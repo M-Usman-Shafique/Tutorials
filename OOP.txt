@@ -1,0 +1,224 @@
+OOP: A programming paradigm based on the concept of objects which contain data & methods operate on that data.
+Object>Class>Encapsulation>Inheritance>Abstraction>Polymorphism.
+Benefits:
+1. Security via Encapsulation (Data Hiding).
+2. Reusability via Inheritance (Classes & Objects).
+3. Modular (organized) Programming (easy maintenance, change). 
+4. Flexibility via Polymorphism.
+Pointer Variable: A special type of variable that holds the memory (location) address of another variable instead of directly storing a value.
+CLASS: A template or blue print which defines properties & behavior of objects like Student.
+OBJECT: An instance or real-world entity produced by a class like zed, amr, bkr.
+An object has 2 things:
+1. Properties (name, age, color etc.): stored in variables.
+2. Behavior (reading, writing, talking, walking etc.): stored in functions/methods.
+Exmp: class Student {
+        Constructor() {
+       }
+      }
+      var stud = new Student();
+______________________________________________________________________________________________
+MODIFIERS/SPECIFIERS: 
+1. ACCESS MODIFIERS: keywords that define the scope (visibility & accessibility) of a class &  its members (variables & methods):
+a. DEFAULT: Only available within a package, hence cannot be accessed from outside the package.
+Package: A folder or namespace that organizes related classes & interfaces to manage code & avoid naming conflicts.
+b. PUBLIC: Available everywhere from within & outside the class, from within & outside the package.
+c. PRIVATE: Only accessible by the members of the class.
+d. PROTECTED: Available & accessible within the class & by its children classes.
+
+2. NON-ACCESS MODIFIERS: Define the behavior & characteristic of a class & its members without controlling their scope.
+a. STATIC: When we declare a member of a class as static it means no matter how many objects of the class are created, there is only one copy of the static member shared by all objects of the class. So if you modify the value of a static variable in one object, the change will be reflected in all other objects as well.
+b. ABSTRACT: When a class is declared as abstract, it cannot be instantiated which means that its object cannot be made. The properties & methods of an abstract class can only be used through inheritance.
+Exmp: Shape class via its Circle, Triangle, Square subclasses.
+An abstract method does not have a body/definition (implementation) in the abstract class. It is implemented using overriding in the child class.
+Exmp: abstract area() method in its abstract Shape() class.
+c. FINAL: When a class is declared as final, it cannot be inherited by a subclass.
+When a variable is declared as final, it becomes constant hence its value cannot be changed once it has been initialized.
+When a method is declared as final, it cannot be overridden by a subclass.
+___________________________________________________________________________
+ABSTRACTION: Hiding complex/technical/irrelevant implementation details from user & displaying only the necessary functionalities & features. It focuses on "what" rather than "how".
+Purpose: Simplifying complexity.
+Abstraction is achieved through abstract classes & methods.
+
+INTERFACE: A reference type similar to a class but it contains only abstract methods & static constants. It provides a way to achieve abstraction, polymorphism & multiple inheritance in OOP.
+
+CONSTRUCTOR: A special type of method that is automatically called when an instance (object) of a class is created, to initialize the newly created object.
+______________________________________________________________________
+ENCAPSULATION: Bundling of object members (data & methods) into a single unit or component (e.g. class) in order to restrict direct access to the members.
+Purpose: Data integrity & security.
+Exmp:
+      class Student {
+        constructor() {
+          let name;
+          let marks;
+        }
+        getName() {
+          return this.name;
+        }
+        setName(name) {
+          this.name = name;
+        }
+
+        getMarks() {
+          return this.marks;
+        }
+        setMarks(marks) {
+          this.marks = marks;
+        }
+      }
+      var stud = new Student();
+      stud.setName("John");
+      stud.setMarks(80);
+      console.log(stud.getName() + " " + stud.getMarks());
+_____________________________________________________________________________________________________
+INHERITANCE: A (child/sub) class derives its properties & behaviors from another (parent/super) class.
+Purpose: Reusability to shorten code & save time.
+Types:
+1. Single: A class inherits properties & behaviors from a single base class:
+    class Parent {}
+      class Child extends Parent {}
+2. Multi-Level: A class inherit properties & behaviors from its parent & grandparent classes:
+    class Grand {}
+      class Parent extends Grand {}
+         class Child extends Parent {}
+3. Hierarchical: Multiple sub-classes inherit from a single super-class:
+    class Parent {}
+     class A extends Parent {}
+     class B extends Parent {}
+     class C extends Parent {}
+4. Multiple: A class inherited from multiple parent classes:
+   class A {}
+   class B {}
+   class C {}
+    class D: public A, public B, public C {}
+Multiple inheritance not allowed in any language except C++ & Python.
+5. Hybrid: Combination of multiple & hierarchical inheritance.
+   class A {}
+     class B: public A {}
+     class C: public A {}
+       class D: public B, public C {}
+Diamond Problem (Ambiguity, Complexity): On executing code, constructor of A will run two times; once due to B & second time due to C, whereas, we want it to run only one time.
+Solution: Make class B & class C virtual base classes to avoid two copies of class A:
+class B: virtual public A {}
+class C: virtual public A {}
+_______________________________________________________________________
+POLYMORPHISM: Handling different data types (variables, objects & functions) through the same interface.
+Ability of a method or operation to behave differently in different contexts.
+Types:
+1. Static (Compile Time): Polymorphic behavior which decides before execution (during compile time) that which implementation of method & operation is appropriate in the given context.
+Compile: The process of transforming source code into executable (machine) code.
+Run: The process of executing the executable code.
+(a) Method Overloading: Defining multiple methods in a class with the same name but with different parameter lists. The appropriate method to be called is determined on the basis of no. of arguments or type of arguments provided during the method call.
+       Exmp:
+        var a = 2, b = 3;
+        class Test {
+        add() {
+        let sum = a + b;
+        console.log(sum);
+        }
+        add(a, b) {
+        let sum = a + b;
+        console.log(sum);
+        }
+        }
+        var t = new Test();
+        t.add();
+        t.add(4, 6);
+However, it is not allowed in JavaScript. Therefore we use:
+class Shape {
+   area() {}
+}
+class Circle extends Shape {
+    area() {
+    return Math.PI * radius ** 2;
+    }
+}
+class Rectangle extends Shape {
+    area() {
+    return width * height;
+    }
+}
+class Triangle extends Shape {
+    area() {
+    return base * height / 2;
+    }
+}
+(b) Operator Overloading: Redefining behavior of an operator for user-defined data types (objects) because arithmetic & logical operators can only be used to perform operations on built-in data types (int, float, char, string, double, long). Selection of appropriate operator is determined during compile time on the basis of operands.
+Exmp: int1 + int2     (predefined)
+      obj1 + obj2     (additional)
+Types: 1. Unary Operators: having one operand.
+       Types: a. Prefix: ++a, --a
+              b. Postfix: a++, a--
+                  class Test {
+                        int num;
+                        public:
+                            Test() {      //constructor of class Test
+                             num = 0;
+                            }
+                        void operator++(int) {
+                           ++num;                   //prefix
+                        }
+                        void operator--() {
+                           --num;                  //postfix
+                        }
+                        void operator--(int) {
+                           --num;                  //prefix
+                        }
+                        void operator++() {
+                           ++num;                  //postfix
+                        }
+
+                  }
+                  main() {
+                   Test t;    // making object of Test class.
+                   ++t;
+                   t++;
+                   --t;
+                   t--;
+                  }
+              2. Binary Operators: having two operands.
+                Exmp:
+                           class Test {
+                             int num;
+                             public:
+                                 Test (int num) {      //parameteric constructor of class Test
+                                   num + n;
+                                 }
+                             void operator+(Test t2) {
+                                 Test t(0);
+                                 t.num = num + t2.num;
+                                 return t;
+                             }
+                             void Display(){}
+                           }
+                          void main() {
+                            Test t(0);
+                            Test t1(3);     //creating objects of class Test & passing arguments
+                            Test t2(2);
+                            t = t1 + t2;      // right = argument & left = function call
+                            t.Display();
+                          }
+2. Dynamic (Run Time): Polymorphic behavior which decides during execution that which implementation of method is appropriate in the given context.
+   Method  Overriding: Reassigning a different behavior or functionality to the method of a child class which is already defined in its parent class. Selection of appropriate method to call is determined at runtime, based on actual type of object.
+   Exmp: class Test {
+           sum (int a) {}
+           sum (int b) {}
+         }
+Overriding isn't allowed in one same class because system get confused k kisy call krun? Hence, show error. Therefore, we use overriding in inheritance.
+   Exmp:
+        class Parent {
+        show() {
+        console.log("Hello");
+        }
+        display() {
+        console.log("Bye")
+        }
+        }
+        class Child extends Parent {
+        show() {
+        console.log("Hi");
+        }
+        }
+        var obj = new Child();
+        obj.show();      // output: Hi
+        obj.display();  // output: Bye 
+As both "show" methods has same arguments & same prameters, system will replace (override) "show" of parent class with "show" of its child class.

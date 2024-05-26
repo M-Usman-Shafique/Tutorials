@@ -1,0 +1,125 @@
+DATA STRUCTURE: Way to organize data so that we can use it efficiently.
+ALGORITHM: Steps or process to arrange data.
+DSA only deals with non-premitive data types because their space complexity is dynamic while space complexity of premitive data types is constant & static.
+Why?
+NON-PREMITIVE:
+1. ARRAYS
+2. FILES
+3. LISTS:
+         a. Linear:
+                  1. Stacks
+                  2. Queues
+         b. Non-Linear:
+                  1. Trees
+                  2. Graphs
+OPERATIONS:
+1. Traversing & Accessing
+2. Insertion
+3. Deletion
+4. Searching
+5. Sorting
+6. Merging
+ALGORITHM COMPLEXITY:
+1. Space (Storage/Memory): Auxiliary Space (additional) + Input Space (variables)
+2. Time (No. of lines/steps): Time complexity directly depends on no. of inputs.
+Formula: f(n) = TC
+Using Formula: f(n) = 5n² + 6n + 12
+5n²: 2 loops with 5 lines in each.
+6n: 1 loop having 6 lines.
+12: simple lines.
+
+ASYMPTOTIC ANALYSIS: To find the better solution in more than one solutions.
+1. Big O: Worst case, closest upper bound, at most, maximum.
+Measures the performance & efficiency of an algorithm using space & time complexity.
+2. Big Omega: Best case, lower bound, at least, minimum.
+3. Big Theta: Avg. case, exact time.
+COMMON COMPLEXITIES:
+1. Constant ​‌‍‌O​(1): No. of operations are independent from the size of inputs.
+Exmp#1: Finding value at a particular index of an array.
+Exmp#2: Sum of 1st & last elements of an array.
+2. Linear ​‌‍‌O​(n): No. of operations are directly dependent on the size of inputs.
+Exmp: Loop iteration on all the elements of an array or string like in searching.
+3. Quadratic ​‌‍‌O​(n²): 
+Exmp: Nested loops like in iteration of a 2D array for sorting.
+4. Exponential ​‌‍‌O​(2ⁿ): Normally, rises due to brute force.
+Exmp: Recursion
+5. Logritmic ​‌‍‌O​(log n): better than ​‌‍‌O​(n)
+Exmp: Binary search where every time when loop iterates the size of input reduced half.
+Trick: When non-nested loop have increment in multiplication or division, it's always logrithmic.
+6. Linearithmic ​‌‍‌O​(nlogn): better than ​‌‍‌O​(n²)
+Exmp: Sorting
+Trick: When nested loop have increment in multiplication or division, it's linearithmic.
+7. Factorial ​‌‍‌O​(n!): worst of them all.
+
+
+
+RECURSION:
+1. Direct Recursion:
+1. Find base case: function will keep calling itself until the base case reaches.
+2. Find relation between problem & sub-problem
+3. Generalize the relation
+Exmp: Finding factorial of any number.
+Base Case: 1! & 0! = 1
+Relation: 5! = 4! * 5
+Gen.: n! = n * (n-1)!
+App.: return n * factorial(n-1);
+Indirect Recursion: Two functions calling each other inside their body.
+Exmp: let n = 1;
+      function odd() {
+        if (n <= 10) {
+          console.log(n);
+          n++;
+          even();
+        }
+      }
+      function even() {
+        if (n <= 10) {
+          console.log(n);
+          n++;
+          odd();
+        }
+      }
+      odd();
+3. Tail Recursion: When recursive call is the last thing done by the function.
+Exmp: function tail(n) {
+        if (n === 0) return;
+        else console.log(n);
+        return tail(n-1);
+      }
+      tail(3);   // output: 3 2 1
+
+4. Head Recursion: When recursive call isn't the last thing done by the function.
+Exmp:  function head(n) {
+        if (n === 0) return;
+        head(n-1);
+        console.log(n);
+      }
+      head(3);   // output: 1 2 3
+
+PATTERNS:
+1. Nested loops
+2. Outer loop for lines/rows.
+3. Inner loop for columns.
+Rules:
+1. Iterate outer loop equal to the no. of lines.
+2. Focus on columns & find a pattern, ratio or relation between rows & columns.
+3. Whatever you print (*) print inside inner loop.
+4. Print "line break" outside inner & inside outer loop.
+5. Observe symmetry [optional step].
+
+STACK (LiFO): A linear data structure in which in insertion & deletion is allowed only at the end (top) of it.
+Implementing Stack using Array: Last index treated as top.
+Queue (FiFO):
+1. Enqueue: Inserting items at start.
+The place from where we insert items or where the latest item lies is called Rear.
+2. Dequeue: Removing items from end.
+The place from where we remove items or where the oldest item lies is called Front.
+Circular Queue: Both front & rear are connected to each other.
+
+SEARCHING O(n):
+1. Linear: used for unsorted data. Checking one by one each element in comparison with its neigbour.
+2. Binary: use for sorted data. Dividing in half repeatedly:
+Steps: 1. Find middle index i.e. mid = (start+end)/2
+       2. if (arr[mid] === target) return mid
+       3. if (arr[mid] < target) repeat start = mid+1
+       4. if (arr[mid] > target) repeat star = mid-1

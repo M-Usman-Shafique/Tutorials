@@ -1,0 +1,178 @@
+justify-content: center;
+align-items: center;
+color; black;
+_________________________________________
+<Link rel="stylesheet" href="style.css">
+_________________________________________
+Background:
+body {
+background-color: grey;
+}
+_________________________________________
+Univrsal Slector:
+* {
+color: blue;
+}
+________________________________________
+Elemnt Slector:
+h1, p {}
+Univrsl & elemnt slctor ek sath use krny
+se pury document pe univrsl wala style
+apply hoga siwaye elemnts k...
+________________________________________
+ID Slector:
+Use div, h1 & <p> etc. for more than
+one tasks. Then asign them diffrnt iDs.
+Use iDs in style.css file to make difrnt
+difrnt chngs.
+<h1 id="Prsn1"> Hello! </h1>
+<h1 id="Prsn2"> World </h1>
+#Prsn1 {color:red;}
+#Prsn2 {color:blue;}
+_____________________________________________________________
+Horizontal Alignment: text-align: center;
+Not w.r.t entire document rather w.r.t its parent only i.e. <body> <div> <p> etc.
+
+Vertical Alignment:
+display: table-cell;
+vertical-Align: middle;
+__________________________________________
+line-height: spc b/w lines of pragraph etc.
+____________________________________________
+To make chngs inside difrnt divs giv thm name
+using id.
+____________________________________________
+Area of content (text, div etc.) cn b chngd
+using hi8 & width.
+____________________________________________
+NavBar:
+<div id="navbar">
+<a id="logo">Amazon.in</a>
+<a href="url">Account</a>
+<a href="url">My Cart</a>
+<a href="url">Contact us</a>
+</div>
+CSS:
+*{
+padding: 0;
+margin:0;
+}
+#navbar {
+hi8: 60px;
+background-color: black;
+}
+#logo {
+background-color:yellow;
+}
+___________________________________________________
+Display-inline:
+Giv it to a block elemnt (div, h1, p etc.) & it will
+start behaving as an inline element (a, button etc.)
+No padding & margin cn apply thn.
+div {
+display: inline;
+}
+Also use to avoid line break.
+_________________________________________________
+Display-block:
+Vice vrsa of Dispaly-inline.
+button {
+display: block;
+}
+_____________________________________________
+Inline-block:
+Smilar to display-inline but margin & padding
+can aply.
+div {
+display: inline-block;
+}
+_____________________________________________
+Display: none;
+Vsiblity & rsrvd spc bth removd.
+______________________________________________
+Visiblity: hidden;
+Only vsiblity removd.
+______________________________________________
+Position: fixed;
+During scroll NavBar remain with you.
+Also use to fix position of a website's header
+& footer.
+
+Position: absolute is used to move child div inside its parent. But to define who is the parent of child div, first give position: relative to the parent div.
+_____________________________________________
+z-index: cntrol ovrlaping of boxes.
+______________________________________________
+Method#1:
+Jis div ko centr me lana ho usky parent div ko
+ye dedo:
+        display: flex;
+        justify-content: center;
+        align-items: center;
+Method#2:
+Parent div ko ye dedo:
+        display: grid;
+        place-content: center;
+_____________________________________________
+display: flex;
+flex-direction: row/row-revrse etc;
+flex-wrap: wrap; (adjst container's size acc. to its items to avoid ovrflow).
+flex-flow (dirction+wrap): row wrap;
+_______________________________________________________________________________________________
+1. align-items (only for vrtical alignmnt of elemnts in a single row).
+2. align-content (vrticl alignmnt of items jab wo wrap ho kr more than 1 row me chali gai hon).
+3. justify-content (only for horizontal alignmnt of elemnts).
+4. place-items (justify+align).
+5. text-align: only for horizontl alignmnt of inline elemnts inside a div/container.
+6. margin: 0 (for both vrticl & horizontl alignmnt of block elemnts in a div/container bcz
+   block elemnts pe left, ri8, top, botom tmam sides se margin aply ho skta).
+7. margin: auto; works only to center from left & ri8.
+________________________________________________________________________________________________
+display: grid;
+grid-template-column: 12px 12px 12px; it means k 3 column 12-12px k bna do.
+grid-template-row: 12px 12px 12px; it means k 12px k 3 rows bna do.
+grid-template-row: repeat(2, 150px); it means k 150-150px ki 2 rows bna do (shortcut).
+grid-template-row: 1fr, 1fr, 1fr, 1fr; it means k 4 rows bnao jo apne container ki sari space ko equally share karen.
+grid-template-row: repeat(2, 1fr); it means k 2 rows bnao jo apne container ki sari space equally share kren (shortcut).
+grid-template-column: max-content, 1fr, 1fr, 1fr; it means k 1st column me jitna content dala jae, column apni width uss content k according brha lay aur sara content aye bhi 1 line mein.
+grid-template-column: min-content, 1fr, 1fr, 1fr; it means k 1st column apni width apne andr mojud content k subse bray word k brabr krly or baqi content nechy ajae.
+grid-column-gap & grid-row-gap property to add gaps btween rows & columns.
+Expnsion of Grid items:
+grid-column-start: 1;
+grid-column-end: 3; it means k box column#1 se expand ho kr column#3 k start tak bra ho jae.
+So jis b item ko xpand krna ho uski class me uper mention code likho!
+Swap Grid items:
+1st row, 1st column waly item ki class me grid-column-start: 2; likhne se wo 2nd waly item se
+apni position swap kr lega.
+So jis bhi item ko swap krwana ho, uski class mein jisky sath swap krwana hai uska no. likho.
+grid-template-column: repeat(auto-fit/auto-fill, minmax(250px, 1fr)); to make responsiv widout
+using media query.
+____________________________________________
+float: left/right;
+Used for img & div adjusting by converting a block elemnt into inline element.
+Clear: left/right;
+Div k jis element ko float hny se floating se exclude krna ho usy target kar k
+clear krdo.
+___________________________________________
+Media Quaries to make websites rsponsive.
+Use rem instead of px: 1 rem = 16px => value in px ÷ 16 = value in rem.
+Use %age instead of px: 100% = 16px => 100 ÷ 16 = 1px => 6.25% = 1px
+1px * 10 = 6.25 * 1 ==> 62.5%
+___________________________________________
+Order property to set presdence of elements.
+___________________________________________
+Parent ko display: flex; & child ko
+margin-left/right/top etc.: auto; deny se jo
+location use ki jati, square usky opposite
+direction me chala jata.
+Child ko margin: auto; deny se wo vrticl & horizontl axis k xact centr me ajata.
+__________________________________________________________________________________________
+margin: 20px auto; means top & botom se 20 jab k left & right se center.
+Assignmnt: margin: auto 20px;
+____________________________________________________________________________________________
+<div>
+position: relative;
+left: 30px;
+</div> (for chnging position of a specific elemnt/div without effecting others.
+_____________________________________________________________________________________________
+
+___________________________________________________

@@ -1,0 +1,25 @@
+Shit+D: permanent delete
+Win+E: File Explorer
+Win+A: wifi
+Win+I: Settings
+Win+L: Lock screen
+Win+S: Search
+Win+D: Minimize All
+Ctrl+W: Close current tab
+Ctrl+Alt+Del: Program Hang
+Alt+F4: close/shut down
+Alt+tab: switch apps
+F2: Rename
+Ctrl+F: Search
+Fn+F5: Refresh
+______________________________
+Ctrl+T: new tab
+Ctrl+N: new window
+Ctrl+Shift+N: incogito
+alt+E: side bar
+Ctrl+J: Downloads
+Ctrl+H: History
+Fn+F12: Console
+Shift+Ctrl+I: Console
+alt+O alt+L: Live Server
+

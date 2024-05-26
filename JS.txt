@@ -1,0 +1,1560 @@
+JavaScript: A high-level programing language used for web development & can be executed both on client-side (within web browsers) & on server-side (with platforms like Node.js).
+Default behavior of JS is single-threaded & synchronous.
+Single-Threaded: Code executes line by line, which means that only one set of instructions can be processed at a time.
+Multi-Threaded: Parallelism & Multi-tasking simultaneously.
+Thread: Smallest unit of execution.
+Synchronous: in a sequence from top to bottom.
+Asynchronous: Tasks are not necessarily executed in a sequential order.
+
+
+REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
+https://webagility.com/posts/the-basics-of-regex-explained.
+______________________________________________________________________________
+DATA TYPES:
+1. Premitive (Value Types): String, Number, Boolean, Null, Undefined, Symbols.
+They are stored & executed in call stack.
+2. Non-Premitive (Reference Types): Arrays, Object Literals, Functions, Dates etc.
+They are stored & executed in heap.
+Watch: Ref.html
+Note: undefined and null are equal in value but different in type.
+Type of undefined is undefined & of null is object.
+Typeof: returns a string describing the data type of a variable, object & function.
+
+IDENTIFIERS: user defined names of variables & functions.
+let x = "John Doe", y = "Volvo", z = 200;
+If you put a number in quotes, the rest of the numbers will be treated as strings &concatenated.
+Exmp: let x = "5" + 2 + 3;       //output: 523
+let x = 2 + 3 + "5";          //output: 55
+_________________________________________________________________________________
+ACCESS:
+Variables declared with let & const inside a block{} cannot be accessed from outside that block:
+{  let x = 2; }
+// x can NOT be used here.
+Variables declared with var inside a block{} can be accessed from outside the block:
+{  var x = 2; }
+// x CAN be used here.
+_________________________________________________________________________________
+ var: can be redeclared & reassignd in a same block.
+var x = 5;
+x = 3;              // allowed (reassignment)
+var x =  3;        // allowed (redeclaration)
+console.log(x)    // output: 3
+ let: cannot be redeclared but can be reassigned in a same block.
+let x = 5;
+let x = 3       // not allowed (redeclaration)
+x = 3;         // allowed (reassignment)
+if (true) {
+  x = 3;          // allowed (reassignment)
+  let x = 3;     // allowed (new declaration)
+}
+ const: cannot be redeclared & reassigned in a same block.
+const x = 5;
+const x = 3;        // not allowed (redeclaration)
+      x = 3;       // not allowed (reassignment)
+if(true) {
+  x = 3;          // not allowed (reassignment)
+  const x = 3;   // allowed (new declaration)
+}
+REASSIGNMENT/INITIALIZATION/DEFINITION:
+let x = 2;
+    x = 5;     // Now x is 5
+
+REDACLARATION:
+var x = 3;
+var/let x = 0;   //value of x now become 0.
+let x = 3;
+let x = 0;      //value of x is still 3.
+Redeclaring a variable inside a block using var will also redeclare the variable outside the block:
+var x = 10;
+{
+ var x = 2;
+// Here x is 2
+}
+// Here x is 2
+Redeclaring a variable inside a block using let & const will not redeclare the variable outside the block:
+let x = 10;
+{
+let x = 2;     // shadowing
+// Here x is 2
+}
+// Here x is 10
+const variables must be assigned a value when they are declared:
+const PI = 3.14159265359;    //correct
+const PI;
+PI = 3.14159265359;         //incorrect
+Ques: (function() {
+        var a = b = 3;
+      })();
+
+       console.log((typeof a !== 'undefined'));   // false
+       console.log((typeof b !== 'undefined'));  // true
+_________________________________________________________________________________
+SCOPE: Region where JavaScript searches (loook up) for & accesses variables.
+The current execution context of a program which determines that which variables & functions can be accessed & which cannot.
+What's scope of 'x' means where can I access 'x'.
+Q: Who determines the scope?
+Ans: JavaScript determines its scope lexically (from surrounding).
+TYPES of SCOPE:
+1. Global Scope: Outside any function or block.
+Variables declared in this scope can be accessed anywhere in the program.
+Exmp: let x = 5;
+      function myFunc() {
+      console.log(x);
+      }
+      myFunc();    // output: 5
+2. Local or Function Scope: Variable declared inside a function definition cannot be accessed outside the function. Hence called Local Variables.
+Exmp: function myFunc() {
+         var x = 5 ;      // x is a local variable.
+      }
+      myFunc();
+      console.log(x);    // output: x is not defined.
+
+Note: variable created without any declaration keyword (var, let, or const) are always global, even if they are created inside a function. Hence, can be accessed anywhere in the program.
+
+Exmp: function myFunc() {
+          x = 5;
+      }
+      myFunc();
+      console.log(x);      // output: 5 
+3. Block Scope: Variable declared inside the code block of "if", "while" & "for" statements with 'let' & 'const' follow identical rules to those of local scope but 'var' follows rules of global scope.
+Exmp#1: if (true) {
+        let x = 5;
+        }
+     console.log(x);     // output: x is not defined.
+Exmp#2: if (true) {
+        var x = 5;
+        }
+     console.log(x);     // output: 5
+
+Lexical Scope: Location or position inside the source code where a variable or function is declared & physically present. It's a combination of two things:
+a. Local memory of itself.
+b. Ref. to the lexical environment of its parent.
+Exmp: function outer() {
+        var x = 5;
+        console.log(y);         // output: y is not defined.
+        function inner() {
+          var y = 10;
+          console.log(x);      // output: 5
+        }
+        inner();
+      }
+      outer();
+      console.log(y);        // output: y is not defined.
+SCOPE CHAINING: Hierarchical structure of nested lexical scopes: an closure has three scopes: Local (apna) + Outer function scope + Global.
+Exmp:
+let x = 3;               // global scope
+function outer() {
+  let y = 5;            // outer function scope
+  function inner() {
+    let z = 7;         // own local scope 
+    console.log(x);
+    console.log(y);
+    console.log(z);
+  }
+  inner();
+}
+outer();
+______________________________________________________________________________
+Hoisting: JavaScript's default behavior of moving all variable & function declarations (not initializations) to the top. It means a variable can be used & a function can be called before declaration.
+Note: Normal functions are hoisted. Arrow functions are not.
+Exmp#1: console.log(x);
+       output: error: x is not defined.
+Exmp#2: console.log(x);
+       x = 5;
+       output: error: x is not defined.
+Exmp#3: x = 5;
+       console.log(x);
+       output: 5
+Exmp#4: console.log(x);
+       var x = 5;
+       output: undefined
+Because JS interpret this code as:
+       var x;               // x declared without initialization, hence, undefined.
+       console.log(x);     // agr hoisting na hoti tou error aata: x is not defined.
+       x = 5;
+Temporal Dead Zone: A zone between the scope & place where the variable is declared. Accessing variables declared using let or const but not initialized with a value results a ReferenceError bcoz although let & const are hoisted but they are in TDZ.
+Watch: Hoist.html
+Exmp#5: console.log(x);
+       let x = 5;
+       output: Error: cannot access 'x' before initialization.
+Exmp#6: same case with 'const'.
+Exmp#7: let x;
+        console.log(x);    // undefined
+        x = 5;
+_________________________________________________________________________________
+Template Literals (Backticks):
+Problem: let str = "Hello \n World";
+output: Hello
+        World
+Solution: let str = `Hello
+World`;
+output: Hello
+        World
+Problem: let str = "Usman";
+console.log("My name is" + str + ".");
+output: My name is Usman.
+Solution: console.log(`My name is ${str}. Thank you!);
+output: My name is Usman. Thank you!
+________________________________________________________________________________
+STRINGS: Premitive data types which can store series of characters & behaves as an object (reference type).
+At(): returns the character at a specified index (position) in a string.
+let str = "John Doe";
+let text = str.at(0);   // output: J
+
+Slice(): extracts a part of a string & returns extracted part in a new string.
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(4, 10);     // output: e, Ban
+Note: if ending value not given, it will slice till the last word automatically.
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(7);         // output: Banana, Kiwi
+
+Replace(): replaces a specified value with another value at first match without changing original string.
+let str = "Please visit Microsoft!";
+let text = str.replace("Microsoft", "W3Schools");
+output: "Please visit W3Schools!"
+
+ReplaceAll(): replace for all matches.
+let str = "Please visit Microsoft! Our Microsoft is wonderful.";
+let text = str.replaceAll("Microsoft", "W3Schools");
+
+Split(): converts string to an array.
+let str = "John Doe";
+let text = str.split("");   //  ['J', 'o', 'h', 'n', ' ', 'D', 'o', 'e']
+Note: if "" is omitted, the returned array will put the whole string in index [0].
+Note: after converting into array, all array methods can be applied on a string.
+
+Join(): converts array again into a string without changing the original one.
+let  array = ['J', 'o', 'h', 'n', ' ', 'D', 'o', 'e'];
+let str = array.join("");   // output: John Doe
+Note: if "" is omitted, the returned string will be comma separated.
+
+Match(): returns first match.
+let text = "The rain in SPAIN stays mainly in the plain";
+text.match("ain");  // output: 1 ain
+Note: For global & case insensitive match use: text.match(/ain/gi);
+
+Includes(): returns true if a string contains a specified value otherwise returns false.
+let text = "Hello world, welcome to the universe.";
+text.includes("world");     // output: true
+
+Startswith(): returns true if a string begins with a specified value otherwise returns false.
+let text = "Hello world, welcome to the universe.";
+text.startsWith("world");    // output: false
+
+Endswith(): opposite of startswith.
+___________________________________________________________________
+ARRAYS: objects with numbered indexes.
+const persons = ["John", "Doe", "Jack"];
+console.log(persons);
+output: [John, Doe, Jack]
+const persons = ["John", "Doe", "Jack"];
+console.log(persons[0]);
+output: John
+
+const cars = ["BMW", "Audi", "Honda"];
+cars = ["Jaguar", "Toyota", "Benz"];   // not allowed
+cars[0] = "Jaguar"    // allowed
+cars.push("Jaguar");  // allowed
+
+Length Property:
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+console.log(fruits.length);
+output: 4
+
+Accessing Last Array Element using Length Property:
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+console.log(fruits[fruits.length-1]);
+output: Mango
+console.log(fruits[fruits.length-2]);
+output: Apple
+
+AT(): takes index to access array element.
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+console.log(fruits.at(-1));
+output: Mango
+console.log(fruits.at(-2));
+output: Apple
+
+PUSH(): add new element at end:
+const fruits = ["Banana", "Orange", "Apple"];
+fruits.push ("Lemon");
+console.log(fruits);
+output: [Banana, Orange, Apple, Lemon]
+
+UNSHIFT(): add nw element at start:
+const fruits = ["Banana", "Orange", "Apple"];
+fruits.unshift (“Lemon” );
+console.log(fruits);
+Output: [Lemon, Banana, Orange, Apple]
+
+POP(): remove last element & its occupied index:
+const fruits = ["Banana", "Orange", "Apple"];
+fruits.pop();
+console.log(fruits);
+output: [Banana, Orange]
+
+SHIFT(): remove 1st element & its occupied index:
+const fruits = ["Banana", "Orange", "Apple"];
+fruits.shift();
+console.log(fruits);
+Output: [Orange, Apple]
+
+DELETE: remove element without removing its reserved index:
+const fruits = ["Banana", "Orange", "Apple"];
+delete fruits[0];
+console.log(fruits);
+output: [<empty>, Orange, Apple]
+
+SLICE():
+
+SPLICE(): add, remove & replace items.
+Syntax: arrayName.splice(index, no. of elements u want to delete, new value);
+let ary = ["Adnan", "Noman", "Furqan", "Luqman"];
+ary.splice(2, 0, "Usman", "Salman");
+output: ["Adnan", "Noman", "Furqan", "Usman", "Salman", "Luqman"];
+ary.splice(2, 1, "Salman");
+output: ["Adnan", "Noman", "Salman", "Luqman"];
+ary.splice(3, 1);
+output: ["Adnan", "Noman", "Salman"];
+
+CONCAT(): merging two arrays.
+const myGirls = ["Saba", "Sana"];
+const myBoys = ["Ali", "Asif", "Babar"];
+const myChildren = myGirls.concat(myBoys);
+output: Saba, Sana, Ali, Asif, Babar
+MORE THAN TWO:
+const arr = arr1.concat(arr2, arr3);
+
+ Arrays have numbered indexes.
+ Objects have named indexes.
+
+SEARCHING:
+IndexOf(): forward search for 1st element in array .
+const fruits = ["Banana", "Orange", "Apple", "Mango", "Apple"];
+console.log (fruits.indexOf(“Apple”));
+output: 2    // Give index of first match.
+console.log (fruits.indexOf(“mango”));
+output: -1    //not found.
+console.log (fruits.indexOf(/mango/i));
+output: 3    //insencitive search.
+
+LastIndexOf(): backward search for 1st element in array.
+console.log(fruits.lastIndexOf(“Apple”));
+output: 4
+
+Includes(): forward search but gives output in boolean.
+console.log(fruits.includes (“Apple”));
+output: true
+
+Find(): search with a condition using        |
+function.But it only shows one (1st)         |
+condition fulfilling element as output.      |
+const numbers = [4, 9, 16, 25, 29, 35, 70];  |
+Task: Find no. greater than 18.              |
+let greater = numbers.find(myFunction);      | 
+function myFunction(value, index, array) {   |
+  return value > 18;                         |
+}                                            | Shortcut:
+console.log(greater);                        | console.log(numbers.find(value) =>
+                                             |             value > 18);
+output: 25                                   | output: 25
+If condtion not fulfilled, output: undefined |
+                                             |
+FindIndex():
+console.log(numbers.findIndex(value) => value > 18);
+output: 3 (index of 25)
+If condtion not fulfilled, output: -1.
+
+Filter(): same as find but show all condition fulfilling elements as output.
+numbers.filter(function(value, index){
+ return value > 18;
+})
+console.log(value);
+Shortcut:
+console.log(numbers.filter(value) => value > 18);
+output: [25, 29, 35, 70]
+If condtion not fulfilled, output: []
+
+Reverse():
+const fruits = ["Banana", "Orange", "Apple", "Mango"]
+console.log(fruits.reverse());
+output: [Mango, Apple, Orange, Banana]
+_________________________________________________________
+SORTING:
+Array of Strings:
+console.log(fruits.sort());
+output: [Apple, Banana, Mango, Orange]
+For descending order, 1st sort then reverse the array.
+Sorting Array (Numbers):
+const numbers = [1, 2, 5, 3, 1000]
+console.log(numbers.sort());
+output: 1, 1000, 2, 3, 5   //it treats numbers as strings.
+
+Array of Numbers (Ascending):
+const numbers = [1, 2, 5, 3, 1000]
+numbers.sort((a, b) => (a-b));
+console.log(numbers);
+Descending:
+numbers.sort((a, b) => (b-a));
+
+Array of Objects:
+const persons = [{name: "Saqib", age: "20", gpa: "3.0"},
+                  {name: "Babar", age: "30", gpa: "1.5"},
+                  {name: "Ali", age: "35", gpa: "2.0"}];
+Sorting w.r.t age:
+persons.sort((a, b) => (a.age - b.age));
+output: 0: {name: Saqib, ...... }
+        1: {name: Babar, ..... }
+        2: {name: Ali, ..... }
+Sorting w.r.t GPA:
+persons.sort((a, b) => (a.gpa - b.gpa));
+output: 0: {name: Babar, ..... }
+        1: {name: Ali, ..... }
+        2: {name: Saqib, ..... }
+Sorting w.r.t Name:
+persons.sort((a, b) => (a.name.localeCompare(b.name)));
+output: 0: {name: Ali, ...... }
+        1: {name: Babar, ..... }
+        2: {name: Saqib, ..... }
+__________________________________________________________
+SPREAD OPERATOR: used to unpack & expand an iterable (such as an array or a string) into individual elements or characters.
+Exmp#1:
+let array1 = [1,2,3];
+let array2 = [4,5,6, ...array1];
+console.log(array2);
+output: [4,5,6,1,2,3]
+let array3 = [...array1, ...array2];
+console.log(array3);
+output: [1,2,3,4,5,6]
+Exmp#2:
+      function sum(a, b, c) {
+        return a + b + c;
+      }
+      let numbers = [1, 2, 3, 4, 5];
+
+      let result = sum(...numbers);
+      console.log(result);
+Exmp#3:
+let info = {fname: "Usman", lname: "Shafiq", age: 30};
+let updateInfo = {city: "Lahore", age: 28};
+let newInfo = {...info, ...updateInfo };
+console.log(newInfo);
+output: {fname: 'Usman', lname: 'Shafiq', age: 28, city: 'Lahore'}
+
+REST PARAMETER: used to gather & pack variable no. of arguments into an array within a function.
+Means, if we want to make a function that receive arguments acc. to user's desire, no matter how much: 1, 2, 3 & more.
+function sum(...args) {
+   }
+sum(2,3,4,5);   // provided by user
+output: [2,3,4,5]
+Rest parameter can also be used to exclude a string from a specific operation:
+function sum(name, ...args) {
+    }
+sum("Yahoo", 2,3,4,5);   // sum function will exclude the string during addition.
+__________________________________________________________
+Math.Min: returns the lowest value in a list of arguments:
+Math.min(0, 150, 30, 20, -8, -200);
+output: -200
+Math.Max: returns the highest value in a list of arguments.
+Math.max(0, 150, 30, 20, -8, -200);
+output: 150
+As Math.max/min only accepts arguments, hence while passing an array, use rest parameters:
+const numbers = [0, 150, 30, 20, -8, -300];
+console.log (Math.min(... numbers));    // output: -300
+console.log (Math.max(... numbers));   // output: 150
+______________________________________________________________________
+Math.random: returns a random number b/w 0 (inclusive) & 1 (exclusive).
+console.log(Math.random());
+output: 0.41467 etc.
+console.log(Math.floor(Math.random() * 10));
+output: 7 etc.   // between 0 to 9
+console.log(Math.floor(Math.random() * 11));
+output: 10   // between 0 to 10
+console.log(Math.floor(Math.random() * 10) + 1);
+output: 1 etc.  // between 1 to 10
+Note: Math.random() ko jis no. se multiply kia jaega,
+random no. uss no. se atleast 1 no. chota hi aega.
+console.log(Math.floor(Math.random() * (25 - 15) + 15));
+output: 20 etc.  //between 15 to 24
+Random Function:
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+console.log(rand(15, 25));
+output: 24 etc.  // min included & max excluded
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+console.log(rand(15, 25));
+output: 25 etc.  // min & max both included
+______________________________________________
+FISHER-YATES ALGORITHM TO RANDOMLY SORT ARRAY:
+1. Starting from the element located at last index & move backward using
+decrement in loop & store value in (i).
+2. Generate a random no. & store in (j).
+3. Swap (i) & (j)
+Exmp: Random.html
+_______________________________________________________________________
+DESTRUCTURING: Assigning elements of an array or properties of an object to different variables.
+1. Destructuring of Array: it happens on the basis of index.
+Problem: let person = ["Usman", true, "Male", 1996, "Lahore"];
+let name = person[0];
+let student = person[1];
+let gender = person[2];
+let birth = person[3];
+let city = person[4];
+Solution: instead of assigning each value separately, gather all variables in an array using destructuring:
+let[name, student, gender, birth, city, post] = person;
+console.log(name, student, gender, birth, city, post);
+output: Usman true Male 1996 Lahore undefined
+let person = ["Usman", true,  , 1996, "Lahore"];
+console.log(gender);   // output: undefined
+
+Assigning Default Value:
+let[name, student, gender = Male, birth, city] = person;
+console.log(name, student, gender, birth, city);
+output: Usman true Male 1996 Lahore
+
+Skiping Value:
+let person = ["Usman", true, 30, 1996, "Lahore"];
+let [name, , age, birth, city] = person;
+console.log(name, age, birth, city);
+output: Usman 30 1996 Lahore
+
+Rest Parameter:
+let person = ["Usman", true, 30, 1996, "Lahore"];
+let [name, ...bio] = person;
+console.log(name, ...bio);
+output: Usman 30 1996 Lahore
+
+Using Nested Array:
+let person = ["Usman", true, "Male", 1996, ["Lahore", 1101]];
+let[name, student, gender, birth, [city, code]] = person;
+console.log(code);  // output: 1101
+Using Function:
+function calculate(a, b) {
+    let add = a + b;
+    let subtract = a - b;
+    let multiply = a * b;
+    let divide = a / b;
+
+    return [add, subtract, multiply, divide];
+}
+
+let [add, sub, mul, div] = calculate(4, 7);
+let msg = [`sum: ${add}`, `sub: ${sub}`, `mul: ${mul}`, `div: ${div}`];
+console.log(msg);
+
+2. Destructuring of Object: it happens on the basis of keys.
+Exmp: let obj = {name: "Usman", age: 30, isMale: true, city: "Lahore"};
+      let {name, age, isMale, city} = obj;
+      console.log(name, age, isMale, city);
+      output: Usman 30 true Lahore
+
+Assigning Default Value:
+let obj = {name: "Usman", city: "Lahore"};
+let {name, age=30, city} = obj;
+console.log(name, age, city);
+output: Usman 30 Lahore
+
+Rest Parameters:
+let user = {name: "Faraz", age: 28, city: "LHR", gender: "Male"};
+let {name, ...age} = user;
+console.log(name, age);
+output: Faraz {age: 28, city: 'LHR', gender: 'Male'}
+let {gender, ...age} = user;
+console.log(age);
+output: {name: 'Faraz', age: 28, city: 'LHR'}
+let {...age} = user;
+console.log(age);
+output: {name: 'Faraz', age: 28, city: 'LHR', gender: 'Male'}
+
+Nested Object:
+let obj = {name: "Usman", age: 30, bio: { city: "Lahore", code: 41213 }};
+let {name, age, bio: {city, code}} = obj;
+console.log(name, age, city, code);
+output: Usman 30 Lahore 41213
+
+Using Function:
+function display(user) {
+    return `I'm ${user.name}, ${user.age} years old, live in ${user.bio.city}.`;
+}
+console.log(display(user));
+     output: I'm Usman, 30 years old, live in Lahore.
+
+Object of Arrays: ==>=============>=============>
+Array of Objects: Watch Exmp. => Destructure.html
+_____________________________________________________
+forEach(): call function once for all array elements.
+const lang = ["Java", "HTML", "PHP", "Python"];
+lang.forEach(function(value, index) {
+             console.log(index + ":" +value);
+           })
+output: 0: Java
+        1: HTML
+        2: PHP
+        3: Python
+___________________________________________________________________________________
+Higher-Order Functions: Functions that can take another functions as argument or returns function as result.
+MAP(): Perform an operation on every element of an array by creating a new array without changing the original.
+Exmp (Array of Numbers):
+Problem:
+const arr = [1, 2, 3, 4, 5];
+let newArr = [];
+for(var i = 0; i<arr.length; i++) {
+     newArr[i] = arr[i] * 2;
+}
+console.log(newArr);
+output: [2, 4, 6, 8, 10]
+Solution:
+let newArr = arr.map(myFunction);
+function myFunction(value) {
+         return value * 5;
+        }
+Shortcut:
+let newArr = arr.map((value) => value * 5);
+console.log(newArr);
+output: [2, 4, 6, 8, 10]
+
+Exmp (Array of Objects):
+const people = [{fname: "Ali", lname: "Raza"},
+                {fname: "Imran", lname: "Khan"},
+                {fname: "Munir", lname: "Ahmed"}];
+var newPeople = people.map(myFunction);
+function myFunction(value) {
+    return value.fname +" "+ value.lname +"<br>";
+   }
+output: Ali raza
+        Imran Khan
+        Munir Ahmed
+
+
+FILTER(): Instead of performing operation on array elements, show all condition fulfilling elements as output.
+Exmp (Array of Numbers):
+let arr = [7, 18, 25, 12, 29, 35, 17, 70];
+console.log(arr.filter((value) => value > 18));
+output: [25, 29, 35, 70]
+If condtion not fulfilled, output: []
+Exmp (Array of Objects):
+const people = [{name: "Ali", skill: "JAVA"},
+                {name: "Imran", skill: "Python"},
+                {name: "Munir", skill: "HTML"},
+                {name: "Usman", skill: "Python"}];
+console.log(people.filter((value) => value.skill == "Python"));
+output: {name: "Imran", skill: "Python"}
+        {name: "Usman", skill: "Python"}
+
+
+REDUCE(): Executes a reducer function on each element of array & returns a single accumulated result without changing the original array.
+Exmp (Array of Numbers):
+let arr = [1, 2, 3, 4, 5];
+let newArr = arr.reduce((acc, curr) => acc += curr, 0);   // acc is accumulator (sum) initialized with 0
+console.log(newArr);                                         & curr is loop itterator.
+output: 15
+let arr = [1, 2, 3, 4, 5];
+let newArr = arr.reduce(function (max, curr) {
+     if (curr > max) {
+      max = curr; }
+      return max;
+      }, 0);
+console.log(newArr);
+output: 5
+
+Exmp (Array of Objects):
+const people = [{name: "Ali"},
+                {name: "Imran"},
+                {name: "Munir"}];
+let newPeople = people.reduce((concat, person) => concat + person.name);
+console.log(newPeople);
+output: AliImranMunir
+________________________________________________________________________
+OPERATORS:
+Assignment (=)
+Equal (==): compare value not type.
+Strict Equal (===): compare both value & type.
+Unequal (!=)
+Strict Unequal (!==)
+Ternary Operator (?:)
+Syntax: [condition] ? [fulfilled] : [otherwise];
+let voteAble (age < 18) ? "Too Young" : "Old Enough";
+
+SWITCHES:
+Break: Jumps out of a loop, switch or block of code.
+If you omit break statement, next case will be executed even if the
+condition does not match the case.
+Default: specifies the code to run if there is no case match.
+Continue: skips one specified iteration in the loop.
+Problem: for (var i = 0; i < 10; i++) {
+            if (i === 3) {
+             console.log(`${i} is my no.`);
+            }
+            if (i === 5) {
+             break;
+            }
+           console.log(i); 
+         }
+output: 0
+        1
+        2
+        3 is my no.
+        3 // repeat
+        4
+Solution:
+        console.log(`${i} is my no.`);
+        coninue;
+output: 0
+        1
+        2
+        3 is my no.
+        4 // no repeat
+
+Common Code Blocks:
+switch() {
+  case 4:
+  case 5:
+    text = "Soon it is Weekend";
+    break;
+  case 0:
+  case 6:
+    text = "It is Weekend";
+    break;
+  default:
+    text = "Looking forward to the Weekend";
+}
+Note: If multiple cases matches a case value, the first case is selected.
+
+FOR LOOP: it takes 3 expressions: for (i=0; i<5; i++)
+You can omit expression 1 or initiate many values in it:
+Exmp. (omit):
+let i = 2;
+for (; i < arr.length; i++)
+Exmp. (many values):
+for (let i = 0, len = arr.length; i < len; i++)
+Expression 3 can also be omitted:
+for (; i < len; )
+Note: When let is used to declare "i" variable in a loop, "i" variable will only be visible within the loop.
+Similarly, incrementing "i" declared using let will only have incremented value inside loop. Outside loop, its value remain unchanged.
+______________________________________________________________________________
+FOR IN LOOP:
+Work in strings, objects & arrays but preferable to use in 1st two.
+Allow access the keys of an object, characters of a string & indexes of an array rather than their values.
+Exmp (Obj):
+let person = {firstname: "Usman", lastname: "Shafiq", age: "30", gpa: "3.5"};
+for (var key in person) {
+   console.log(key + "<br>");
+  }
+output: firstname
+        lastname
+        age
+        gpa
+for (var key in person) {
+   console.log(person[key] + "<br>");
+  }
+output: Usman
+        Shafiq
+        30
+        3.5
+for (var key in person) {
+   console.log(key + ":" person[key] + "<br>");
+  }
+output: firstname: Usman
+        lastname: Shafiq
+        age: 30
+        gpa: 3.5
+Exmp (String):
+let str = "Hello";
+for (let char in str) {
+   console.log(str[char]);
+  }
+output: H
+        e
+        l
+        l
+        o
+FOR OF LOOP:
+Work in strings, objects & arrays but preferable to use in arrays.
+Allows you to access the values of an object or an array rather
+than their keys or indexes.
+Exmp:
+const cars = ["BMW", "Audi", "Toyota"];
+for (let items of cars) {
+   console.log(items);
+  }
+output: BMW
+        Audi
+        Toyota
+__________________________________________________________
+FUNCTIONS:
+ARROW FUNCTION:
+Exmp1:
+function greet() {
+console.log("Good Morning");
+}
+Shortcut:
+greet = () => {
+console.log("Good Morning");
+}
+Shortercut:
+greet = () => console.log("Good Morning");
+Exmp2:
+function sum(a, b) {
+return a+b;
+}
+Shortcut:
+sum = (a, b) => {
+return a+b;
+}
+Shortercut:
+sum = (a, b) => a+b;
+
+Diff. between Normal & Arrow Functions:
+1. Normal functions have their own "this" context, which means that "this" represents the object that called the function, not the object where function is defined.
+Exmp: let x = {value: 10,
+               simpleFunc: function () { return this.value } };
+      let y = {value: 5};
+
+      console.log(x.simpleFunc());            // output: 10
+      console.log(x.simpleFunc.call(y));     // output: 5
+2. Constructor function of the normal function can be made.
+3. Hoisted: Hence, can be called before declaration.
+
+1. Arrow functions don't have their own 'this' rather uses the lexical "this" which means that "this" represents the (global: window) object where arrow function is defined, not where it is called. Hence it results undefined.
+Exmp: let man = {
+                 value: 10,
+                 arrowFunc: () => this.value
+                };
+      console.log(man.arrowFunc());    // output: undefined (lexical 'this').
+2. It cannot be used to create constructor function.
+3. Not hoisted.
+_________________________________________________________________________________
+"this" Keyword: Its behavior (representation + value) varies depending on different contexts.
+ this.name is exactly what obj.name means, just like the English pronoun (ضمیر).
+ Alone it refers to the global (window) object.
+ In an function, "this" refers to the owner object of that function, which in case of an independent function is global (window) object.
+ If function is a method of an object, then before being called, "this" refers to the owner object. 
+ After being called, 'this' does not essentialy point towards its owner object but points to the object where the method is called.
+ In a function in strict mode, "this" is undefined.
+_______________________________________________________________________________
+Function Expression: Assigning function to a variable:
+let add = function(a, b) {
+    return a + b;
+};
+This function is also not hoisted.
+
+IIFE (Immediately Invoked Function Expression):
+(function () {
+console.log("Hello");
+})();
+
+Parameters & Arguments:
+Names listed in function's definition i.e. x & y in myFunc(x, y) are called parameters & values passed corresponding to the parameters while calling function are called arguments i.e. myFunc(3, 4).
+_________________________________________________________________________________
+OBJECT Literals: Variables that can contain many properties (key-value pairs) & behaviors (methods).
+Exmp:
+const car = {type:"Fiat", model:"500", color:"white"};
+Object Name: car | keys: type, model & color | values: Fiat, 500 & white.
+console.log(car.type);     // output: Fiat
+console.log("car type is " + car.type + ".");  // output: car type is Fiat.
+console.log("car type is " + car.type + "& model is " + car.model + ".");    // output: car type is Fiat & model is 500.
+console.log("car type is " + car.type + "& model is " + car.model);         // output: car type is Fiat & model is 500
+OBJECT METHODS:
+const person = {
+                firstName: "John",
+                lastName : "Doe",
+                fullName : function() { 
+                  return this.firstName + " " + this.lastName;
+                 }
+               };
+Function inside an object can also be defined as:
+const person = {
+                fullName() { 
+                return this.firstName + " " + this.lastName;
+                }
+               };
+NESTED OBJECTS:
+const student = {
+                name: "Usman",
+                city: "LHR",
+                age: 30,
+                info: {
+                       id: usman@gmail.com,
+                       password: 123456789,
+                       address: ABC
+                       }
+                };
+console.log(student.info.address);
+output: ABC
+OBJECT into ARRAY:
+const person = {
+               fname: "John",
+               lname: "Lock"
+               age: 30,
+               city: "New York"
+               };
+console.log(Object.values(person));
+output: ['John', 'Lock', 30, 'New York']
+
+ADDING EXTRA PROPERTIES:
+let obj1 = { name: "Usman", age: 30 };
+let obj3 = {...obj1, gender: "Male", city: "LHR"};
+console.log(obj3);
+
+CONCATINATION OF OBJECTS:
+let obj1 = { name: "Usman", age: 30 };
+let obj2 = { gender: "Male", city: "LHR" };
+
+let obj3 = {...obj1, ...obj2};
+console.log(obj3);
+___________________________________________________________________________________
+CALL(): An object can call an independent function as well as a method belonging to another object using call method. It is used when the no. of function’s arguments are known.
+Exmp1: Making function inside an object & using it:
+      const person1 = {
+                       fname: "Usman",
+                       lname: "Shafiq",
+                       fullname: function() {
+                         return this.fname + " " + this.lname;
+                       }
+                     };
+      console.log(person1.fullname());
+      // output: Usman Shafiq & no need to use call() property bcoz function already belongs to obj person1.
+
+      const person2 = {
+                       fname: "Salman",
+                       lname: "Khan"
+                      };
+     // Use person1's function for person2 using call property:
+      console.log(person1.fullname.call(person2));  //output: Salman Khan
+Exmp2: Making function outside object & using it:
+      const person1 = {
+        fname: "Usman",
+        lname: "Shafiq"
+      };
+      const person2 = {
+        fname: "Salman",
+        lname: "Khan"
+      };
+      function fullname() {
+          return this.fname + " " + this.lname;
+        }
+      console.log(fullname.call(person1));  // by using call property bcoz function
+                                               does not belong to any obj yet.
+      console.log(fullname.call(person2));
+      output: Usman Shafiq Salman Khan
+Exmp3: call() can accept any type of arguments as well:
+function subjects(a, b, c) {
+return [a, b, c];
+}   
+console.log(subjects.call(person1, "Eng", "Math", "History")); //output: Eng, Math, History
+console.log(subjects.call(person2, "Math", "Eng", "Physics")); //Math, Eng, History
+
+APPLY(): Quite similar to call() but it is used when the number of the function’s arguments are unknown as it accepts arguments in the form of array.
+const nums = [1, 2, 3];
+const largest = Math.max.apply(null, nums);
+But now we use spread operators instead:
+const nums = [1, 2, 3];
+const largest = Math.max(...nums);
+
+      function subjects(a, b, c) {
+        console.log([a, b, c]);
+        }   
+      console.log(subjects.apply(person1, ["Eng", "Math", "History"]));  //output: ['Eng', 'Math', 'History']
+      console.log(subjects.apply(person2, ["Math", "Eng", "Physics"]));  //output: ['Math', 'Eng', 'Physics']
+
+BIND(): By using bind, an object can borrow a function from another object, can pass parameters to it without invoking it instantly rather keeping it saved for another time.
+      const person1 = {
+        fname: "Usman",
+        lname: "Shafiq",
+        fullname: function () {
+          return this.fname + " " + this.lname;
+        }
+      };
+
+      const person2 = {
+        fname: "Salman",
+        lname: "Khan"
+      };
+
+      let fullname = person1.fullname.bind(person2);
+      console.log(fullname);     //output: ƒ () {return this.fname + " " + this
+                                           lname;}
+      console.log(fullname());  //output: Salman Khan
+      (OR)
+      console.log(person1.fullname.bind(person2()));  //output: Salman Khan without writing previous 3 lines.
+
+CLOSURE: Inner function along with lexical scope (ref. of its own location in memory + ref. of lexical environment of its parent).
+In general, we know that the variables declared within a function are called local variables, hence, cannot be accessed outside that function. But closure (an inner function nested inside another function) retains access to the lexical environment (variables of outer function) even after the outer function has finished execution. 
+Problem: function outer() {
+        let person = "Usman";      // local variable
+        function inner() {
+          console.log(person);
+    // local variable "person" used with successful execution bcoz outer scope accessible to inner function.
+        }
+        inner();
+      }
+      let x = outer();
+      console.log(x());   // Uncaught TypeError.
+   // local variable "person" used but throw execution error bcoz inner scope not accessible to the outer.
+
+Solution: function outer() {
+            let person = "Usman";    // local variable declaration.
+            function inner() {
+              return person;
+        // local variable "person" used with successful execution bcoz outer scope is accessible to inner function.
+            }
+            return inner;     // closure: instead of calling inner();
+            }
+            let x = outer();
+            console.log(x);        // output: f inner() {return name;}
+            console.log(x());     // output: Usman
+
+  // kisi function ko return krny ka mtlb function ka result return krna nhi, balky uska poora lexical scope (including body/definition, local memory of itself & ref. to the lexical environment of its parent) return krna hota hai.
+  let x = outer(); iss code se outer function invoke hogya or apna execution context khtm kr k call stack se nikal gya. Function mein mojud variables bhi memory heap se delete hogay. But 'x' still remembers the value of those variables Qk humne outer function k andr se ek closure (inner function) ko return krwaya tha, jo closure poora ka poora aakar 'x' mein store hogya. Or closure k paas mojud ref. to the lexical environment of parent ki wja se wo parent k andr mojud variables ki values ko retain rakhta hai. Even that agr 'person' variable, outer function ki bjae, outest function scope ya global scope mein hota, tab bhi lexical environment k access ki wja se inner function uski value ko access kar sakta tha.
+
+Benefits of Closure:
+1. Memoization: Time optimization by caching (memorizing) results of repetitive calculations.
+2. Function "Once": useful in scenarios where you want to perform an expensive operation only once & then reuse the result for subsequent calls.
+3. Module Design Pattern: User can't access a private function directly, but through another public function. Pvt. functions are those who don't return anything, hence, can't be directly accessible.
+4. Currying
+___________________________________________________________________________________
+PROTOTYPE: Template or blue-print for objects.
+PROTOTYPAL INHERITENCE:  A process in which objects directly inherit properties & methods from other objects.
+      const users = {
+        fullname: function () {
+        return this.fname + " " + this.lname;
+        },
+        age: function () {
+        return new Date().getFullYear() - this.birth;
+        }
+      };
+      const student = {
+        fname: "Usman",
+        lname: "Shafiq",
+        birth: 2000
+      };
+      const teacher = {
+        fname: "Salman",
+        lname: "Khan",
+        birth: 1980
+      };
+
+      // student.__proto__ = users;
+      // teacher.__proto__ = users;            [OUTDATED WAY]
+
+      Object.setPrototypeOf(student, users);
+      Object.setPrototypeOf(teacher, users);   [LATEST WAY]
+
+      console.log(student.fullname(), student.age());   // output: Usman Shafiq 24
+      console.log(teacher.fullname(), teacher.age());   // output: Salamn Khan 44
+      console.log(student);   // output: {fname: 'Usman', lname: 'Shafiq', birth: 2000}
+      console.log(teacher);   // output: {fname: 'Salman', lname: 'Khan', birth: 1980}
+
+In order to add "fullname" & "age" as properties of "student" & "teacher" use the
+following code instead of __proto__ or Object.setPrototypeOf:
+        const student = {
+        fname: "Usman",
+        lname: "Shafiq",
+        fullname: users.fullname,    // additional step.
+        birth: 2000,
+        age: users.age              // It's too.
+      };
+      const teacher = {
+        fname: "Salman",
+        lname: "Khan",
+        fullname: users.fullname,   // additional step.
+        birth: 1980,
+        age: users.age             // It's too.
+      };
+output:
+Usman Shafiq 24
+Salamn Khan 44
+{fname: 'Usman', lname: 'Shafiq', birth: 2000, fullname: ƒ, age: ƒ}
+{fname: 'Salman', lname: 'Khan', birth: 1980, fullname: ƒ, age: ƒ}
+_______________________________________________________________________________
+SUMMARY: Ways to use an object's method in another object:
+1(a). users.fullname.call(student);    // method of an object.
+1(b). fullname.call(student);         // individual & independent func.
+2. student.__proto__ = users;        // OUTDATED
+3. Object.setPrototypeOf(student, users);        // LATEST
+4. const student = {fullname: users.fullname};  // add as property.
+5. Student.prototype.fullname = function() {}  // constructor
+_______________________________________________________________________________
+OBJECT CONSTRUCTOR FUNCTION: A function used to make many objects having same properties instead of making them separately.
+Exmp: function Student(first, last, city) {
+// It is common practice to define a constructor with capital letter.
+       this.fname =  first;
+       this.lname = last;
+       this.city = city;
+      }
+var student1 = new Student("Usman", "Shafiq", "LHR");
+var student2 = new Student("Salman", "Khan", "FSD");
+var student3 = new Student(.................. so on);
+To add some extra property to an instance object:
+student2.age = 20;
+console.log(student2);
+output: Student(2) {fname: "Salman", lname: "Khan", city: "FSD", age: 20}
+To add a function to an instance object:
+student1.fullname = function() {
+   return this.fname+ " "+lname;
+}
+console.log(student1);
+output: Student(1) {fname: "Usman", lname: "Shafiq", city: "LHR", f}
+To add some extra property to Object Constructor:
+Student.prototype.language = "Urdu";
+To add a function to Object Constructor:
+Student.prototype.fullname = function() {
+   return this.fname+ " "+lname;
+}
+Program:
+        function Parent(name) {
+            this.name = name;
+        }
+        Parent.prototype.sayHello = function() {
+            console.log(`Hello ${this.name}`);
+        }
+        
+        function Child(name, age) {
+            Parent.call(this, name);    // calling constructor of Parent.
+            this.age = age;
+        }
+
+        Child.prototype = Object.create(Parent.prototype);     // Child inheriting Parent.
+        Child.prototype.constructor = Child;
+
+        let child1 = new Child("Usman", 30);
+        child1.sayHello();
+ A function defined as the property of an object is called "method" of that object.
+ A function designed to create new objects is called object constructor.
+After coming the concept of classes in JavaScript, use of object constructor is no more neeeded.
+________________________________________________________________________________
+SETS: collection of unique values. Don't store duplicate value.
+Exmp1:
+const mySet = (["Hello", 786, false, "Hello"]);
+console.log(mySet);
+output: Set(4) {Hello, 786, false}
+Exmp2:
+const mySet = new Set();
+mySet.add("Hello");
+mySet.add("World");
+mySet.add("World");
+mySet.add(786);
+console.log(mySet);
+output: Set(3) {"Hello", "World", 786}   //set don't show repeated values.
+
+MAPS: Collection of data in key-value pairs.
+const myMap = new Map();
+myMap.set("Name", "Usman");
+myMap.set("func", function () { });
+myMap.set("Number", 3245);
+console.log(myMap);
+output: {'Name' => 'Usman', 'func' => ƒ, 'Number' => 3245}
+__________________________________________________________
+ACCESSOR PROPERTIES:
+1. GETTER: It makes a property readable. It doesn't take any parameter.
+const person = {
+       fname: "Usman",
+       lname: "Shafiq",
+       get getname() {
+       return this.fname + " " + this.lname;
+      }
+   };
+console.log(person.getname);
+output: Usman Shafiq
+2. SETTER: It makes a property writable. It takes only 1 parameter.
+const person = {
+       fname: "Usman",
+       lname: "Shafiq",
+       set setfname(value) {
+        return (this.fname = value);
+       },
+       set setlname(value) {
+        return this.lname = value;
+       }
+    };
+person.setfname = "Salman";
+person.setlname = "Khan";
+console.log(person.getname);
+output: Salman Shafiq
+___________________________________________________________________________________
+CLASSES: Templates or blueprints for objects having two things:
+1. Properties (name, color, age, size, price)
+2. Methods (functions)
+Note: Always add a method named constructor() in a class otherwise, JavaScript will add an empty constructor method.
+Types of Methods of a Class:
+1. Constructor: method created with the "constructor" keyword & automatically calls himself as we make a class object.
+class Hello {
+ constructor () {
+ console.log("Hello");
+ }
+}
+let a = new Hello;
+let b = new hello;
+output: Hello      // print "Hello" without calling or consoling.
+        Hello
+Main purpose of constructor function is defining properties of a class & assigning values to the properties:
+constructor(a, b) {
+  this.name = a;
+  this.age = b;
+}
+2. Prototype: user defined method & called only when user want to.
+class Hello {
+   message(){                       // prototype method
+   console.log("Hello World");
+  }
+}
+let a = new Hello();
+a.message();
+// An object named "a" created from the "hello" class calling method "message".
+output: Hello World
+3. Static: it cannot be called on an object, but only a class & object can be passed as argument. 
+class Hello {
+   static message(){
+   console.log("Hi...");
+   }
+ }
+let obj = new Hello();
+hello.message(obj);
+Output: Hi...
+___________________________________________________________________________________
+Inheritence: A process in which classes inherit properties & methods from other classes.
+Exmp: class model extends car {
+        constructor() {
+         }
+       }
+SUPER(): used inside a child class to call constructor of its parent class.
+Exmp1: 
+      class Parent {
+        constructor() {
+          console.log("Constructor of Parent Class");
+        }
+      }
+      class Child extends Parent {
+        constructor() {
+          console.log("Constructor of Child Class");
+        }
+      }
+      let obj = new Child();
+As we didn't use super() in child class, constructor of parent (super) class will not be called, hence,
+output: Constructor of Child Class.
+Exmp2:
+      class Child extends Parent {
+        constructor() {
+          super();
+  // if constructor of parent class has some parameters, pass them in super(n) as well..
+          console.log("Constructor of Child Class");
+        }
+      }
+      let obj = new Child();
+As we used super() in child class, constructor of (super) parent class will also be called (invoked), hence,
+output: Constructor of Parent Class
+        Constructor of Child Class
+
+ADDING NEW METHOD To A CLASS:
+Parent.prototype.sayOye = function() {
+                           console.log("Oye");
+                          }
+COMPOSITION & MIXIN: Multiple inheritence is not allowed in JavaScript, but a child class or a specific object of that class can use features of one or more other objects without inheritence using mixin.
+Exmp (Mixin in Class Objects):
+class Car {
+        constructor() {
+          console.log("Cars are awesome!");
+        }
+      }
+      class Model extends Car {
+        constructor() {
+          super();
+          console.log("BMW");
+          Model.h1 = new Hello();
+    // Creating instance of "Hello" in "Model" class.
+        }
+        callMessage() {
+          Model.h1.message();
+        }
+        callFunny() {
+          Hello.funny();      // for static methods.
+        }
+      }
+      let c1 = new Model();   // creating object.
+      c1.callMessage();
+      c1.callFunny();
+
+Exmp (Mixin via Independent Objects):
+      const obj1 = {
+                    sayHi: function() {
+                      console.log("Hi...");
+                      },
+                    sayBye: function() {
+                      console.log("Bye");
+                    }
+                   };
+     Object.assign(Child.prototype, obj1, obj2, obj3);
+   // Now child class acquired features of "obj1" using mixin.
+Features can also be added to a specific object of class using mixin:
+     let c1 = Object.assign(obj1, obj2, obj3);
+   // Object "c1" of child class acquiring features from "obj1".
+____________________________________________________________________________________
+SET TIMEOUT:
+setTimeout(myFunction, 2000);
+function myFunction() {
+console.log("Hello");
+}
+output: Hello (after 2s)
+CLEAR TIMEOUT:
+let myTime = setTimeout(myFunction, 2000);
+clearTimeout(myTime);  // stop the execution of setTimeout
+SET INTERVAL:
+setInterval(myFunction, 2000);
+function myFunction() {
+console.log("Hello");
+}
+output: Hello (repeat again & again after 2s)
+CLEAR INTERVAL:
+let myInterval = setInterval(myFunction, 2000);
+clearInterval(myInterval);  // stop the execution when invoked.
+________________________________________________________________________
+CALLBACK: A function passed as an argument to another function & doesn't execute until the enclosing function completes its execution.
+Exmp#1:
+function hello() {
+console.log("Hello");
+}
+setTimeout(hello, 2000);
+[OR]
+To shorten our code, we can make an arrow function inside setTimeout:
+setTimeout(() => {
+console.log("Hello");
+}, 2000);
+Exmp#2: 
+Problem: we want to print "Hello" before "GoodBye" but this code prints opposite:
+      function hello() {
+        setTimeout(function () {
+          console.log("Hello");
+        }, 1000);
+      }
+      function bye() {
+        console.log("GoodBye");
+      }
+      hello();
+      bye();
+output: GoodBye
+        Hello
+Solution: Now bye() will wait untill the execution of hello() completed:
+      function hello(callback) {
+   // Taking a callback function as argument.
+        setTimeout(function () {
+          console.log("Hello");
+          callback();
+        }, 1000);
+      }
+      function bye() {
+        console.log("GoodBye");
+      }
+      hello(bye); 
+output: Hello
+        GoodBye
+Two Problems of Callback:
+1. Inversion of Control: On passing a function into another, we actually handover the control of our function to the other function which makes our function dependent on that function.
+2. Callback Hell: Nested callbacks stacked below one another, form a pyramid structure (pyramid of doom) which makes programming difficult to manage & understand.
+Watch: Async.html
+_________________________________________________________________________________
+PROMISE: An object having three states & represents the eventual completion or failure of an async. operation.
+States of a Promise:
+1. Pending (waiting)
+2. Fulfilled (resolve: result) => then()
+3. Canceled (reject: error) => catch()
+Producing Code: use "Promise" constructor with new keyword.
+let myPro = new Promise((resolve, reject) => {})
+[OR]
+New promise can be returned:
+return new Promise((resolve, reject) => {})
+Constructor takes a function as parameter.
+This function further takes two functions (resolve & reject) as parameter.
+When async. task completes successfully, 1st function (resolve) is called to return the result.
+When async. task fails, 2nd function (reject) is called to return the reason of failure.
+Consuming Code:
+then() method returns a promise & takes 2 callback functions as arguments.
+1st for success & 2nd for failure.
+1st callback has one argument i.e. fulfillment value or result.
+We can do promise chaining in then() by returning the value or result instead of displaying it on console.
+myPro.then(value => {
+console.log(value); },
+error => {
+console.error(error); });
+2nd callback function also takes one argument i.e. rejection reason.
+catch() method returns a promise & used for error handling as it deals with rejected cases only.
+It can also be chained in the same way as then().
+catch() also takes a callback function as argument which further takes one argument i.e. rejection error.
+myPro.catch((error) => {console.error(error);})
+finally() method used in replacement of both then() & catch() as it executes in both cases either success or fail. It also takes a callback function as argument without any parameters.
+myPro.finally(()=> {console.log("Cleaned up!");})
+Instead of writing producing & consuming codes separately, then(), catch() & finally() can be attached directly with the ending braces of producing code.
+
+PROMISE CHAINING: then().then().then().then()
+Watch: Async.html
+
+ASYNC(): An async. function which returns a promise representing the eventual completion or failure of an async. operation.
+Exmp: async function test() {
+        return "Hello"; }
+AWAIT Keyword: Pauses the execution of async. function until the promise being awaited is resolved or rejected.
+For error handling, use try() & catch() inside asyn().
+________________________________________________________________________
+Error/Exception Handling:
+TRY, CATCH, THROW, FINALLY:
+Exmp: try {
+        let user = {name: "Usman", age: 30, city: "LHR"};
+        if (!user.name) {
+          throw new Error("Task Failed: Username not found.");
+        } else {
+          console.log(`Username "${user.name}" is found.`);
+        }
+      }
+      catch (error) {
+        console.error(error.message);
+      }
+      finally {
+        console.log("Execution completed!");
+      }
+___________________________________________________________
+COPYING VARIABLE: On assigning a variable to another variable, the value of assigned variable will be copied to the new variable. Hence, any changes in the value of new variable will not effect the original variable.
+let x = 5;
+let y = x;
+y = 3;
+console.log(x);
+output: 5
+COPYING OBJECT: Unlike variables, on assigning an object to a variable, ref. of memory location of object will be copied to the variable instead of value. Hence, any changes in the variable will also make a change in original object.
+const x = {
+          name: "Usman"
+          };
+let y = x;
+y.name = "Salman";
+console.log(x);
+output: {name: "Salman"}
+SHALLOW COPY: Creating a new object & copying only the top-level properties of the original object to preserve properties in original object:
+let y = Object.assign({}, x);  [OR]  let y = {...x};
+y.name = "Salman";
+console.log(x);   // output: {name: "Usman"}
+console.log(y);   // output: {name: "Salman"}
+But shallow copy works only for basic properties of an object not for sub-properties:
+const x = {
+          name: "Usman",
+          info: {
+                city: "LHR",
+                state: "Pakistan"
+                }
+          };
+let y = {...x};    // Object Deconstruction
+y.info.city = "FSD";
+console.log(x.info.city);   // output: {city: "FSD"}
+DEEP COPY: Used to copy nested objects & arrays of an object
+let y = JSON.parse(JSON.stringify(x));
+y.info.city = "FSD";
+console.log(x.info.city);   // output: {city: "LHR"}
+console.log(y.info.city);   // output: {city: "FSD"}
+
+Limitation: When an object has a function or Date in its properties, then on making its deep copy, function & date will be lost.
+Solution: Use loadash library or copy each property one by one using for loop.
+______________________________________________________________
+AJAX (Asynchronous JavaScript & XML): A technique to create asynchronous web applications. It allows you to send & receive data from a web server without reloading the entire web page.
+___________________________________________________________
+XML (Extensible Markup Language): Set of rules for encoding documents in a format that is both human-readable & machine-readable.
+_________________________________________________________________________
+JSON (Javascript Object Notation): Text format to store & interchange data between web-servers & clients.
+Commonly used as an alternative to XML for API (fetching & parsing data from server) & config. files.
+JSON DATA:
+{
+ "name": "Usman",
+ "age": 30,
+ "is_student": true,
+ "passport_no": null,
+ "prog.lang": ["HTML", "CSS", "JAVA", "Python"],
+ "address": {
+            "city": "Lahore",
+            "state": "Pakistan",
+            "post_code": 11011
+            }
+}
+JSON DATA for Multiple People:
+{
+ "students": {
+              "name": "Usman",
+              "age": 30
+             },
+             {
+              "name": "Salman",
+              "age": 20
+             },
+             {
+              "name": "Noman",
+              "age": 25
+             }
+}
+FETCHING, STORING & PARSING JSON DATA: Data comes from server in the form of string, so we will store it in a variable using backticks:
+let data = `{
+            "name": "Usman",
+            "age": 30,
+            "is_student": true,
+            "passport_no": null,
+            "prog.lang": ["HTML", "CSS", "JAVA", "Python"],
+            "address": {
+                       "city": "Lahore",
+                       "state": "Pakistan",
+                       "post_code": 11011
+                       }
+            }`;
+Now convert this string data into object so that javascript can read it:
+let dataObj = JSON.parse(data);
+console.log(dataObj["name"]);   // output: Usman
+console.log(dataObj["prog.lang"][2]);        // output: JAVA
+console.log(dataObj["address"]["state"]);   // output: Pakistan
+SENDING DATA TO SERVER: Make an object which we want to send:
+const student {
+              name: "Usman",
+              age: 30,
+              city: Lahore
+              }
+Now convert javascript object into JSON string to send it to the server:
+let Jdata = JSON.stringify(student);
+_____________________________________________________________________________________
+API (Application Programming Interface): Set of rules & protocols that allow different computer programs (softwares & apps.) to interact with each other. 
+FETCH API: Easiest waytomake a http request. Other ways are AJAX & XMLHttpRequest.
+
+FETCH (READING Data):
+fetch("file path")    // reading data from a file in PC
+  .then((response) => {
+    return response.text();    // Data either will be txt() or json()
+   })
+  .then((data) => {
+    console.log(data);
+   });
+
+fetch("Server URL")                  // reading data from server
+   .then((response) => response.json())   // Data either will be txt() or json()
+   .then((data) => {
+    console.log(data);
+
+    for (var x in data) {      // bcoz data received in the form of array
+       var a = `${data[x].name} - ${data[x].email} <br>`;
+       document.write(a);    // output: list of data: names & emails
+    }
+ })
+   .catch((error) => document.write("Sorry! Data Fetching Failed!"));
+
+FETCH (INSERTING Data in Server):
+    var obj = {
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  };
+fetch('Server URL', {     // where we want to send data
+  method: 'POST',        // to insert data
+  body: JSON.stringify(obj),
+  headers: {
+    'Content-type': 'application/json;',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+
+FETCH (UPDATING Data in Server):
+method: 'PUT'        // to update data
+
+FETCH (DELETING Data in Server):
+method: 'DELETE'    // to delete data

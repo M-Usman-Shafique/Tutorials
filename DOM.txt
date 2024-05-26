@@ -1,0 +1,212 @@
+DOM (Document Object Model): a platform or interface used to access, modify & manipulate  content, structure & style of a document dynamically.
+Document: HTML k tmam elements javascript mein aa kar ek object mein convert ho jaty jisy document kaha jata jo available hota hai window object k andar.
+Dynamic Changes: HTML & CSS files ko chherry bgher just on the basis of user's input.
+DOM ACCESS:
+1. ID: document.getElementById("idName")
+2. Class: document.getElementsByClassName("className")
+          It returns an HTMLCollection (similar to an array but not exactly).
+3. Tagname: document.getElementsByTagName("p")
+4. All Elements of a Document:
+let element = document.all;
+console.log(element);
+output:
+0: html
+1: head
+2: title
+3: style
+4: body
+5: div#outer
+6: h5
+7: div#inner1
+8: h5
+9: div#inner2
+10: h5
+11: div#inner3
+12: h5
+13: script
+14: script
+Now target any element you want, using its index:
+let element = document[9];
+console.log(element);
+output: <div id="inner2">...</div>
+5. All the anchor tags of document:
+let element = document.links;
+console.log(element);
+Now target any link you want using its index:
+let element = document.links[3];
+6. Query Selector: document.querySelector("#idName/.className/tag")
+                   It returns 1st element corresponding to the given id/class/tag.
+7. Query Selector All: document.querySelectorAll("#myId/.myClass/tag")
+                       It returns all elements (NodeList).
+Note: QuerySelector use karty huay class se pehlay "." & Id se pehlay "#" lgana zroori.
+https://www.freecodecamp.org/news/dom-manipulation-htmlcollection-vs-nodelist/
+__________________________________________________________
+DOM Manipulation (Properties):
+1. tagName: returns tag of element.
+2. innerText: returns text content elements & its children: Hello.
+3. innerHTML: returns text plus HTML related info.: <h5>Hello</h5>.
+4. textContent: returns text content even for hidden elements.
+DOM Manipulation (Attributes):
+1. getAttribute(attr): returns attribute value.
+2. setAttribute(attr, value): change attribute value.
+3. Attributes: document.getElementById("idName").attributes;
+output:
+0: id
+1: class
+2: style
+3: onclick etc.
+DOM Manipulation (Style):
+Syntax: nodeName.style.property.
+div.style.background = "blue";
+div.style.fontSize = "20px";
+_____________________________________________________________
+GET DOM Value:
+1. innerText
+2. innerHTML
+3. getAttribute
+4. Attributes
+SET DOM Value:
+1. innerText
+2. innerHTML
+3. setAttribute
+4. removeAttribute
+________________________________________________________________________
+Styling CSS using DOM:
+1. Style: document.querySelector('container').style.background = 'red';
+2. className: document.querySelector('li').className = 'abc';
+3. classList: document.querySelector('li').classList.add('abc','xyz');
+              document.querySelector('li').classList.remove('abc','xyz');
+_________________________________________________________________________
+EVENTS: Any action or occurence detected due to user's activity like clicking, submitting, focusing etc.
+document.querySelector('li').onClick = abc;
+function abc() {
+ document.querySelector('ul').style.color = 'green';
+}
+<button onclick="document.getElementById('demo').innerHTML = Date()"> Click me </button>
+output: on clicking, date msg will be shown below the button.
+<button onclick="this.innerHTML = Date()"> Click me </button>
+output: on clicking, button will convert into date msg.
+<button onclick="displayDate()"> Click me </button>
+Event Attributes Calling Functions:
+function displayDate () {
+return document.getElementById('demo').innerHTML = Date () ;
+}
+
+EVENT LISTENER: Functions that wait for a specific event to occur & execute designated code in response.
+1. document.querySelector('li').addEventListener('click', abc);
+   function abc() {
+    document.querySelector('ul').style.color = 'green';
+   }
+2. document.querySelector('li').addEventListener('click', function abc() {
+   document.querySelector('li').style.color = 'green';
+});
+Shorcut: document.querySelector('li').addEventListener('click', function abc() {
+   this.style.color = 'green';
+});
+4. document.querySelector('li').addEventListener('click', function abc() {
+   this.classList.add('abc', 'xyz')});
+5. document.querySelector('li').addEventListener('click', function abc() {
+   this.classList.remove('abc', 'xyz')});
+
+REMOVE EVENT LISTENER:
+document.querySelector('li').removeEventListener('click', abc);
+
+EVENT PROPAGATION: DOM elements can be nested inside each other. Therefore, when an event occurs on one element, it passes/propagates up & down to the other element.
+1. Capturing/Trickling: Propagation of event from top (parent) to bottom (child).
+Exmp: document.getElementById('demoId').addEventListener("click", function() {
+console.log("demoText");}, true);
+2. Bubbling: Propagation of event from bottom (child) to top (parent).
+Exmp: document.getElementById('demoId').addEventListener("click", function() {
+console.log("demoText");}, false);    // false by default
+CREATE METHODS:
+1. createElement: let newElement = document.createElement('p');
+2. createTextNode: let newText = document.createTextNode("Hello World");
+3. createComment: document.createComment("Hello World");
+___________________________________________________________________
+APPEND METHODS:
+1. AppendChild: newElement.appendChild(newText);
+                document.querySelector('.items').appendChild(newElement);
+2. InsertBefore: let target = document.querySelector('.items');
+                 target.insertBefore(newElement, target.childNodes[0]);
+___________________________________________________________________
+CREATE & APPEND:
+1. insertAdjacentElement: creates tags only:
+   let newElement = document.createElement('h4');
+   let target = document.querySelector('.test');
+   target.insertAdjacentElement('afterbegin', newElement);
+Result: Empty <h4></h4> tag added to "test" class.
+2. insertAdjacentText: creates text only: "Hello World".
+   let newText = document.createText('This is a new text.');
+   target.insertAdjacentText('afterbegin', newText);
+Result: A text added to "test" class.
+3. insertAdjacentHTML: creates tag & text both:
+   let newElement = "<h4>This is my new text.</h4>";
+   target.insertAdjacentHTML("beforeend", newElement);
+_______________________________________________________
+REPLACE & REMOVE:
+Replace: let target = document.querySelector('.test');
+         let oldElement = target.children[0];
+         target.replaceChild(newElement, oldElement);
+Remove: target.removeChild(oldElement);
+_______________________________________________________
+CLONING:
+let target = document.querySelector('.list').children[0];
+let copyElement = target.cloneNode(true);   // if no parameter or 'false' then only tag & attribute will be
+                                               copied leaving the text behind.
+document.querySelector('.true').appendChild(copyElement);
+________________________________________________________
+Single DOM Selectors:
+document.getElementById("ID name").style.background = black;
+document.getElementById("ID name").style.display = none;
+document.getElementById("ID name").textContent = "Task List";
+document.getElementById("ID name").innerText = "My Tasks";
+document.getElementById("ID name").innerHTML = '<span style="color:red">My Tasks</span>';
+
+Query Selectors:
+document.querySelector("#myId/.myClass/tag");
+document.querySelector("li").style.color = 'red';                        // only 1st list item not all
+document.querySelector("li:last-child").style.color = 'blue';
+document.querySelector("li:nth-child(3)").style.color = 'green';
+document.querySelector("li:nth-child(odd)").innerText = 'Hello';       // only 1st odd not all
+document.querySelector("li:nth-child(even)").textContent = 'World';   // only 1st even not all
+___________________________________________________________________
+Multiple DOM Selector:
+let items = document.getElementsByClassName("myClassName");  // all items of class
+console.log(items);
+items[0].style.color = 'red';
+items[3].textContent = 'Hello';
+
+let lists = document.getElementsByTagName("li");    // all 'li" elements
+lists = Array.from(lists);       // converted HTML elements into array, hence, all array operations
+                                    can be performed on them.
+ 
+
+
+document.querySelectorAll("ul");
+items.forEach(function(item) {
+        item.innerText = 'Hello';
+  });
+console.log(items);
+let odd = document.querySelectorAll("li:nth-child(odd)");   // for all odd'li' elements
+let even = document.querySelectorAll("li:nth-child(even)");   // for all even 'li' elements
+odd.forEach(li) => li.style.color = 'red';
+console.log(items);
+
+
+
+let items = list.children;
+list.children[0].style.color = 'blue';
+list.children[0].children[3].innerText = 'Hello';    // child of child
+
+
+list.firstChild;     // #text (line break)
+list.firstElementChild;
+list.lastElementChild;
+
+list.parentElement;
+list.ParentElement.parentElement;
+
+list.nextSiblingElement;
+list.nextSiblingElement.nextSiblingElement;
+list.previousSiblingElement;
+_____________________________________________________________
