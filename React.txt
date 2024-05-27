@@ -208,6 +208,7 @@ If we pass an empty array as dependency, useEffect will be invoked only once.
 ⁡⁣⁣⁢4. useContext():⁡ To share values between multi-levels of components without passing props through each level.
 
 ⁡⁣⁣⁢5. useRef():⁡ To directly access DOM elements & for creating mutable variables which do not re-render the component.
+For example, if we try to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since useState() itself causes a re-render.
 
 ⁡⁣⁣⁢6. useReducer:⁡ similar to useState but manages more complex states when new state depends on the previous state.
 It takes a reducer function & initial state as arguments & returns the new state & a dispatch function.
@@ -217,11 +218,12 @@ newState = reducer(currentState, action)
 ⁡⁢⁣⁣Dispatch:⁡ used to send actions to the reducer. When an action is dispatched, the reducer processes it & returns the new state.
 
 ⁡⁣⁣⁢7. useMemo():⁡ used for performance optimization by memoizing result/value of expensive calculations to avoid unnecessary re-renders.
+⁡⁢⁣⁣Memoization:⁡ Caching a value so that it does not need to be recalculated.
 ⁡⁢⁣⁣Diff. b/w useMemo() & useEffect():⁡
 1. useMemo stops the unwanted rendering of a specific part of a component while useEffect stops the unwanted rendering of the whole component.
 2. In useEffect, value cannot be returned & stored in variable unlike useMemo.
 
-⁡⁣⁣⁢8. useCallback():⁡ used for performance optimization by memoizing functions to prevent them from being re-created & re-rendered.
+⁡⁣⁣⁢8. useCallback():⁡ used for performance optimization by memoizing expensive functions to prevent them from being re-created & re-rendered.
 ⁡⁢⁣⁣Diff. b/w useMemo() & useCallback():⁡
 1. useMemo returns memoize result/value while useCallback returns memoize function.
 2. Parameter can be passed in usecallback unlike useMemo.
