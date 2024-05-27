@@ -123,3 +123,14 @@ Steps: 1. Find middle index i.e. mid = (start+end)/2
        2. if (arr[mid] === target) return mid
        3. if (arr[mid] < target) repeat start = mid+1
        4. if (arr[mid] > target) repeat star = mid-1
+
+⁡⁢⁣⁣SORTING:⁡
+⁡⁣⁣⁢1. Bubble Sort ‌O​(n²):⁡ Starting from the first index, comparing each element with its next one. If next one is lower, swap it with the previous one.
+⁡⁣⁣⁢2. Selection Sort ‌O​(n²):⁡ Traversing the array to find the lowest value & moving it to the first index.
+⁡⁣⁣⁢3. Insertion Sort⁡ ⁡⁣⁣⁢‌O​(n²):⁡ Intuative approach. Repeatedly taking the next element and inserting it into the correct position among the already sorted elements.
+⁡⁣⁣⁢4. Merge Sort⁡ ⁡⁣⁣⁢O(nlogn):⁡ Divide & Conquer. Keep dividing the array into half until 2 elements left in the sub-array. Then compare them & bring the lowest one to the start.
+⁡⁣⁣⁢5. Quick Sort ⁢O(nlogn):⁡
+a. Select a 'pivot' element.
+b. Divide the array in two sub-arrays; one with elements lower than the pivot & second with elements greater than the pivot.
+c. Put the pivot between lower & greater sub-arrays.
+d. Call this algorithm twice; one for lower & one for greater sub-array untill sub-array has one or zero elements.
