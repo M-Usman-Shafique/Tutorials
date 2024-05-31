@@ -164,7 +164,13 @@ function Message({ username, children }) {
 ⁡⁢⁣⁡⁣⁣⁢3. High Order Components (HOCs):⁡⁡ Sharing logic between components using 'props' whose value is a component. HOC is a function which takes a component & returns another component.
 ⁡⁢⁣⁣Benefits:⁡ Reusability, Enhancement, Testing and Debugging.
 ⁡⁣⁣⁢4. Render Props:⁡ Sharing logic between components using 'props' whose value is function.
-⁡⁣⁣⁢5. Context API:⁡ Sharing data between multi-levels of components using useContext hook, without explicitly passing props through each component.
+⁡⁣⁣⁢5. Context API:⁡ Sharing data between multi-levels of components using useContext hook, without explicitly passing props (props drilling) through each component.
+
+Lifting State Up: Sending data from child to parent component.
+
+CONTROLLED & UNCONTROLLED COMPONENTS:
+Controlled: where the 'value' of input field is controlled by the component's state. By providing the value attribute, you synchronize the input field's value with the corresponding state variable as it establishes a two-way binding between the input field & the component's state. Changes made to the input field by the user trigger updates to the component's state, and changes to the component's state update the input field's value accordingly.
+Uncontrolled: not controlled using useState() but using useRef() or document.getElementById.
 
 ⁡⁢⁣⁣CONDITIONAL RENDERING:⁡
 function Profile() {
@@ -246,10 +252,18 @@ Most common library used for routing in React is 'react-router-dom'.
 ⁡⁣⁢⁣Link vs. NavLink:⁡ Link provides a basic link to any URL, while NavLink offers additional features (i.e. styling active links) that can enhance the user experience.
 
 ⁡⁣⁢⁣API⁡ ⁡⁣⁢⁣(Restaurant Analogy)⁡:⁡
-Client: Customer
+Client/Consumer: Customer
 Browser: Table
 API: Waiter
-Server: Kitchen
+Server/Provider: Kitchen
+Def.: An intermediar that allow two applications to talk to each other.
+1. Web API: used for web applications.
+2. Rest: Architectural guideline to develop a web API.
+3. Rest/Restful API: API developed using REST.
+Create (POST): Creating/Posting/Inserting Data.
+Read (GET): Reading/Getting/Fetching/Retrieving Data
+Update (PUT, PATCH):  PUT for Complete Update & PATCH for Partial Update Data.
+Delete (DELETE): Deleting Data.
 
 ⁡⁣⁢⁣AXIOS:⁡⁡ A package used to make HTTP requests (calling an API). AXIOS do in react what Fetch API does in JavaScript.
 
@@ -266,9 +280,13 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁣⁢⁣REDUX:⁡ Data & state management library for complex JavaScritp applications .
 Working:
 ⁡⁢⁣⁣1. ACTION:⁡ User instructions that describe what should happen in the application.
-⁡⁢⁣⁣2. STORE:⁡ Takes actions & give it to Reducer function.
+⁡⁢⁣⁣2. STORE (Stock Room):⁡ Takes actions & give it to Reducer function.
+Global state store to wrap the whole app. to become accessible anywhere.
 ⁡⁢⁣⁣3. DISPATCH:⁡ A method available on the store to send actions to the reducer.
-⁡⁢⁣⁣4. REDUCER:⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
+⁡⁢⁣⁣4. REDUCER (SalesMan to handle diff. sale's department):⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
+5. SLICE (Manufacturer):
+6. useSelect ():
+7. useDispatch ():  
 Steps to Implement Redux:
 1. Designing store: By making an object contains all actions/task in property-value pair.
 2. Listing our actions:

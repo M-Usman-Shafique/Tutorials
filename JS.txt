@@ -182,7 +182,7 @@ Exmp#7: let x;
         console.log(x);    // undefined
         x = 5;
 _________________________________________________________________________________
-Template Literals (Backticks):
+Template Literals (Backticks): Enables string interpolation (shamil krna). It lets us embed expressions within a string.
 Problem: let str = "Hello \n World";
 output: Hello
         World
