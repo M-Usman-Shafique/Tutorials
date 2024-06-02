@@ -45,10 +45,10 @@ Exmp: Nested loops like in iteration of a 2D array for sorting.
 Exmp: Recursion
 5. Logritmic ​‌‍‌O​(log n): better than ​‌‍‌O​(n)
 Exmp: Binary search where every time when loop iterates the size of input reduced half.
-Trick: When non-nested loop have increment in multiplication or division, it's always logrithmic.
+Trick: When non-nested loop has increment in multiplication or division, it's always logrithmic.
 6. Linearithmic ​‌‍‌O​(nlogn): better than ​‌‍‌O​(n²)
 Exmp: Sorting
-Trick: When nested loop have increment in multiplication or division, it's linearithmic.
+Trick: When nested loop has increment in multiplication or division, it's linearithmic.
 7. Factorial ​‌‍‌O​(n!): worst of them all.
 
 

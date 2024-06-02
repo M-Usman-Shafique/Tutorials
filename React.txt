@@ -257,9 +257,9 @@ Browser: Table
 API: Waiter
 Server/Provider: Kitchen
 Def.: An intermediar that allow two applications to talk to each other.
-1. Web API: used for web applications.
-2. Rest: Architectural guideline to develop a web API.
-3. Rest/Restful API: API developed using REST.
+1. Web API: Set of rules & protocols that allow different software applications to communicate & interact with each other
+2. REST (Representational State Transfer): Architectural guidelines to design networked applications e.g. Web Browsers, Emails, Web APIs.
+3. REST/RESTful API: A type of web API that follows the principles and constraints of REST 
 Create (POST): Creating/Posting/Inserting Data.
 Read (GET): Reading/Getting/Fetching/Retrieving Data
 Update (PUT, PATCH):  PUT for Complete Update & PATCH for Partial Update Data.
@@ -280,21 +280,30 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁣⁢⁣REDUX:⁡ Data & state management library for complex JavaScritp applications .
 Working:
 ⁡⁢⁣⁣1. ACTION:⁡ User instructions that describe what should happen in the application.
+Different events that can happen in a shopping store:
+a. ADD_TO_CART
+b. REMOVE_FROM_CART
+c. INCREASE_QUANTITY
+d. DECREASE_QUANTITY:
 ⁡⁢⁣⁣2. STORE (Stock Room):⁡ Takes actions & give it to Reducer function.
 Global state store to wrap the whole app. to become accessible anywhere.
+STATE: Products/goods.
 ⁡⁢⁣⁣3. DISPATCH:⁡ A method available on the store to send actions to the reducer.
-⁡⁢⁣⁣4. REDUCER (SalesMan to handle diff. sale's department):⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
-5. SLICE (Manufacturer):
+Store manager sending out a message to all the employees (reducers) that something needs to be done.
+⁡⁢⁣⁣4. MIDDLEWARE:⁡ A middleman between action creators & reducers. When an action is dispatched, it first passes through the middleware before reaching the reducers. Middleware can intercept the action before it reaches the reducer, allowing us to perform additional logic, such as logging, asynchronous operations, or modifying actions
+Thunk Middleware: Handles asynchronous actions, like fetching product data from a server.
+Special staff/team in a store dedicated to manage the special requests of the customers that require some time.
+⁡⁢⁣⁣5. REDUCER (SalesMan to handle diff. sale's department):⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
+Salesman or manager to handle actions & update the store's state acc. to the actions.
+For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
+5. SLICE: Section or department handles specific categories of products (state).
+ For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles. It contains reducer logic, action creators etc. to organize & modularize the Redux code.
 6. useSelect ():
-7. useDispatch ():  
-Steps to Implement Redux:
-1. Designing store: By making an object contains all actions/task in property-value pair.
-2. Listing our actions:
-   a. Add task
-   b. Remove task
-   c. Task Completed
-3. Creating reducer function.
-4. Creating redux store.
+7. useDispatch ():
+Async. Thunk: Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
+Thunk middleware manages the overall coordination of async operations within your Redux store, while async thunks represent specific tasks or operations that require asynchronous logic to be performed.
+
+
 
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
