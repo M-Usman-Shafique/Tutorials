@@ -300,10 +300,8 @@ For example, when ADD_TO_CART action is dispatched, the reducer updates the inve
  For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles. It contains reducer logic, action creators etc. to organize & modularize the Redux code.
 6. useSelect ():
 7. useDispatch ():
-Async. Thunk: Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
+Async Thunk: Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
 Thunk middleware manages the overall coordination of async operations within your Redux store, while async thunks represent specific tasks or operations that require asynchronous logic to be performed.
-
-
 
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
