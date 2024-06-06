@@ -296,12 +296,25 @@ Special staff/team in a store dedicated to manage the special requests of the cu
 ⁡⁢⁣⁣5. REDUCER (SalesMan to handle diff. sale's department):⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
 Salesman or manager to handle actions & update the store's state acc. to the actions.
 For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
-5. SLICE: Section or department handles specific categories of products (state).
+5. SLICE: Where the complete logic of reducer is written.
+Section or department handles specific categories of products (state).
  For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles. It contains reducer logic, action creators etc. to organize & modularize the Redux code.
 6. useSelect ():
 7. useDispatch ():
-Async Thunk: Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
+Async Thunk: A middleware to handle asynchronous operations.
+Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
 Thunk middleware manages the overall coordination of async operations within your Redux store, while async thunks represent specific tasks or operations that require asynchronous logic to be performed.
+
+Diagram:
+When button of "subChild" is clicked, an action is dispatched using the useDispatch hook. A dispatch function is used to send actions to the store.
+In this case, the action is dispatched with a state/value = 1 called payload: useDispatch(payload).
+The Redux store holds the entire state tree of the application & responsible for dispatching actions to reducers & managing state.
+The store then forwards the action to the appropriate reducer based on the action type.
+In this case, Redux store forwarded the dispatched action (value=1) along with the current state (value=0) of application-which was already present in the store-to the reducer present in the store.
+Reducers are functions that take the current/initial state & an action as arguments and return a new state. In this case, reducer1: (state (0), payload (1)) => { logic }.
+The { logic } part of reducer-which handles the dispatched action & payload (value)-comes from the slice component.
+The reducer updates the new state (value = 1) & store it in the Redux store.
+useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
 
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling

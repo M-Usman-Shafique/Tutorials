@@ -1,24 +1,57 @@
-DATA STRUCTURE: Way to organize data so that we can use it efficiently.
-ALGORITHM: Steps or process to arrange data.
+DATA STRUCTURE: Way to define, store, organize & retrive data in a systemetic way.
+ALGORITHM: Steps by step procedure to execute instructions in a certain order to get the desired output.
 DSA only deals with non-premitive data types because their space complexity is dynamic while space complexity of premitive data types is constant & static.
-Why?
-NON-PREMITIVE:
+NON-PREMITIVE: That can store data of more than one type.
 1. ARRAYS
 2. FILES
 3. LISTS:
-         a. Linear:
-                  1. Stacks
-                  2. Queues
-         b. Non-Linear:
-                  1. Trees
-                  2. Graphs
-OPERATIONS:
-1. Traversing & Accessing
-2. Insertion
-3. Deletion
-4. Searching
-5. Sorting
-6. Merging
+a. Linear: Data items arranged in sequential order.
+  1. Array: Collection of elements, each identified by an index or key, stored next to each other.
+  2. Linked List: A linear data structure in which elements (nodes: data+ref.) are connected with each other & each elements points to its next element.
+     a. Singly: Each node contains a data element and a ref. to the next node in the sequence. Traversal is possible in only one direction, from head to tail.
+     b. Doubly: Each node contains a data element and two references: one to the next node and one to the previous node. Traversal is possible in both directions.
+     c. Circular: Last node's reference points back to the first node forming a continuous loop.
+  3. Stack: Data structure that follows the LIFO principle.
+     Uses of Stack:
+     1. Expression Evaluation
+     2. Backtracking (puzzel & maze solving) algorithms
+     3. Undo mechanism in applications.
+     4. Manage program execution (call stack)
+     Operations on Stack:
+     1. push(): adding
+     2. pop(): removing
+     3. peek(): top item
+     4. isempty()
+     5. isfull()
+  4. Queue: Data structure that follows the FIFO principle.
+     Operations on Queue:
+     1. enqueue(): inserting element at rear (start).
+     2. dequeue(): removing element from front (end).
+     3. peek(): element at front (end).
+     4. isempty()
+     5. isfull()
+     Uses of Queue:
+     1. In web servers to manage requests
+     2. Asynchronous Task Management
+     3. 
+
+b. Non-Linear:
+   1. Trees: Data structure which represents hierarchical relationships between elements.
+      Binary Tree: Each node can have two children at maximum.
+      Heap: A special type of binary tree.
+   2. Graphs: A pictorial representation of a set of objects where some pairs of objects are connected by links. The interconnected objects are represented by points termed as vertices, and the links that connect the vertices are called edges.
+    Common ways to Traverse a Graph:
+    1. Depth First Search (DFS)
+    2. Breadth First Search (BFS)
+
+COMMON OPERATIONS:
+1. Traversal: Accessing & Printing
+2. Insertion: Adding
+3. Deletion: Removing
+4. Searching: Finding
+5. Sorting: Arranging
+6. Merging: Joining
+
 ALGORITHM COMPLEXITY:
 1. Space (Storage/Memory): Auxiliary Space (additional) + Input Space (variables)
 2. Time (No. of lines/steps): Time complexity directly depends on no. of inputs.
@@ -28,11 +61,13 @@ Using Formula: f(n) = 5n² + 6n + 12
 6n: 1 loop having 6 lines.
 12: simple lines.
 
-ASYMPTOTIC ANALYSIS: To find the better solution in more than one solutions.
-1. Big O: Worst case, closest upper bound, at most, maximum.
+ASYMPTOTIC ANALYSIS: Evaluation of an algorithm's performance in terms of space & time complexity.
+Asymptotic Notations: 
+1. Big Omega (Ω): Best case, lower bound, at least, minimum.
 Measures the performance & efficiency of an algorithm using space & time complexity.
-2. Big Omega: Best case, lower bound, at least, minimum.
-3. Big Theta: Avg. case, exact time.
+2. Big Theta (Θ): Avg. case, exact time.
+3. Big O: Worst case, closest upper bound, at most, maximum.
+
 COMMON COMPLEXITIES:
 1. Constant ​‌‍‌O​(1): No. of operations are independent from the size of inputs.
 Exmp#1: Finding value at a particular index of an array.
@@ -117,7 +152,7 @@ The place from where we remove items or where the oldest item lies is called Fro
 Circular Queue: Both front & rear are connected to each other.
 
 SEARCHING O(n):
-1. Linear: used for unsorted data. Checking one by one each element in comparison with its neigbour.
+1. Linear: used for unsorted data. Checking one by one each element by comparing with its next element.
 2. Binary: use for sorted data. Dividing in half repeatedly:
 Steps: 1. Find middle index i.e. mid = (start+end)/2
        2. if (arr[mid] === target) return mid
@@ -126,8 +161,8 @@ Steps: 1. Find middle index i.e. mid = (start+end)/2
 
 ⁡⁢⁣⁣SORTING:⁡
 ⁡⁣⁣⁢1. Bubble Sort ‌O​(n²):⁡ Starting from the first index, comparing each element with its next one. If next one is lower, swap it with the previous one.
-⁡⁣⁣⁢2. Selection Sort ‌O​(n²):⁡ Traversing the array to find the lowest value & moving it to the first index.
-⁡⁣⁣⁢3. Insertion Sort⁡ ⁡⁣⁣⁢‌O​(n²):⁡ Intuative approach. Repeatedly taking the next element and inserting it into the correct position among the already sorted elements.
+⁡⁣⁣⁢2. Selection Sort ‌O​(n²):⁡ Finding the lowest value from unsorted elements, finding correct position for this value in the sorted elements & placing it there.
+⁡⁣⁣⁢3. Insertion Sort⁡ ⁡⁣⁣⁢‌O​(n²):⁡ Intuative approach. Randomly picking an element from unsorted elements & placing it at the correct position of sorted elements.
 ⁡⁣⁣⁢4. Merge Sort⁡ ⁡⁣⁣⁢O(nlogn):⁡ Divide & Conquer. Keep dividing the array into half until 2 elements left in the sub-array. Then compare them & bring the lowest one to the start.
 ⁡⁣⁣⁢5. Quick Sort ⁢O(nlogn):⁡
 a. Select a 'pivot' element.
