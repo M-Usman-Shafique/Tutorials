@@ -203,8 +203,10 @@ function Profile() {
 ⁡⁢⁣⁣Syntax:⁡ useEffect(callback, [array of dependency variables])
 Callback function tells what to run & dependency tells when to run.
 ⁡⁢⁣⁣Dependency:⁡
-If no dependencies are passed, useEffect is first invoked when a component mounts & then invoked at every update in the component.
-If we pass an empty array as dependency, useEffect will be invoked only once.
+1. DidMount & DidUpdate: If no dependencies are passed, useEffect is first invoked when component mounts & then invoked at every update in the component.
+2. DidMount: If we pass an empty array as dependency, useEffect will be invoked only once on mounting.
+3. DidUnmount: If we return a function inside useEffect, the function will be triggered when component unmounts.
+4. DidUpdate: Passing array with some value.
 
 ⁡⁣⁣⁢3. useLayoutEffect():⁡ similar with useEffect in syntax & handling side effects, used to measure DOM nodes or performing layout calculations.
 ⁡⁢⁣⁣Diff. between useEffect() & useLayoutEffect():⁡
