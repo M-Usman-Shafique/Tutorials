@@ -70,7 +70,6 @@ class Counter extends React.Component {
 3. Performance Optimization: shouldComponentUpdate()
 4. Cleanup: componentWillUnmount()
 
-
 ⁡⁢⁣⁢Note:⁡ Whenever, parent component is rendered it renders all its child components as well.
 
 ⁡⁣⁣⁢2. Function Components:⁡ JS functions which return JSX. They use hooks for state management.
@@ -134,12 +133,20 @@ function Garage() {
 ⁡⁢⁣⁢Note:⁡ Instead of normal loop, map() loop is used in the return of function component.
 ⁡⁢⁣⁢List & Keys:⁡⁡ Keys allows React to keep track of elements. Otherwise while updating or removing an element of list, React will render the entire list.
 
-⁡
+⁡⁢⁣⁣Using <Component> or {Component()} inside Another Component:⁡
+When you use <Component /> in your JSX, you are treating it as a React component. This means that React will create an instance of the component and manage its state and lifecycle. It can accept props just like any other React component. This is the recommended way to use components in React.
+
+When you use {Component()} in your JSX, you are treating it as a JavaScript function call. It is not treated as a React component. This means that React will execute the Component function immediately and render the JSX returned by that function. It does not have access to React's state management or lifecycle methods.
+In this case, you cannot pass props directly to Component, and it will not behave like a typical React component. It's just a function that returns JSX, and it gets called whenever your main component (Home in this case) re-renders.
+
 ⁡⁢⁣⁣COMPOSITION:⁡ Making complex UIs by nesting & combining smaller, reusable components. It is considered as an alternative of inheritance in React.⁡
 ⁡⁣⁣⁢1. Props:⁡⁡⁡ Properties pass as arguments into React components to pass data from parent to child components.
 ⁡⁣   ⁢⁡⁣⁢⁢Difference between State & Props:⁡
    1.  Props are immutable, meaning once they are set by the parent, the child component cannot modify them. Whereas, state is mutable, meaning it can be modified using setState() method (in class components) & using useState hook (in functional components).
    2. Props controls the component externally while state controls internally.
+   ⁢⁡⁣⁢⁡⁣⁢⁢Difference between State & Variables:⁡
+   Updating a variable does not cause rerender of the component but updating state does.
+
 ⁡⁢⁣⁡⁣⁣⁢2. Children Props:⁡⁡ Passing data from parent to child between opening & closing tags of a component. Children can receive this data using props.children or { children }.
    Export File:
    <Message username="Usman">Salman</Message>    // Usman is props & Salman is children props!
@@ -165,8 +172,7 @@ function Message({ username, children }) {
 ⁡⁢⁣⁣Benefits:⁡ Reusability, Enhancement, Testing and Debugging.
 ⁡⁣⁣⁢4. Render Props:⁡ Sharing logic between components using 'props' whose value is function.
 ⁡⁣⁣⁢5. Context API:⁡ Sharing data between multi-levels of components using useContext hook, without explicitly passing props (props drilling) through each component.
-
-Lifting State Up: Sending data from child to parent component.
+⁡⁣⁣⁢6. Lifting State Up:⁡ Sending data from child to parent component.
 
 CONTROLLED & UNCONTROLLED COMPONENTS:
 Controlled: where the 'value' of input field is controlled by the component's state. By providing the value attribute, you synchronize the input field's value with the corresponding state variable as it establishes a two-way binding between the input field & the component's state. Changes made to the input field by the user trigger updates to the component's state, and changes to the component's state update the input field's value accordingly.
@@ -218,11 +224,12 @@ Callback function tells what to run & dependency tells when to run.
 ⁡⁣⁣⁢5. useRef():⁡ To directly access DOM elements & for creating mutable variables which do not re-render the component.
 For example, if we try to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since useState() itself causes a re-render.
 
-⁡⁣⁣⁢6. useReducer:⁡ similar to useState but manages more complex states when new state depends on the previous state.
-It takes a reducer function & initial state as arguments & returns the new state & a dispatch function.
-let [newState, dispatch] = useReducer(reducer, initialState)
-⁡⁢⁣⁣Reducer:⁡ it takes current state & action as arguments & returns new state.
+⁡⁣⁣⁢6. useReducer:⁡ similar to useState but manages more complex states when new state depends on the previous state. useState uses useReducer internally.
+It takes a reducer function & initial state as arguments & returns new state & a dispatch function.
+let [state, dispatch] = useReducer(reducer, initialState)
+⁡⁢⁣⁣Reducer:⁡ A pure function which takes current (initial) state & (disatched) action as arguments & returns new state value which is then stored in the state returned by useReducer.
 newState = reducer(currentState, action)
+Pure Function: which does not produce any side-effects & always returns the same output if the same arguments are passed in.
 ⁡⁢⁣⁣Dispatch:⁡ used to send actions to the reducer. When an action is dispatched, the reducer processes it & returns the new state.
 
 ⁡⁣⁣⁢7. useMemo():⁡ used for performance optimization by memoizing result/value of expensive calculations to avoid unnecessary re-renders.
@@ -253,6 +260,9 @@ Most common library used for routing in React is 'react-router-dom'.
 
 ⁡⁣⁢⁣Link vs. NavLink:⁡ Link provides a basic link to any URL, while NavLink offers additional features (i.e. styling active links) that can enhance the user experience.
 
+
+HTTP (Hyper Text Transfer Protocol): To make a connection (like loading pages, form submitting etc.) between web server & client.
+
 ⁡⁣⁢⁣API⁡ ⁡⁣⁢⁣(Restaurant Analogy)⁡:⁡
 Client/Consumer: Customer
 Browser: Table
@@ -279,53 +289,55 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁢⁣⁣2. Lazy Loading:⁡ Delaying the loading of certain components of an application until they are actually needed to optimize app. performance.
 ⁡⁣⁣⁢Suspense:⁡⁡ React component used to handle asynchronous operations such as data fetching, loading chunks of code via lazy loading. It displayed a fallback content on UI while waiting for the asynchronous operation to complete.
 
-⁡⁣⁢⁣REDUX:⁡ Data & state management library for complex JavaScritp applications .
-Working:
+THROTLING: Function is repeatedly invoked after a given interval.
+DEBOUNCING: Function is invoked after a certain period of inactivity.
+
+⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & state management library for complex JavaScritp applications.
+On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.
+Solution: Redux persist.
+Data flow in redux is uni-directional.
 ⁡⁢⁣⁣1. ACTION:⁡ User instructions that describe what should happen in the application.
 Different events that can happen in a shopping store:
 a. ADD_TO_CART
 b. REMOVE_FROM_CART
 c. INCREASE_QUANTITY
 d. DECREASE_QUANTITY:
-⁡⁢⁣⁣2. STORE (Stock Room):⁡ Takes actions & give it to Reducer function.
-Global state store to wrap the whole app. to become accessible anywhere.
-STATE: Products/goods.
-⁡⁢⁣⁣3. DISPATCH:⁡ A method available on the store to send actions to the reducer.
-Store manager sending out a message to all the employees (reducers) that something needs to be done.
-⁡⁢⁣⁣4. MIDDLEWARE:⁡ A middleman between action creators & reducers. When an action is dispatched, it first passes through the middleware before reaching the reducers. Middleware can intercept the action before it reaches the reducer, allowing us to perform additional logic, such as logging, asynchronous operations, or modifying actions
-Thunk Middleware: Handles asynchronous actions, like fetching product data from a server.
-Special staff/team in a store dedicated to manage the special requests of the customers that require some time.
-⁡⁢⁣⁣5. REDUCER (SalesMan to handle diff. sale's department):⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
-Salesman or manager to handle actions & update the store's state acc. to the actions.
-For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
-5. SLICE: Where the complete logic of reducer is written.
-Section or department handles specific categories of products (state).
- For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles. It contains reducer logic, action creators etc. to organize & modularize the Redux code.
-6. useSelect ():
-7. useDispatch ():
-Async Thunk: A middleware to handle asynchronous operations.
-Shopping assistant which shops on yours behalf for things which take time, when meanwhile you keep your other shopping continue.
+⁡⁢⁣⁣2. STORE:⁡ Global state store to wrap the whole app. to become accessible anywhere. It takes actions & give it to reducer function.
+   Analogy: Stock Room
+   ⁡⁣⁢⁢State:⁡ Products/goods.
+⁡⁢⁣⁣3. DISPATCH:⁡ A hook (useDispatch) available on the store to send actions to the reducer.
+   Analogy: Store manager sending out message to all the employees (reducers) that something needs to be done.
+⁡⁢⁣⁣4. MIDDLEWARE:⁡ A middleman between action creators & reducers. When an action is dispatched, it first passes through the middleware before reaching the reducers. Middleware can intercept the action before it reaches the reducer, allowing us to perform additional logic, such as logging, asynchronous operations, or modifying actions.
+⁡⁣⁢⁢Thunk Middleware:⁡ Handles asynchronous actions, like fetching product data from a server.
+Analogy: Special staff/team in a store dedicated to manage the special requests of the customers that require some time.
+⁡⁣⁢⁢Async Thunk:⁡ A middleware to handle asynchronous operations.
+Analogy: Shopping assistant which shops on yours behalf for things which take time allowing you to keep your other shopping continue meanwhile.
+⁡⁣⁢⁢Diff. between Thunk & Async Thunk:⁡
 Thunk middleware manages the overall coordination of async operations within your Redux store, while async thunks represent specific tasks or operations that require asynchronous logic to be performed.
+⁡⁢⁣⁣5. REDUCER:⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
+Analogy: Salesman to handle to handle diff. sale's departments by handling actions & to updating the store's state acc. to the actions.
+For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
+⁡⁢⁣⁣6. SLICE:⁡ Actions & reducers which were separately handled in redux, now both come under slice in redux toolkit. It contains complete reducer logic, action creators etc. to organize & modularize the Redux code.
+Analogy: Section or department handles specific categories of products (state).
+For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles.
+⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to get data from redux store to the app component.
+
 
 Diagram:
 When button of "subChild" is clicked, an action is dispatched using the useDispatch hook. A dispatch function is used to send actions to the store.
-In this case, the action is dispatched with a state/value = 1 called payload: useDispatch(payload).
+In this case, the action is dispatched with a state/value = 1 called payload:
+useDispatch(payload).
 The Redux store holds the entire state tree of the application & responsible for dispatching actions to reducers & managing state.
 The store then forwards the action to the appropriate reducer based on the action type.
 In this case, Redux store forwarded the dispatched action (value=1) along with the current state (value=0) of application-which was already present in the store-to the reducer present in the store.
-Reducers are functions that take the current/initial state & an action as arguments and return a new state. In this case, reducer1: (state (0), payload (1)) => { logic }.
+Reducers are functions that take the current/initial state & an action as arguments and return a new state. In this case: reducer1: (state (0), payload (1)) => { logic }.
 The { logic } part of reducer-which handles the dispatched action & payload (value)-comes from the slice component.
 The reducer updates the new state (value = 1) & store it in the Redux store.
 useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
 
 
+Action: Data that we want to store in redux store.
+Reducer: which stores that data in redux store.
+
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
 ⁡⁣⁢⁣YUP:⁡ Form Validation
-
-
-
-SSR vs. CSR:
-SEO is very poor in React because search engine searches for sementics/keywords in HTML file, while in React, HTML file has only one (div tag) root element.
-DX in React is Good.
-But compromises UX & SEO.
-Hydration: Attaching event listeners to the elements to make them interactable.

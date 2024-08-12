@@ -112,6 +112,8 @@ Method#2:
 Parent div ko ye dedo:
         display: grid;
         place-content: center;
+
+Method#3: margin: 0 auto;
 _____________________________________________
 display: flex;
 flex-direction: row/row-revrse etc;
@@ -126,7 +128,9 @@ ________________________________________________________________________________
 6. margin: 0 (for both vrticl & horizontl alignmnt of block elemnts in a div/container bcz
    block elemnts pe left, ri8, top, botom tmam sides se margin aply ho skta).
 7. margin: auto; works only to center from left & ri8.
-________________________________________________________________________________________________
+_____________________________________________________________
+Giving "flex-grow: 1" to all the items of a flex-box will stretch the items to fill all the space of the flex-box.
+_________________________________________________________________________________________
 display: grid;
 grid-template-column: 12px 12px 12px; it means k 3 column 12-12px k bna do.
 grid-template-row: 12px 12px 12px; it means k 12px k 3 rows bna do.
@@ -168,11 +172,45 @@ Child ko margin: auto; deny se wo vrticl & horizontl axis k xact centr me ajata.
 __________________________________________________________________________________________
 margin: 20px auto; means top & botom se 20 jab k left & right se center.
 Assignmnt: margin: auto 20px;
-____________________________________________________________________________________________
+____________________________________________________________________________________
 <div>
 position: relative;
 left: 30px;
-</div> (for chnging position of a specific elemnt/div without effecting others.
-_____________________________________________________________________________________________
+</div> (for chnging position of a specific elemnt/div without effecting others)
+_____________________________________________________________________________________
+Height in %age will only work when its parent was given height.
+Width in %age work even when its parent wasn't given any width.
+_________________________________________________________________
+RESPONSIVE Tips:
+- By default HTML websites are responsive. It is us who disturb their responsiveness with our CSS.
+- Try to use min-height & max-width instead of fixed for large size elements (containers, wrappers, headers, footers etc.).
+- Use "margin-inline: auto" with "max-width" to center the container on expanded devices.
+- Try to give fluid height & width (in %age) rather than fixed (in px).
+- Parent having width in %age with child having fixed width (px) will cause an overflow of the child on small sized screens. So try to give fluid width to the child as well.
+- Try not to give any height to an element unless it's very very needed. And when give try to give fluid.
+- Avoid giving unnecessary sizes i.e. body {width: 100%; height: 100vh} etc.
+- Avoid giving any size to <body> element. Instead use a container div to wrap the whole website with height: 100% & width: 100%.
+- Things having flex property inside a thing which doesn't have a flex property will overflow on resizing the device, so try to use flex-wrap: wrap along with flex.
+- Grid: display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;
+The above grid statements will create three columns (3 images/row) with equal space between them. But if we use: grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+Initially there will be one column, but as soon as we resize the webpage, the browser will automatically adjust the images as needed. 1st it will make two columns (2 images/row), then three, then four & so on..
+- %age: relative to the parent.
+- em: takes height & width acc. to the size of its parent.
+Exmp: .parent {font-size: 20px;}
+      .child {font-size: 1em}   // 1em = 20px in this case.
+- rem: takes height & width acc. to the size of root (screen/device).
+  1rem = 16px
+- height: calc(100% - 100px) takes the whole height of the screen except 100px (navbar).
+- "flex-basis: 100%" & "flex: 1" to fit the flex items in the whole space of flex box.
+- mx-width & min-height
 
-___________________________________________________
+
+
+
+Media Quaries:
+@media (max-width:600px) {   // As long as the width is less than or equal to 600px.
+        .container {
+                background-color: blue;
+        }
+}
+  

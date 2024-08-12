@@ -15,6 +15,7 @@ DATA TYPES:
 They are stored & executed in call stack.
 2. Non-Premitive (Reference Types): Arrays, Object Literals, Functions, Dates etc.
 They are stored & executed in heap.
+When we assign an object to a variable, the variable contains a reference to the object. So if we assign that variable to another variable, the second variable will also contain a reference to the object. Therefore, if we change the object using one of the variables, that change will also be visible into another variable.
 Watch: Ref.html
 Note: undefined and null are equal in value but different in type.
 Type of undefined is undefined & of null is object.
@@ -25,6 +26,8 @@ let x = "John Doe", y = "Volvo", z = 200;
 If you put a number in quotes, the rest of the numbers will be treated as strings &concatenated.
 Exmp: let x = "5" + 2 + 3;       //output: 523
 let x = 2 + 3 + "5";          //output: 55
+
+
 _________________________________________________________________________________
 ACCESS:
 Variables declared with let & const inside a block{} cannot be accessed from outside that block:
@@ -126,9 +129,10 @@ Exmp#2: if (true) {
         }
      console.log(x);     // output: 5
 
-Lexical Scope: Location or position inside the source code where a variable or function is declared & physically present. It's a combination of two things:
+Lexical Scope: kisi function ka apna scope + usky parent(s) ka scope + global scope.
+It's a combination of two things:
 a. Local memory of itself.
-b. Ref. to the lexical environment of its parent.
+b. Ref. to the lexical environment of its parent(s).
 Exmp: function outer() {
         var x = 5;
         console.log(y);         // output: y is not defined.
@@ -140,7 +144,7 @@ Exmp: function outer() {
       }
       outer();
       console.log(y);        // output: y is not defined.
-SCOPE CHAINING: Hierarchical structure of nested lexical scopes: an closure has three scopes: Local (apna) + Outer function scope + Global.
+SCOPE CHAINING: Hierarchical structure of nested lexical scopes: an closure has three scopes: Local (apna) + Outer function(s) scope + Global.
 Exmp:
 let x = 3;               // global scope
 function outer() {
@@ -172,7 +176,7 @@ Because JS interpret this code as:
        var x;               // x declared without initialization, hence, undefined.
        console.log(x);     // agr hoisting na hoti tou error aata: x is not defined.
        x = 5;
-Temporal Dead Zone: A zone between the scope & place where the variable is declared. Accessing variables declared using let or const but not initialized with a value results a ReferenceError bcoz although let & const are hoisted but they are in TDZ.
+Temporal Dead Zone: During memory creation phase, variables declared using const or let has undefined in their value because in memory creation phase variables are not initialized/assigned with a value, hence can't be accessed & cause a ReferenceError.
 Watch: Hoist.html
 Exmp#5: console.log(x);
        let x = 5;
@@ -595,7 +599,17 @@ output: 0: Java
         2: PHP
         3: Python
 ___________________________________________________________________________________
-Higher-Order Functions: Functions that can take another functions as argument or returns function as result.
+Higher-Order Function (HOF): Function that takes another functions as argument or returns a function as result.
+Exmp:
+function hello(b) {
+console.log("Hello...");
+}
+
+hello(function welcome() {
+       console.log("Welcome!");
+      }
+"hello" is HOF & "welcome" is callback function.
+
 MAP(): Perform an operation on every element of an array by creating a new array without changing the original.
 Exmp (Array of Numbers):
 Problem:
@@ -784,7 +798,17 @@ output: BMW
         Audi
         Toyota
 __________________________________________________________
-FUNCTIONS:
+FUNCTIONS: If a function performs an operation but doesn't return anything then on assigning that function to a variable, result will be undefined.
+Exmp:
+      function add(a, b) {
+        let sum = a + b;
+        console.log(sum);   // output: 5
+      }
+      
+      let result = add(2, 3);
+      console.log(result)    // output: undefined
+Solution: return sum;
+------------------------------------------------
 ARROW FUNCTION:
 Exmp1:
 function greet() {
@@ -1299,8 +1323,8 @@ console.log("Hello");
 }
 output: Hello (after 2s)
 CLEAR TIMEOUT:
-let myTime = setTimeout(myFunction, 2000);
-clearTimeout(myTime);  // stop the execution of setTimeout
+let timer = setTimeout(myFunction, 2000);
+clearTimeout(timer);  // stop the execution of setTimeout
 SET INTERVAL:
 setInterval(myFunction, 2000);
 function myFunction() {
@@ -1308,8 +1332,8 @@ console.log("Hello");
 }
 output: Hello (repeat again & again after 2s)
 CLEAR INTERVAL:
-let myInterval = setInterval(myFunction, 2000);
-clearInterval(myInterval);  // stop the execution when invoked.
+let timer = setInterval(myFunction, 2000);
+clearInterval(timer);  // stop the execution when invoked.
 ________________________________________________________________________
 CALLBACK: A function passed as an argument to another function & doesn't execute until the enclosing function completes its execution.
 Exmp#1:
@@ -1413,13 +1437,13 @@ Exmp: try {
         console.log("Execution completed!");
       }
 ___________________________________________________________
-COPYING VARIABLE: On assigning a variable to another variable, the value of assigned variable will be copied to the new variable. Hence, any changes in the value of new variable will not effect the original variable.
+COPYING VARIABLE: On assigning a premitive variable to another premtive variable, the value of assigned variable will be copied to the new variable. Hence, any changes in the value of new variable will not effect the original variable.
 let x = 5;
 let y = x;
 y = 3;
 console.log(x);
 output: 5
-COPYING OBJECT: Unlike variables, on assigning an object to a variable, ref. of memory location of object will be copied to the variable instead of value. Hence, any changes in the variable will also make a change in original object.
+COPYING OBJECT: Unlike object variables, on assigning an object to another object variable, ref. (address) of memory location of object will be copied to the variable instead of value. Hence, any changes in the variable will also make a change in original object.
 const x = {
           name: "Usman"
           };
@@ -1428,7 +1452,9 @@ y.name = "Salman";
 console.log(x);
 output: {name: "Salman"}
 SHALLOW COPY: Creating a new object & copying only the top-level properties of the original object to preserve properties in original object:
-let y = Object.assign({}, x);  [OR]  let y = {...x};
+const x = {name: "Usman"};
+let y = {...x};    // Object Deconstruction
+Now updating y doesn't update x:
 y.name = "Salman";
 console.log(x);   // output: {name: "Usman"}
 console.log(y);   // output: {name: "Salman"}
@@ -1440,10 +1466,11 @@ const x = {
                 state: "Pakistan"
                 }
           };
-let y = {...x};    // Object Deconstruction
+let y = {...x};
 y.info.city = "FSD";
 console.log(x.info.city);   // output: {city: "FSD"}
-DEEP COPY: Used to copy nested objects & arrays of an object
+Because for basic properties, it copies the values instead of ref. (memory address) but for sub properties it again copies the ref. (address). 
+DEEP COPY: Used to copy nested objects & arrays (sun-properties) of an object.
 let y = JSON.parse(JSON.stringify(x));
 y.info.city = "FSD";
 console.log(x.info.city);   // output: {city: "LHR"}

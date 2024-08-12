@@ -21,5 +21,56 @@ Ctrl+J: Downloads
 Ctrl+H: History
 Fn+F12: Console
 Shift+Ctrl+I: Console
+_____________________________
 alt+O alt+L: Live Server
+Ctrl+D: To select the next same word
+Cltrl+Shift+L: To select all same words
+Ctrl+B: Toggle the bar
+Ctrl+Shift+P: Command Pallete
+Ctrl+P: Recently opened files
+F2 after selecting a word: strict select
+Ctrl+~: Terminal as it is
+Ctrl+Shift+~: Refreshed Terminal
+Ctrl+Spc: Suggestion Box
+Ctrl+,: Settings
+Alt+Up: Move the line upward
+Alt+Click: Multiple cursors
+Ctrl+Alt+Up: Multile cursors upward
+Ctrl+Tab: To switch b/w diff. tabs
+Ctrl+W: closing tabs one by one
+Ctrl+K, W: closing all
+Ctrl+K, F: Close Folder
+Ctrl+K+O: Open New Folder
+------------------------------------------------
+rfce
+imr→	import React from 'react'
+imrd→	import ReactDOM from 'react-dom'
+imrs→	import React, { useState } from 'react'
+imrse→	import React, { useState, useEffect } from 'react'
+exp→	export default moduleName
+nfn→	const functionName = (params) => { }
+sti→	setInterval(() => { }, intervalTime
+sto→	setTimeout(() => { }, delayTime
+rxaction→	redux action template
+rxreducer→	redux reducer template
+rxselect→	redux selector template
+rxslice→	redux slice template
+--------------------------------------------------------------------
+git init: Initializes a new Git repository in the current directory.
+git add [file]: Adds a file or directory to the staging area.
+git commit -m "[commit message]"
+git status
+git push
+-------------------------------------------------------------------
+npm update
+Remove-Item -Recurse -Force .next (empty cache by deleting .next folder)
+npm install --legacy-peer-deps
+
+
+
+
+ 
+
+
+
 
