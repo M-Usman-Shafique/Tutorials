@@ -1,0 +1,34 @@
+AI: Branch of CS that focuses on developing such methods/algorithms that allow computers to learn without explicit programming.
+ML: Feed data &  while Model will generate Rules (Generalization).
+Model:
+
+Methods of ML:
+A. Supervised Learning:
+1. input/output pair: cat or cat not
+2. Regression: value i.e. stock, score predictions.
+Model operates in two Modes:
+1. Training Mode: Learning mode
+2. Inference/Prediction Mode: Non-learning mode
+Training Data: 70% data feeding
+Testing/Validation Data: 30% to test
+100% Accuracy: cram, over trained, over feeding & hard cored
+Training Accuracy > Validation Accuracy = Bad Sign
+Training Accuracy <= Validatio Accuracy = Good Sign
+
+B. Unsupervised:
+1. Clustering: grouping similar things: A folder of 1M images of 3 types of animals
+2. Anomaly Detection: Trained on normal things & when see abnormal give a warning instantly.
+3. Dimensionality Reduction: 3D to 2D
+
+C. Reinforcement Learning: bicycle riding
+Agent: Learner
+Reward & Punishment
+
+D. Deep Learning: The study of Artificial Neural Networking.
+Neural network of different functions returning output to a single place.
+Exmp: Hiring a developer, Rishta.
+GPT3 has 176B neurons.
+
+
+
+

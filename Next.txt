@@ -47,14 +47,17 @@ Modular Styling: custom.module.css => file name || main => class name
 Usage: className={custom.main}
 
 
+async-await doesn't work directly in the client component rather works only in server component.
+Exmp: export default async function App() {
 
+}
 
 Client Side Data Fetching:
 1st. we loads our app on client
 2nd. app make API call
 3rd. Wait for data
 4th. Set the received data in state
-5th. Rerender the component to show that data.
+5th. Re-render the component to show that data.
 SWR (Stale While Revalidation): Optimization of fetching by Next.JS
 
 Server Side Data Fetching:

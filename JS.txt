@@ -1005,7 +1005,9 @@ BIND(): By using bind, an object can borrow a function from another object, can 
       (OR)
       console.log(person1.fullname.bind(person2()));  //output: Salman Khan without writing previous 3 lines.
 
-CLOSURE: Inner function along with lexical scope (ref. of its own location in memory + ref. of lexical environment of its parent).
+CLOSURE: when an inner function who's using the variables of its outer function is returned from the outer function, it doesn't return alone, rather all the variables of the outer function which are used in the inner function are also returned. Although the execution context of the outer function is finished & all of its variables are deleted from the memory.
+
+Inner function along with lexical scope (ref. of its own location in memory + ref. of lexical environment of its parent).
 In general, we know that the variables declared within a function are called local variables, hence, cannot be accessed outside that function. But closure (an inner function nested inside another function) retains access to the lexical environment (variables of outer function) even after the outer function has finished execution. 
 Problem: function outer() {
         let person = "Usman";      // local variable
