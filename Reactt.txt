@@ -295,7 +295,6 @@ DEBOUNCING: Function is invoked after a certain period of inactivity.
 ⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & state management library for complex JavaScritp applications.
 On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.
 Solution: Redux persist.
-Data flow in redux is uni-directional.
 ⁡⁢⁣⁣1. ACTION:⁡ User instructions that describe what should happen in the application.
 Different events that can happen in a shopping store:
 a. ADD_TO_CART
@@ -320,7 +319,7 @@ For example, when ADD_TO_CART action is dispatched, the reducer updates the inve
 ⁡⁢⁣⁣6. SLICE:⁡ Actions & reducers which were separately handled in redux, now both come under slice in redux toolkit. It contains complete reducer logic, action creators etc. to organize & modularize the Redux code.
 Analogy: Section or department handles specific categories of products (state).
 For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles.
-⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to get data from redux store to the app component.
+⁡⁢⁣⁣7. SELECTOR:⁡ useSelect():
 
 
 Diagram:
@@ -335,9 +334,6 @@ The { logic } part of reducer-which handles the dispatched action & payload (val
 The reducer updates the new state (value = 1) & store it in the Redux store.
 useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
 
-
-Action: Data that we want to store in redux store.
-Reducer: which stores that data in redux store.
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
 ⁡⁣⁢⁣YUP:⁡ Form Validation
