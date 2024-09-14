@@ -1,0 +1,56 @@
+CORE DATA TYPES:
+1. Number
+2. String
+3. Boolean
+When no value is assigned, then by default every variable has data type "any".
+Exmp: let x;
+When no data type is declared then by default data type of variable is what we pass for the first time.
+Exmp: let x = 10;  // data type: number
+Exmp: const y = 5; // data type: 5 bcoz can't change
+Union Type: When value type is not confirmed:
+Exmp: let x:string | number | boolean = 10;
+          x = true; // it will work
+Exmp: let y:any = "ali"
+          y = 10; // it will work.
+Literal Type: assigning value instead of type.
+Exmp: let data:"abc" | 123 = "abc";
+
+OBJECT:
+let user:{ name: string; age: number; isMale: boolean } = {
+    name: "John",
+    age: 30,
+    isMale: true,
+};
+If have to use again & again then define types at the top:
+type objType = { name: string; age: number; isMale: boolean };
+let user:objType = {
+    name: "John",
+    age: 30,
+    isMale: true,
+};
+
+ARRAY:
+When have one type of values:
+let data:string[] = ["php", "node", "express", "ruby"];
+
+Tuple: When have random type of limited values:
+let random:[string, string, number, boolean?] = ["usman", "ali", 30]
+random.push(true); // it will work.
+random[1] = 5; // it will not.
+random[1] = "saqib"
+
+When have one of the types but not sure which:
+let random:string[] | number[] | boolean[] = ["hi", "hello", "bye"]
+let random:string[] | number[] | boolean[] = [1, 2, 3]
+
+When have random type of unlimited values:
+let random:any[] = ["usman", 30, true, 12, "ali', false]
+
+ENUM: Group of constants.
+Exmp:
+enum Color {RED, GREEN, BLUE}
+console.log(Color.1) // RED
+console.log(Color.BLUE) // 2
+
+ANY:
+

@@ -191,16 +191,42 @@ function Profile() {
   )
 }
 
+CHILDREN PROPS:
+Component:
+export default function Button({ children }) {
+   return (
+<button>{children}</button>
+)
+
+Usage:
+<Button>Left</Button>
+<Button>Right</Button>
+
 ⁡⁢⁣⁡⁢⁣⁢Refs:⁡⁡ Provide a way to access DOM nodes & React elements.
 
 ⁡⁣⁢⁣HOOKS:⁡ Functions that allow us to use React’s features (state management, lifecycle methods & performing side effects) in functional components without writing a class.
 
 ⁡⁣⁣⁢1. useState():⁡ used to add & manage the state of a component. It returns an array. First element of array is a variable & second element is modifier function for that variable.
+useState is made on using closure to remember previous value.
 ⁡⁢⁣⁣Diff. between Normal & State Variables:⁡
 1. State variables are declared & initialized by destructuring.
 2. Normal variables cannot trigger re-render of the component, therefore, state cannot be managed through normal variables.
+Problem:
+const [count, setCount] = useState(0);
+const handleCount  = () => {
+setCount(count + 1)
+setCount(count + 1)
+setCount(count + 1)
+} // result: 1 because no rerender & no state update until the entire function ends.
+Solution:
+{
+setCount((prev) => prev + 1)
+setCount((prev) => prev + 1)
+setCount((prev) => prev + 1)
+} // result: 3
+Note: when new state depends on the prev. state using callback (prev) is must.
 
-⁡⁣⁣⁢2. useEffect():⁡ used to handle side effects which was done using lifecycle methods in class components. It's a close replacement for componentDidMount, componentDidUpdate & componentWillUnmount combined.
+⁡⁣⁣⁢2. useEffect():⁡ used to monitor state, handle side effects which was done using lifecycle methods in class components. It's a close replacement for componentDidMount, componentDidUpdate & componentWillUnmount combined.
 ⁡⁢⁣⁣Side Effects:⁡ Anything that happens beyond the function's expected behavior (computing & returning a value).
 1. Fetching Data from a Server
 2. Manually Updating DOM
@@ -247,7 +273,7 @@ Pure Function: which does not produce any side-effects & always returns the same
 ⁡⁣⁢⁣ROUTING:⁡⁡ Navigating between different pages (URLs) of a React application.
 Most common library used for routing in React is 'react-router-dom'.
 
-⁡⁢⁣⁡⁣⁣⁢9. useParam():⁡⁡ used to manage dynamic routing which means if a URL has multiple parameters (e.g. '/users/:id'), they can be accessed using useParam() hook.
+⁡⁢⁣⁡⁣⁣⁢9. useParams():⁡⁡ used to manage dynamic routing which means if a URL has multiple parameters (e.g. '/users/:id'), they can be accessed using useParams() hook.
 
 ⁡⁣⁣⁢10. useLocation():⁡⁡ used to access the current location (URL) of a react component at any moment. It contains various properties such as pathname, search, hash etc.
 

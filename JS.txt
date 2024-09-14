@@ -1,3 +1,4 @@
+History: Netscape: MOCHA/LiveScript
 JavaScript: A high-level programing language used for web development & can be executed both on client-side (within web browsers) & on server-side (with platforms like Node.js).
 Default behavior of JS is single-threaded & synchronous.
 Single-Threaded: Code executes line by line, which means that only one set of instructions can be processed at a time.
@@ -13,9 +14,14 @@ ______________________________________________________________________________
 DATA TYPES:
 1. Premitive (Value Types): String, Number, Boolean, Null, Undefined, Symbols.
 They are stored & executed in call stack.
+Call Stack:
+1. Manages function calls and their contexts
+b. LIFO
 2. Non-Premitive (Reference Types): Arrays, Object Literals, Functions, Dates etc.
 They are stored & executed in heap.
-When we assign an object to a variable, the variable contains a reference to the object. So if we assign that variable to another variable, the second variable will also contain a reference to the object. Therefore, if we change the object using one of the variables, that change will also be visible into another variable.
+Heap: Dynamic memory allocation for objects, arrays & other complex data structures.
+
+When we assign an object to a variable, the variable contains a reference to the object. So if we assign that variable to another variable, the second variable will also contain a reference to the object. Therefore, if we change the object using one of the variables, that change will also be reflected into another variable.
 Watch: Ref.html
 Note: undefined and null are equal in value but different in type.
 Type of undefined is undefined & of null is object.
@@ -37,10 +43,10 @@ Variables declared with var inside a block{} can be accessed from outside the bl
 {  var x = 2; }
 // x CAN be used here.
 _________________________________________________________________________________
- var: can be redeclared & reassignd in a same block.
+ var: can be redeclared & reassignd in a same block. var has global scope if declared outside of any function or block and function-scoped if declared inside a function.
 var x = 5;
-x = 3;              // allowed (reassignment)
 var x =  3;        // allowed (redeclaration)
+x = 3;              // allowed (reassignment)
 console.log(x)    // output: 3
  let: cannot be redeclared but can be reassigned in a same block.
 let x = 5;
@@ -201,16 +207,26 @@ Solution: console.log(`My name is ${str}. Thank you!);
 output: My name is Usman. Thank you!
 ________________________________________________________________________________
 STRINGS: Premitive data types which can store series of characters & behaves as an object (reference type).
-At(): returns the character at a specified index (position) in a string.
+At()/charAt(): returns the character at a specified index (position) in a string.
 let str = "John Doe";
 let text = str.at(0);   // output: J
 
 Slice(): extracts a part of a string & returns extracted part in a new string.
-let text = "Apple, Banana, Kiwi";
-let part = text.slice(4, 10);     // output: e, Ban
-Note: if ending value not given, it will slice till the last word automatically.
-let text = "Apple, Banana, Kiwi";
-let part = text.slice(7);         // output: Banana, Kiwi
+Syntax: str.slice(starting index, ending index) // ending index excluded in output
+let text = "Hello Brave New World";
+let part = text.slice(12, 15);     // output: New
+Note: the end index is not includes.
+Note: if ending index not given, it will slice till the last word automatically.
+let part = text.slice(12);         // output: New World
+
+Substr(): extracts characters between two indices (positions) without changing the original string.
+Syntax: str.substr(starting index, amount of indexes) // end excluded
+let text = "Hello Brave New World";
+let subText = text.substr(12, 3); // output: New
+let subText = text.substr(12); // output: New World
+
+Diff. b/w Slice() & Substring():
+
 
 Replace(): replaces a specified value with another value at first match without changing original string.
 let str = "Please visit Microsoft!";
@@ -257,7 +273,8 @@ output: John
 
 const cars = ["BMW", "Audi", "Honda"];
 cars = ["Jaguar", "Toyota", "Benz"];   // not allowed
-cars[0] = "Jaguar"    // allowed
+Because changing the ref. of "cars" by reassigning it to a new array, whereas, "const" ensures that "cars" will always refer to the same array.
+cars[0] = "Jaguar"   // allowed because modifying the content of variable "car"
 cars.push("Jaguar");  // allowed
 
 Length Property:
@@ -285,7 +302,7 @@ fruits.push ("Lemon");
 console.log(fruits);
 output: [Banana, Orange, Apple, Lemon]
 
-UNSHIFT(): add nw element at start:
+UNSHIFT(): add new element at start:
 const fruits = ["Banana", "Orange", "Apple"];
 fruits.unshift (“Lemon” );
 console.log(fruits);
@@ -303,52 +320,102 @@ fruits.shift();
 console.log(fruits);
 Output: [Orange, Apple]
 
-DELETE: remove element without removing its reserved index:
+DELETE: remove element without removing its occupied index:
 const fruits = ["Banana", "Orange", "Apple"];
 delete fruits[0];
 console.log(fruits);
 output: [<empty>, Orange, Apple]
 
-SLICE():
+SLICE(): extracts a part (elements) of an array & returns extracted part (elements) in a new array.
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const ext-num = nums.slice(2, 7)
+Note: In the output, 2nd index will be included but 7th isn't.
+console.log(ext-num); // [3, 4, 5, 6, 7]
+Note: if ending value not given, it will slice till the last element automatically.
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const ext-num = nums.slice(4)
+console.log(ext-num); // [5, 6, 7, 8, 9]
 
-SPLICE(): add, remove & replace items.
+SPLICE(): add, remove & replace items in/from the original array. The removed elements are automatically stored in a new array.
 Syntax: arrayName.splice(index, no. of elements u want to delete, new value);
 let ary = ["Adnan", "Noman", "Furqan", "Luqman"];
-ary.splice(2, 0, "Usman", "Salman");
-output: ["Adnan", "Noman", "Furqan", "Usman", "Salman", "Luqman"];
-ary.splice(2, 1, "Salman");
-output: ["Adnan", "Noman", "Salman", "Luqman"];
-ary.splice(3, 1);
-output: ["Adnan", "Noman", "Salman"];
+const newArr = ary.splice(2, 0, "Usman", "Salman");
+console.log(ary)
+output: ["Adnan", "Noman", "Usman", "Salman", "Furqan", "Luqman"];
+console.log(newArr)
+output: []
+ary = ["Adnan", "Noman", "Usman", "Salman", "Furqan", "Luqman"];
+const newArr = ary.splice(2, 1, "Ahmed");
+console.log(ary)
+output: ["Adnan", "Noman", "Salman", "Furqan", "Luqman"];
+console.log(newArr)
+output: ["Usman"]
+ary = ["Adnan", "Noman", "Salman", "Furqan", "Luqman"];
+const newArr = ary.splice(2, 2);
+console.log(ary)
+output: ["Adnan", "Noman", "Luqman"];
+console.log(newArr)
+output: ["Salman", "Furqan"]
+
+FROM(): used to create array from an iterable (array-like).
+Exmp#1:
+const str = "ABCDEFG";
+const arr = Array.from(str);
+console.log(arr); // output: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+Exmp#2:
+const num = 12345;
+const arr = Array.from(num);
+console.log(arr); // output: ['1', '2', '3', '4', '5']
+const arr = Array.from(num, Number);
+console.log(arr); // output: [1, 2, 3, 4, 5]
+Exmp#3:
+const func = (args) => {
+  return Array.from(args).join('');
+}
+const result = func('A', 'B', 'C', 'D', 'E', 'F', 'G');
+console.log(result); // output: ABCDEFG
 
 CONCAT(): merging two arrays.
 const myGirls = ["Saba", "Sana"];
 const myBoys = ["Ali", "Asif", "Babar"];
 const myChildren = myGirls.concat(myBoys);
-output: Saba, Sana, Ali, Asif, Babar
+output: [Saba, Sana, Ali, Asif, Babar]
 MORE THAN TWO:
 const arr = arr1.concat(arr2, arr3);
+Modern Method (ES6):
+console.log([...myGirls, ...myBoys])
+output: [Saba, Sana, Ali, Asif, Babar]
 
  Arrays have numbered indexes.
  Objects have named indexes.
 
 SEARCHING:
-IndexOf(): forward search for 1st element in array .
+IndexOf(): forward search for 1st matching element in an array. Used when an array has premitive types of elements e.g. numbers & strings.
 const fruits = ["Banana", "Orange", "Apple", "Mango", "Apple"];
 console.log (fruits.indexOf(“Apple”));
-output: 2    // Give index of first match.
+output: 2
 console.log (fruits.indexOf(“mango”));
 output: -1    //not found.
 console.log (fruits.indexOf(/mango/i));
-output: 3    //insencitive search.
+output: 3    //case insensitive search.
 
-LastIndexOf(): backward search for 1st element in array.
+LastIndexOf(): backward search for 1st matching element in array.
 console.log(fruits.lastIndexOf(“Apple”));
 output: 4
 
 Includes(): forward search but gives output in boolean.
-console.log(fruits.includes (“Apple”));
+console.log(fruits.includes(“Apple”));
 output: true
+console.log(fruits.includes(“Banana”, 2));
+output: false // because started search from index 2
+
+Some(): similar to includes but it takes a callback function to check if atleast one of the elements of an array satisfies a condition.
+console.log(fruits.some(items => items === “Apple”));
+output: true
+
+Every(): checks if each element of an array satisfies a condition.
+console.log(fruits.every(items => items === “Apple”));
+output: false
 
 Find(): search with a condition using        |
 function.But it only shows one (1st)         |
@@ -364,18 +431,18 @@ console.log(greater);                        | console.log(numbers.find(value) =
 output: 25                                   | output: 25
 If condtion not fulfilled, output: undefined |
                                              |
-FindIndex():
-console.log(numbers.findIndex(value) => value > 18);
+FindIndex(): Similar to find() except it returns 1st condition fulfilling element's index instead of element itself. Used when an array has non-premitive types of elements i.e. objects.
+console.log(numbers.findIndex(item => item > 18));
 output: 3 (index of 25)
 If condtion not fulfilled, output: -1.
 
 Filter(): same as find but show all condition fulfilling elements as output.
-numbers.filter(function(value, index){
- return value > 18;
+numbers.filter(function(item, index){
+ return item > 18;
 })
 console.log(value);
 Shortcut:
-console.log(numbers.filter(value) => value > 18);
+console.log(numbers.filter(item) => item > 18);
 output: [25, 29, 35, 70]
 If condtion not fulfilled, output: []
 
@@ -384,6 +451,103 @@ const fruits = ["Banana", "Orange", "Apple", "Mango"]
 console.log(fruits.reverse());
 output: [Mango, Apple, Orange, Banana]
 _________________________________________________________
+forEach(): call function once for all array elements.
+const lang = ["Java", "HTML", "PHP", "Python"];
+lang.forEach(function(value, index) {
+             console.log(index + ":" +value);
+           })
+output: 0: Java
+        1: HTML
+        2: PHP
+        3: Python
+
+Difference between forEach() & map():
+- making changes using forEach() cause change in original array.
+- making changes using map() create another array to make changes.
+___________________________________________________________________________________
+Higher-Order Function (HOF): Function that takes another functions as argument or returns a function as result.
+Exmp:
+function hello(b) {
+console.log("Hello...");
+}
+
+hello(function welcome() {
+       console.log("Welcome!");
+      })
+"hello" is HOF & "welcome" is callback function.
+
+MAP(): Perform an operation on every element of an array by creating a new array without changing the original.
+Exmp (Array of Numbers):
+Problem:
+const arr = [1, 2, 3, 4, 5];
+let newArr = [];
+for(var i = 0; i<arr.length; i++) {
+     newArr[i] = arr[i] * 2;
+}
+console.log(newArr);
+output: [2, 4, 6, 8, 10]
+Solution:
+let newArr = arr.map(myFunction);
+function myFunction(value) {
+         return value * 5;
+        }
+Shortcut:
+let newArr = arr.map((value) => value * 5);
+console.log(newArr);
+output: [2, 4, 6, 8, 10]
+
+Exmp (Array of Objects):
+const people = [{fname: "Ali", lname: "Raza"},
+                {fname: "Imran", lname: "Khan"},
+                {fname: "Munir", lname: "Ahmed"}];
+var newPeople = people.map(myFunction);
+function myFunction(value) {
+    return value.fname +" "+ value.lname +"<br>";
+   }
+output: Ali raza
+        Imran Khan
+        Munir Ahmed
+
+
+FILTER(): Instead of performing operation on array elements, show all condition fulfilling elements as output.
+Exmp (Array of Numbers):
+let arr = [7, 18, 25, 12, 29, 35, 17, 70];
+console.log(arr.filter((value) => value > 18));
+output: [25, 29, 35, 70]
+If condtion not fulfilled, output: []
+Exmp (Array of Objects):
+const people = [{name: "Ali", skill: "JAVA"},
+                {name: "Imran", skill: "Python"},
+                {name: "Munir", skill: "HTML"},
+                {name: "Usman", skill: "Python"}];
+console.log(people.filter((value) => value.skill == "Python"));
+output: {name: "Imran", skill: "Python"}
+        {name: "Usman", skill: "Python"}
+
+
+REDUCE(): Executes a reducer function on each element of array & returns a single accumulated result without changing the original array.
+Exmp (Array of Numbers):
+let arr = [1, 2, 3, 4, 5];
+let newArr = arr.reduce((acc, curr) => acc += curr, 0);   // acc is accumulator (sum) initialized with 0
+console.log(newArr);                                         & curr is loop itterator.
+output: 15
+let arr = [1, 2, 3, 4, 5];
+let newArr = arr.reduce(function (max, curr) {
+     if (curr > max) {
+      max = curr; }
+      return max;
+      }, 0);
+console.log(newArr);
+output: 5
+
+Exmp (Array of Objects):
+const people = [{name: "Ali"},
+                {name: "Imran"},
+                {name: "Munir"}];
+let newPeople = people.reduce((concat, person) => concat + person.name);
+console.log(newPeople);
+output: AliImranMunir
+------------------------------------------------------------------------
 SORTING:
 Array of Strings:
 console.log(fruits.sort());
@@ -588,99 +752,6 @@ console.log(display(user));
 
 Object of Arrays: ==>=============>=============>
 Array of Objects: Watch Exmp. => Destructure.html
-_____________________________________________________
-forEach(): call function once for all array elements.
-const lang = ["Java", "HTML", "PHP", "Python"];
-lang.forEach(function(value, index) {
-             console.log(index + ":" +value);
-           })
-output: 0: Java
-        1: HTML
-        2: PHP
-        3: Python
-___________________________________________________________________________________
-Higher-Order Function (HOF): Function that takes another functions as argument or returns a function as result.
-Exmp:
-function hello(b) {
-console.log("Hello...");
-}
-
-hello(function welcome() {
-       console.log("Welcome!");
-      }
-"hello" is HOF & "welcome" is callback function.
-
-MAP(): Perform an operation on every element of an array by creating a new array without changing the original.
-Exmp (Array of Numbers):
-Problem:
-const arr = [1, 2, 3, 4, 5];
-let newArr = [];
-for(var i = 0; i<arr.length; i++) {
-     newArr[i] = arr[i] * 2;
-}
-console.log(newArr);
-output: [2, 4, 6, 8, 10]
-Solution:
-let newArr = arr.map(myFunction);
-function myFunction(value) {
-         return value * 5;
-        }
-Shortcut:
-let newArr = arr.map((value) => value * 5);
-console.log(newArr);
-output: [2, 4, 6, 8, 10]
-
-Exmp (Array of Objects):
-const people = [{fname: "Ali", lname: "Raza"},
-                {fname: "Imran", lname: "Khan"},
-                {fname: "Munir", lname: "Ahmed"}];
-var newPeople = people.map(myFunction);
-function myFunction(value) {
-    return value.fname +" "+ value.lname +"<br>";
-   }
-output: Ali raza
-        Imran Khan
-        Munir Ahmed
-
-
-FILTER(): Instead of performing operation on array elements, show all condition fulfilling elements as output.
-Exmp (Array of Numbers):
-let arr = [7, 18, 25, 12, 29, 35, 17, 70];
-console.log(arr.filter((value) => value > 18));
-output: [25, 29, 35, 70]
-If condtion not fulfilled, output: []
-Exmp (Array of Objects):
-const people = [{name: "Ali", skill: "JAVA"},
-                {name: "Imran", skill: "Python"},
-                {name: "Munir", skill: "HTML"},
-                {name: "Usman", skill: "Python"}];
-console.log(people.filter((value) => value.skill == "Python"));
-output: {name: "Imran", skill: "Python"}
-        {name: "Usman", skill: "Python"}
-
-
-REDUCE(): Executes a reducer function on each element of array & returns a single accumulated result without changing the original array.
-Exmp (Array of Numbers):
-let arr = [1, 2, 3, 4, 5];
-let newArr = arr.reduce((acc, curr) => acc += curr, 0);   // acc is accumulator (sum) initialized with 0
-console.log(newArr);                                         & curr is loop itterator.
-output: 15
-let arr = [1, 2, 3, 4, 5];
-let newArr = arr.reduce(function (max, curr) {
-     if (curr > max) {
-      max = curr; }
-      return max;
-      }, 0);
-console.log(newArr);
-output: 5
-
-Exmp (Array of Objects):
-const people = [{name: "Ali"},
-                {name: "Imran"},
-                {name: "Munir"}];
-let newPeople = people.reduce((concat, person) => concat + person.name);
-console.log(newPeople);
-output: AliImranMunir
 ________________________________________________________________________
 OPERATORS:
 Assignment (=)
@@ -929,6 +1000,31 @@ let obj2 = { gender: "Male", city: "LHR" };
 
 let obj3 = {...obj1, ...obj2};
 console.log(obj3);
+CHECK EMPTY:
+Object.keys(obj) === 0 // true if 'obj' is empty.
+
+CKECK OWN vs, NESTED PROPERTIES:
+hasOwnProperty(): to check whether an object has nested properties or not.
+It only returns true for direct properties not for nested/inherited ones.
+Exmp:     let user = {
+        fName: "Usman",
+        lName: "Shafiq",
+        fullName: function () {
+          return `${this.fName} ${this.lName}`;
+        },
+        address: {
+            country: "PAK",
+            city: "Lahore",
+            post: 5125,
+        }
+      };
+
+user.hasOwnProperty("fName") // true
+user.hasOwnProperty("lName") // true
+user.hasOwnProperty("age") // false
+user.hasOwnProperty("city") // false
+
+
 ___________________________________________________________________________________
 CALL(): An object can call an independent function as well as a method belonging to another object using call method. It is used when the no. of function’s arguments are known.
 Exmp1: Making function inside an object & using it:

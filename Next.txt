@@ -1,33 +1,62 @@
 NEXT vs. REACT:
-- More Features: Routing, Image & Font Optimization, Middleware, SSR, Backend etc.
-- SSR vs. CSR
-- Fast & SEO
+- Full-Stack (Backend APIs)
+- File base Routing
+- Fast Loading Experience (SSR/SSG/ISR vs. CSR)
+- DX vs. UX
+- Middleware
+- Image & Font Optimization
+- Poor SEO in React as search engine searches for semantics/keywords in HTML file, but in React, HTML file has only one root element: <div id="root"></div>
 
-PRE-RENDERING: Execution of code on the server side in advance of sending it to the browser.
 Execution: converting JS code into HTML.
+RENDERING: Sending the executed code to the browser to display the content of the webpage. 
+PRE-RENDERING: Execution of code (generating HTML files) on the server side in advance of sending it to the browser.
 TYPES:
-1. SSG: Code execution on build-time. Used for static data, when data has not to be changed.
-Benefits:
-a. Fast Loading Experience
-b. SEO
-2. SSR: Code execution on the server on the request of user before sending it to the user. Used for dynamic data, when data has to be changed.
+1. SSG: Code execution on build-time before coming any access request from the client. Used for static data, when data has not to be modified after build.
+For Static Pages:
+export const generateStaticParams = async () => {
+    const data = getData();
+    const users = await data;
+    return users.map(user=>({
+        id: user.id.toString()
+    }))
+}
+And npm run build
+2. SSR: Code execution on the request of client on server side before sending it to the user. Used for dynamic data, when data has to be modified.
 
-
-SSR: When a user sends a webpage request, the server executes the JS code, pre-renders the content & then sends the pre-rendered HTML file & minimal JS to the user which leads to the page loading faster because now browser has lesser JS code to execute & rerender the page.
+SSR: When a user sends a webpage request, the server executes the JS code, pre-renders the content & then sends the pre-rendered HTML file & minimal JS to the user which leads to the page loading faster because now browser has lesser JS code to execute & re-render the page.
 CSR: Executing the code on user's browser as server sends HTML, CSS & JS code to the client whenever he requests for a webpage. Then browser downloads & executes the JS code which leads to the rerendering of components & finally webpage is displayed.
-SEO is very poor in React because search engine searches for sementics/keywords in HTML file, while in React, HTML file has only one (div tag) root element.
-DX in React is Good.
-But compromises UX & SEO.
+
 Hydration: Attaching event listeners to the elements to make them interactable.
 By default every component in app folder goes for SSR.
 To enable CSR, add 'use client' on the top.
 A SSR component nested inside CSR component will behave as CSR component.
 Making the parent component client, make all its child (imported) components client.
 
-Browser-only APIs: setTimeout() & setInterval() etc.
-Interactivity, event listeners (onClick, onChange etc.), useState, useEffect, useReducer & custom hooks & which are dependent on these three hooks & react class components are always used as CSR.
+Use CSR for:
+- Browser-only APIs: setTimeout() & setInterval() etc.
+- Event listeners (onClick, onChange etc.),
+- Hooks (useState, useEffect, useReducer, custom hooks)
+- React class components
+
+Comon Layout:
 layout.js file jis folder mein hogi, layout.js file k tmam features uss folder k har component mein show hongy like navbar, footer etc.
-Data Fetching:
+usePathname(): to conditionaly render common layouts.
+
+Dynamic Routing: one page for all users.
+[userId]/page.jsx inside 'users' folder.
+props.params.userId: to get all the dynamic url.
+
+Catch All Segments: for multi-nested dynamic routes.
+[...postId]/page.jsx inside 'posts' folder.
+params: to get dynamic url.
+props.params.postId: an array of all segments.
+Post: params.postId[0] // first segment
+Category: params.postId[1] // second segment & so on..
+
+404 | Page Not Found:
+Global: not-found.jsx inside app folder.
+Specific: [...pageName]/page.jsx inside specific folder.
+
 1. SSR (dynamic): Data will be fetched but not cached/stored.
 Limitation: What if 1M pages?
 2. Static Site Generation (static/default): on build app pages cached by CDN, indexed by search engine & serve instantly.
@@ -41,16 +70,45 @@ DYNAMIC ROUTE:
 CATCH ALL ROUTE:
 
 
-For images use <Image/> instead of <img>
+IMAGE OPTIMIZATION:
+import Logo from "/public/logo.png"
+<Image src={Logo} alt="logo" height={300} width={300} />
+inside next.config.mjs:
+const nextConfig = {
+    images : {
+        domains : ["images.pexels.com"]
+    },
+}
+
+FONT OPTIMIZATION:
+import { Poppins } from "next/font/google";
+const poppins = Poppins({
+    weight: '300',
+    subsets: ['latin'],
+    display: 'swap'
+})
+ <body className={poppins.className}>
+ {children} </body>
+
+META-DATA:
+1. Static
+2. Dynamic:
+After the export statement of a page:
+export function generateMetadata() {
+    return {
+        title: 'My First Project',
+        description: 'This is my first next js 14 project'
+    }
+}
+
+
 External styling cannot be used in Nest.JS except by importing in layout.js file where it will be available globally.
 Modular Styling: custom.module.css => file name || main => class name
 Usage: className={custom.main}
 
 
-async-await doesn't work directly in the client component rather works only in server component.
-Exmp: export default async function App() {
-
-}
+async-await doesn't work directly in the main client component rather works only in server component or in sub component of a main client component.
+Exmp: export default async function App() {}
 
 Client Side Data Fetching:
 1st. we loads our app on client
@@ -66,7 +124,20 @@ Server Side Data Fetching:
 3rd: Display the rendered page to the user with data on it.
 
 Folder Structure:
-middleware.js: Todo a task after sending API request & before implementing the response on webpage.
+middleware.js: Executes after sending an API request from client & before coming response from the server.
+Exmp:
+import { NextResponse  } from "next/server";
+// const isLoggedIn = false;
+export function middleware(request){
+    // console.log("This is middleware")
+    // if(!isLoggedIn && request.nextUrl.pathname != '/home'){
+        return NextResponse.redirect(new URL('/home', request.url))
+    // }
+}
+export const config = {
+    matcher: ["/contact/:path*"]
+}
+
 Any folder 0r file inside src/app is related to the app router.
 layout.js = index.html (common/shared UI)
 page.js = index.js (Homepage & unique UI)
@@ -81,11 +152,6 @@ GraphQL:
 1. Query: Get Data
 2. Mutation: Post, Update, Delete Data
 3. Resolver: Logic to handle query & Mutation
-
-comment.js
-graphqlRequest.js
-commentForm.js
-parentIn: null
 
 ROUTING:
 1. Linking: <Link href="/about">About</Link>
