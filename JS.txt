@@ -4,8 +4,12 @@ Default behavior of JS is single-threaded & synchronous.
 Single-Threaded: Code executes line by line, which means that only one set of instructions can be processed at a time.
 Multi-Threaded: Parallelism & Multi-tasking simultaneously.
 Thread: Smallest unit of execution.
-Synchronous: in a sequence from top to bottom.
-Asynchronous: Tasks are not necessarily executed in a sequential order.
+Synchronous: waiting for one line to finish before going to the next line.
+[OR]
+in a sequence from top to bottom.
+Asynchronous: no wait for one line to finish before going to the next line.
+[OR]
+Tasks are not necessarily executed in a sequential order.
 
 
 REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
@@ -335,6 +339,19 @@ Note: if ending value not given, it will slice till the last element automatical
 const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const ext-num = nums.slice(4)
 console.log(ext-num); // [5, 6, 7, 8, 9]
+
+Usaually assigning one array to another copies the ref. of 1st array into 2nd. Hence, making changes in one array causes the change in the other one as well.
+Exmp: let arr1 = [1, 2, 3];
+      let arr2 = arr1;
+      arr2.push(4);
+      console.log(arr1) // [1, 2, 3, 4]
+To avoid this problem we can use slice():
+Exmp: let arr1 = [1, 2, 3];
+      let arr2 = arr1.slice();
+      arr2.push(4);
+      console.log(arr1) // [1, 2, 3,]
+      console.log(arr2) // [1, 2, 3, 4]
+
 
 SPLICE(): add, remove & replace items in/from the original array. The removed elements are automatically stored in a new array.
 Syntax: arrayName.splice(index, no. of elements u want to delete, new value);
@@ -984,15 +1001,41 @@ const person = {
                fname: "John",
                lname: "Lock"
                age: 30,
-               city: "New York"
+               "my-city": "New York"
                };
 console.log(Object.values(person));
 output: ['John', 'Lock', 30, 'New York']
 
-ADDING EXTRA PROPERTIES:
+ACCESSING PROPERTIES:
+console.log(person.fname); // John
+console.log(person.["fname"]); // John
+console.log(person.my-city); // error
+console.log(person["my-city"]); New York
+
+ADDING PROPERTIES:
 let obj1 = { name: "Usman", age: 30 };
+obj1.city = "LHR";
+obj1[city] = "FSD";
+obj["my-city"] = "KHI";
+
+ADDING EXTRA PROPERTIES:
 let obj3 = {...obj1, gender: "Male", city: "LHR"};
 console.log(obj3);
+
+SHORTHAND PROPERTY:
+const name = "Usman";
+const user = {
+  name: name,
+  [OR]
+  name, // shorthand
+  method: function sayHi() {
+    console.log("Hi...")
+  }
+  [OR]
+  sayHi() { // 
+    console.log("Hi...")
+  }
+}
 
 CONCATINATION OF OBJECTS:
 let obj1 = { name: "Usman", age: 30 };
@@ -1003,7 +1046,7 @@ console.log(obj3);
 CHECK EMPTY:
 Object.keys(obj) === 0 // true if 'obj' is empty.
 
-CKECK OWN vs, NESTED PROPERTIES:
+CKECK OWN vs. NESTED PROPERTIES:
 hasOwnProperty(): to check whether an object has nested properties or not.
 It only returns true for direct properties not for nested/inherited ones.
 Exmp:     let user = {
@@ -1024,6 +1067,13 @@ user.hasOwnProperty("lName") // true
 user.hasOwnProperty("age") // false
 user.hasOwnProperty("city") // false
 
+Accessing keys of an Object:
+Object.keys(user) // output: [fName, lName, fullName, address]
+
+
+Accessing values of an Object:
+Object.values(user)
+output: [Usman, Shafiq, f => (), {city: "Lahore", country: "PAK", zip: "5125"}]
 
 ___________________________________________________________________________________
 CALL(): An object can call an independent function as well as a method belonging to another object using call method. It is used when the no. of function’s arguments are known.
@@ -1630,7 +1680,7 @@ console.log(dataObj["name"]);   // output: Usman
 console.log(dataObj["prog.lang"][2]);        // output: JAVA
 console.log(dataObj["address"]["state"]);   // output: Pakistan
 SENDING DATA TO SERVER: Make an object which we want to send:
-const student {
+const student = {
               name: "Usman",
               age: 30,
               city: Lahore
@@ -1638,6 +1688,25 @@ const student {
 Now convert javascript object into JSON string to send it to the server:
 let Jdata = JSON.stringify(student);
 _____________________________________________________________________________________
+LOCAL STORAGE:
+Exmp#1:
+const str = "Hello World";
+localStorage.setItem("message", str);
+const data = localStorage.getItem("message");
+console.log(data) // Hello World
+Exmp#2:
+const obj = {
+              name: "Usman",
+              age: 30,
+              city: Lahore
+              }
+localStorage.setItem("objData", JSON.stringify(obj)); // converting obj into JSON string
+const data = localStorage.getItem("objData");
+// converting JSON string data into JS object:
+console.log(JSON.parse(data));  {name: "Usman", age: 30, city: Lahore}
+
+
+-------------------------------------------------------------------------------------
 API (Application Programming Interface): Set of rules & protocols that allow different computer programs (softwares & apps.) to interact with each other. 
 FETCH API: Easiest waytomake a http request. Other ways are AJAX & XMLHttpRequest.
 
