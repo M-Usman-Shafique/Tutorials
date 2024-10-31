@@ -478,9 +478,25 @@ output: 0: Java
         2: PHP
         3: Python
 
-Difference between forEach() & map():
-- making changes using forEach() cause change in original array.
-- making changes using map() create another array to make changes.
+Diff. between forEach() & map():
+forEach():
+- It returns undefined.
+- Mutable: it does not create a new array; it simply calls the provided function for each element of the original array.
+Exmp:
+const array = [1, 2, 3, 4, 5];
+array.forEach((element) => {
+  console.log(element * 2);
+});
+
+map():
+- It returns a new array with the results of calling the provided function on every element.
+- Immutable: It does not modify the original array.
+Exmp:
+const array = [1, 2, 3, 4, 5];
+const newArray = array.map((element) => {
+  return element * 2;
+});
+console.log(newArray); 
 ___________________________________________________________________________________
 Higher-Order Function (HOF): Function that takes another functions as argument or returns a function as result.
 Exmp:

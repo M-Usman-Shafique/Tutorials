@@ -23,11 +23,14 @@ a. Linear: Data items arranged in sequential order.
      3. peek(): top item
      4. isempty()
      5. isfull()
-  4. Queue: Data structure that follows the FIFO principle.
+  4. Queue: Data structure that follows the FIFO principle. Unlike other data structures, its both ends are open.
+  Rear: insertion end
+  Front: deletion end
+
      Operations on Queue:
-     1. enqueue(): inserting element at rear (start).
-     2. dequeue(): removing element from front (end).
-     3. peek(): element at front (end).
+     1. enqueue(): inserting element at rear.
+     2. dequeue(): removing element from front.
+     3. peek(): getting element from the front.
      4. isempty()
      5. isfull()
      Uses of Queue:
@@ -60,6 +63,7 @@ Using Formula: f(n) = 5n² + 6n + 12
 5n²: 2 loops with 5 lines in each.
 6n: 1 loop having 6 lines.
 12: simple lines.
+Note: Always ignore the non-dominant term.
 
 ASYMPTOTIC ANALYSIS: Evaluation of an algorithm's performance in terms of space & time complexity.
 Asymptotic Notations: 
@@ -74,11 +78,13 @@ Exmp#1: Finding value at a particular index of an array.
 Exmp#2: Sum of 1st & last elements of an array.
 2. Linear ​‌‍‌O​(n): No. of operations are directly dependent on the size of inputs.
 Exmp: Loop iteration on all the elements of an array or string like in searching.
-3. Quadratic ​‌‍‌O​(n²): 
+3. Quadratic ​‌‍‌O​(n²): No. of operations grow quadratically with the size of the input.
 Exmp: Nested loops like in iteration of a 2D array for sorting.
 4. Exponential ​‌‍‌O​(2ⁿ): Normally, rises due to brute force.
 Exmp: Recursion
-5. Logritmic ​‌‍‌O​(log n): better than ​‌‍‌O​(n)
+5. Logritmic ​‌‍‌O​(log n): No. of operations grow logrithmically with the size of the input. It's better than ​‌‍‌O​(n).
+Q: log 2⁸ = ? means 2ˣ = 8 means two to the what power equals eight?
+Ans: 3
 Exmp: Binary search where every time when loop iterates the size of input reduced half.
 Trick: When non-nested loop has increment in multiplication or division, it's always logrithmic.
 6. Linearithmic ​‌‍‌O​(nlogn): better than ​‌‍‌O​(n²)
@@ -150,6 +156,13 @@ The place from where we insert items or where the latest item lies is called Rea
 2. Dequeue: Removing items from end.
 The place from where we remove items or where the oldest item lies is called Front.
 Circular Queue: Both front & rear are connected to each other.
+
+LINKED LIST: Elements are called nodes.
+Node: Value + Next (address/ref. of next node)
+Head: 1st Node
+Tail: Last Node
+Tail has "null" in the next.
+Empty Linked List: Head & Tail is same node.
 
 SEARCHING O(n):
 1. Linear: used for unsorted data. Checking one by one each element by comparing with its next element.

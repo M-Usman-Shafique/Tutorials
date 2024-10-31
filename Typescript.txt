@@ -4,10 +4,10 @@ CORE DATA TYPES:
 1. Number
 2. String
 3. Boolean
-When no value is assigned, then by default every variable has data type "any".
+When no value is assigned, then by default a variable has data type "any".
 Exmp: let x;
 When no data type is declared then by default data type of variable is what we pass for the first time.
-Exmp: let x = 10;  // data type: number
+Exmp: x = 10;  // data type: number
 Exmp: const y = 5; // data type: 5 bcoz can't change
 Union Type: When value type is not confirmed:
 Exmp: let x:string | number | boolean = 10;

@@ -9,13 +9,42 @@
 1. Strict rules
 2. Framwork is incharge as it provides some places, only where you can call your code.
 3. Less customization
-⁡⁣⁢⁣JSX:⁡ JavaScript XML (Extensible Markup Language):⁡ Modern syntax convention to write HTML & JavaScript code together which defines the structure of UI components.
+⁡⁣⁢⁣JSX:⁡ JavaScript Syntax Extension acc. to official documentation of React and JavaScript XML (Extensible Markup Language) acc. to blogs & articles.⁡
+A Modern syntax convention to write HTML & JavaScript code together which defines the structure of UI components.
+
+JS Expressions (code that directly returns a value) can be written inside JSX.
+Exmp#1:
+<p>{2 + 3}</p>
+Exmp#2:
+let fname = "Usman"
+let lname = "Shafiq"
+<p>{fname+lname}</p>
+
+JS Statements (code that performs an action but doesn't directly return a value) cannot be written inside JSX.
+Exmp#1:
+<p>{let fname = "Usman"}</p>
+Exmp#2
+<div>{for (let x of arr) {
+    console.log(x);
+}}</div>
+
 ⁡⁣⁢⁣BABEL:⁡ JS compiler which onverts JSX into normal JS code to make it understandable for browser.
 ⁡⁢⁣⁢Note:⁡⁡ Always write JS expression inside curly braces:
 const task = 2;
 <h1> Task: {task} </h1>
 output: Task: 2
 ⁡⁣⁢⁣COMPONENTS:⁡ Reusable building blocks of an application's UI.
+Diff. between Functions & Components:
+Functions:
+1. Purpose: perform computations, reusable logic
+2. Returns any value (number, string, object, etc.)
+3. Cannot manage internal state in React
+4. Not reactive; cannot trigger re-renders
+Components:
+1. To render UI, manage state, handle lifecycle events
+2. Returns JSX
+3. Manage internal state using React Hooks (like useState)
+4. Reactive; changes in state or props trigger UI re-renders
 ⁡⁣⁢⁣Types:⁡
 ⁡⁣⁣⁢1. Class Components:⁡ Simple JS classes that extend 'React.component' & have a render() method which returns JSX.
 ⁡⁢⁣⁣React.component:⁡⁡ A base class in React that is used to create class components. It provides methods & properties that allow a component to manage its state & lifecycle.
@@ -145,7 +174,35 @@ In this case, you cannot pass props directly to Component, and it will not behav
    1.  Props are immutable, meaning once they are set by the parent, the child component cannot modify them. Whereas, state is mutable, meaning it can be modified using setState() method (in class components) & using useState hook (in functional components).
    2. Props controls the component externally while state controls internally.
    ⁢⁡⁣⁢⁡⁣⁢⁢Difference between State & Variables:⁡
-   Updating a variable does not cause rerender of the component but updating state does.
+   1. State can only be declared and used inside a component. To use in other components, we can pass it as props. While variables Can be declared and used outside a function/component e.g. global variables.
+   2. Updating a variable does not cause rerender of the component but updating state does.
+
+ ⁡⁣⁣⁢Special Scenario:⁡ Suppose we have two almost similar components in our app with some differences as well:
+export default function App() {
+    return (
+        <div>
+            <Card title="Title 1" description="Description 1">
+                <a href="google.com">Goto Google</a>
+            </Card>
+            <Card title="Title 2" description="Description 2">
+                <button>Like</button>
+                <button>Subscribe</button>
+            </Card>
+        </div>
+    )
+}
+
+const Card = (props) => {
+    return (
+        <div>
+            {/* for similarities: */}
+            <h1>{props.title}</h1>
+            <p>{props.description}</p>
+            {/* for differences */}
+            {props.children} 
+        </div>
+    )
+}
 
 ⁡⁢⁣⁡⁣⁣⁢2. Children Props:⁡⁡ Passing data from parent to child between opening & closing tags of a component. Children can receive this data using props.children or { children }.
    Export File:
@@ -247,7 +304,7 @@ Callback function tells what to run & dependency tells when to run.
 
 ⁡⁣⁣⁢4. useContext():⁡ To share values between multi-levels of components without passing props through each level.
 
-⁡⁣⁣⁢5. useRef():⁡ To directly access DOM elements & for creating mutable variables which do not re-render the component.
+⁡⁣⁣⁢5. useRef():⁡ To directly access and manuplate DOM elements without rerendering the component.
 For example, if we try to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since useState() itself causes a re-render.
 
 ⁡⁣⁣⁢6. useReducer:⁡ similar to useState but manages more complex states when new state depends on the previous state. useState uses useReducer internally.
@@ -317,6 +374,14 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 
 THROTLING: Function is repeatedly invoked after a given interval.
 DEBOUNCING: Function is invoked after a certain period of inactivity.
+
+Diff. b/w Context API and Redux Toolkit:
+Context API:
+1. Create, Provide, Use
+2. Can wrap only necessary components.
+Redux Toolkit:
+1. Action, Reducer, Store
+2. Wraps the entire application.
 
 ⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & state management library for complex JavaScritp applications.
 On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.
