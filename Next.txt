@@ -64,6 +64,10 @@ Limitation: What if data changes after build?
 3. Incremental Static Regeneration (static+dynamic): Data will be cached but after sometimes it will be refreshed: { next: { revalidate: 10 }}
 Note: Diff. between SSR & SSG can only be understood when we are in production (build) mode, otherwise in development mode we see no difference.
 
+When to use CSR and SSR?
+- SSR: landing pages, blogs, sites where SEO and fast initial load is crucial.
+- CSR: SPAs that need frequent updates.
+
 NESTED Routes:
 GROUP ROUTE:
 DYNAMIC ROUTE:
@@ -144,7 +148,7 @@ page.js = index.js (Homepage & unique UI)
 
 REST API vs. GraphQL:
 1. Over fetching of data in case of a single entity i.e. Post.
-2. Under fetching pf data in case of multiple entities i.e. Post & its commments.
+2. Under fetching of data in case of multiple entities i.e. Posts & commments.
 3. REST API: GET, POST, PUT, DELETE vs. GraphQL: POST
 
 

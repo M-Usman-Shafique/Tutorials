@@ -343,23 +343,6 @@ Most common library used for routing in React is 'react-router-dom'.
 
 ⁡⁣⁢⁣Link vs. NavLink:⁡ Link provides a basic link to any URL, while NavLink offers additional features (i.e. styling active links) that can enhance the user experience.
 
-
-HTTP (Hyper Text Transfer Protocol): To make a connection (like loading pages, form submitting etc.) between web server & client.
-
-⁡⁣⁢⁣API⁡ ⁡⁣⁢⁣(Restaurant Analogy)⁡:⁡
-Client/Consumer: Customer
-Browser: Table
-API: Waiter
-Server/Provider: Kitchen
-Def.: An intermediar that allow two applications to talk to each other.
-1. Web API: Set of rules & protocols that allow different software applications to communicate & interact with each other
-2. REST (Representational State Transfer): Architectural guidelines to design networked applications e.g. Web Browsers, Emails, Web APIs.
-3. REST/RESTful API: A type of web API that follows the principles and constraints of REST 
-Create (POST): Creating/Posting/Inserting Data.
-Read (GET): Reading/Getting/Fetching/Retrieving Data
-Update (PUT, PATCH):  PUT for Complete Update & PATCH for Partial Update Data.
-Delete (DELETE): Deleting Data.
-
 ⁡⁣⁢⁣AXIOS:⁡⁡ A package used to make HTTP requests (calling an API). AXIOS do in react what Fetch API does in JavaScript.
 
 ⁡⁣⁢⁣Bundling:⁡ Combining multiple JS files & their dependencies (CSS files, images) into a single file using module bundlers i.e. Webpack, Parcel, Rollup etc.
