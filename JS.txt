@@ -1203,6 +1203,8 @@ Benefits of Closure:
 2. Function "Once": useful in scenarios where you want to perform an expensive operation only once & then reuse the result for subsequent calls.
 3. Module Design Pattern: User can't access a private function directly, but through another public function. Pvt. functions are those who don't return anything, hence, can't be directly accessible.
 4. Currying
+⁡⁣5. ⁢⁣DEBOUNCING:⁡ Function is invoked after a certain period of inactivity.
+6. ⁡⁣⁢⁣THROTLING:⁡ Function is repeatedly invoked after a given interval.
 ___________________________________________________________________________________
 PROTOTYPE: Template or blue-print for objects.
 PROTOTYPAL INHERITENCE:  A process in which objects directly inherit properties & methods from other objects.
@@ -1314,27 +1316,28 @@ Program:
  A function designed to create new objects is called object constructor.
 After coming the concept of classes in JavaScript, use of object constructor is no more neeeded.
 ________________________________________________________________________________
-SETS: collection of unique values. Don't store duplicate value.
-Exmp1:
-const mySet = (["Hello", 786, false, "Hello"]);
+SETS: collection of unique values. Don't store duplicate value. Do not maintain an insertion order.
+Exmp:
+const mySet = new Set(["Hello", 786, false, "Hello"]);
 console.log(mySet);
 output: Set(4) {Hello, 786, false}
-Exmp2:
-const mySet = new Set();
 mySet.add("Hello");
 mySet.add("World");
 mySet.add("World");
 mySet.add(786);
 console.log(mySet);
-output: Set(3) {"Hello", "World", 786}   //set don't show repeated values.
-
-MAPS: Collection of data in key-value pairs.
-const myMap = new Map();
-myMap.set("Name", "Usman");
+output: Set(3) {"Hello", "World", 786}
+-------------------------------------------------------------------------
+MAPS: Ordered collection of key-value pairs.
+Exmp:
+const myMap = new Map([['a', 1], ['b', 2]]);
+for (let [key, value] of myMap) {
+  console.log(`${key}: ${value}`); // a: 1, b: 2
+}
+myMap.set("c", 3);
 myMap.set("func", function () { });
-myMap.set("Number", 3245);
 console.log(myMap);
-output: {'Name' => 'Usman', 'func' => ƒ, 'Number' => 3245}
+output: {a: 1, b: 2, c: 3, 'func' => ƒ}
 __________________________________________________________
 ACCESSOR PROPERTIES:
 1. GETTER: It makes a property readable. It doesn't take any parameter.
@@ -1642,6 +1645,18 @@ console.log(y.info.city);   // output: {city: "FSD"}
 
 Limitation: When an object has a function or Date in its properties, then on making its deep copy, function & date will be lost.
 Solution: Use loadash library or copy each property one by one using for loop.
+--------------------------------------------------------------
+​‌‍‌𝗘𝗩𝗘𝗡𝗧 𝗟𝗢𝗢𝗣:​
+It consists of 3 major components:
+𝟏. 𝐂𝐚𝐥𝐥 𝐒𝐭𝐚𝐜𝐤: Tracks the order of function calls in JavaScript; it processes one function at a time in a Last-In, First-Out (LIFO) manner. For example: console.log(5), console.log(x)
+
+𝟐. 𝐓𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞: Holds tasks (like setTimeout callbacks) to execute after the Call Stack is empty, maintaining execution order (FIFO). For example:
+setTimeout(...)
+
+𝟑. 𝐌𝐢𝐜𝐫𝐨𝐭𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞 (More priority than Task Queue) : Contains high-priority tasks (like Promise callbacks) that run immediately after the Call Stack clears but before the Task Queue. For example:
+API Call using Promise
+
+Event loop keeps checking if Call stack is empty, Then Micro-task queue and finally task queue...!!!
 ______________________________________________________________
 AJAX (Asynchronous JavaScript & XML): A technique to create asynchronous web applications. It allows you to send & receive data from a web server without reloading the entire web page.
 ___________________________________________________________

@@ -14,9 +14,9 @@ a. Linear: Data items arranged in sequential order.
   3. Stack: Data structure that follows the LIFO principle.
      Uses of Stack:
      1. Expression Evaluation
-     2. Backtracking (puzzel & maze solving) algorithms
-     3. Undo mechanism in applications.
-     4. Manage program execution (call stack)
+     2. Backtracking/Browser History Tracking (Go Back)
+     3. Undo mechanism in applications while typing
+     4. Call stack in JS runtime
      Operations on Stack:
      1. push(): adding
      2. pop(): removing
@@ -24,8 +24,8 @@ a. Linear: Data items arranged in sequential order.
      4. isempty()
      5. isfull()
   4. Queue: Data structure that follows the FIFO principle. Unlike other data structures, its both ends are open.
-  Rear: insertion end
-  Front: deletion end
+  Rear/Tail: insertion end
+  Front/Head: deletion end
 
      Operations on Queue:
      1. enqueue(): inserting element at rear.
@@ -35,8 +35,8 @@ a. Linear: Data items arranged in sequential order.
      5. isfull()
      Uses of Queue:
      1. In web servers to manage requests
-     2. Asynchronous Task Management
-     3. 
+     2. Printers
+     3. Callback queue in JS runtime
 
 b. Non-Linear:
    1. Trees: Data structure which represents hierarchical relationships between elements.
@@ -156,6 +156,7 @@ The place from where we insert items or where the latest item lies is called Rea
 2. Dequeue: Removing items from end.
 The place from where we remove items or where the oldest item lies is called Front.
 Circular Queue: Both front & rear are connected to each other.
+Doubly Queue: Insertion and deletion can be done from both ends.
 
 LINKED LIST: Elements are called nodes.
 Node: Value + Next (address/ref. of next node)

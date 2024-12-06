@@ -355,14 +355,11 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁢⁣⁣2. Lazy Loading:⁡ Delaying the loading of certain components of an application until they are actually needed to optimize app. performance.
 ⁡⁣⁣⁢Suspense:⁡⁡ React component used to handle asynchronous operations such as data fetching, loading chunks of code via lazy loading. It displayed a fallback content on UI while waiting for the asynchronous operation to complete.
 
-THROTLING: Function is repeatedly invoked after a given interval.
-DEBOUNCING: Function is invoked after a certain period of inactivity.
-
-Diff. b/w Context API and Redux Toolkit:
-Context API:
+⁡⁣⁢⁣Diff. b/w Context API and Redux Toolkit:⁡
+⁡⁣⁣⁢Context API:⁡
 1. Create, Provide, Use
 2. Can wrap only necessary components.
-Redux Toolkit:
+⁡⁣⁣⁢Redux Toolkit:⁡
 1. Action, Reducer, Store
 2. Wraps the entire application.
 
@@ -397,7 +394,7 @@ For example, there could be a cart slice responsible for managing the shopping c
 ⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to get data from redux store to the app component.
 
 
-Diagram:
+⁡⁢⁣⁣Diagram:⁡
 When button of "subChild" is clicked, an action is dispatched using the useDispatch hook. A dispatch function is used to send actions to the store.
 In this case, the action is dispatched with a state/value = 1 called payload:
 useDispatch(payload).
@@ -410,8 +407,8 @@ The reducer updates the new state (value = 1) & store it in the Redux store.
 useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
 
 
-Action: Data that we want to store in redux store.
-Reducer: which stores that data in redux store.
+⁡⁢⁣⁣Action:⁡ Data that we want to store in redux store.
+⁡⁢⁣⁣Reducer:⁡ which stores that data in redux store.
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
 ⁡⁣⁢⁣YUP:⁡ Form Validation

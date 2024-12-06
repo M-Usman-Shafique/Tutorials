@@ -13,8 +13,9 @@ git add  <file1> <file2> <file3>
 Exmp: git add index.jsx App.jsx globals.css etc.
 To stage all the changed files:
 git add .
-6. To unstage a file:
+6. To unstage a file or stop a tracking a tracked file:
 git rm --cached <file>
+
 Exmp: git rm --cached App.jsx
 7. To commit the staged files into Repo:
 git commit -m "commit message"

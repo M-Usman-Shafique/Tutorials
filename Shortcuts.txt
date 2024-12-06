@@ -65,6 +65,8 @@ git push
 npm update
 Remove-Item -Recurse -Force .next (empty cache by deleting .next folder)
 npm install --legacy-peer-deps
+npm uninstall
+
 
 
 
