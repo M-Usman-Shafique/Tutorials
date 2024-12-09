@@ -1,7 +1,7 @@
-⁡⁣⁢⁣REACT: ⁡A JavaScript library use to make UIs of websites & singl-page web applications by using component-based approach. 
+⁡⁣⁢⁣REACT: ⁡A JavaScript library use to make UIs of websites & singl-page web applications using component-based approach. 
 ⁡⁢⁣⁣Declarative:⁡ A programming paradigm where developers describe what they want to achieve (UI), rather than specifying how to achieve it (DOM manupulation).
 ⁡⁢⁣⁣Imperative:⁡ Explicitly defining the step-by-step instructions to achieve a desired outcome.
-⁡⁢⁣⁣Libray:⁡
+⁡⁢⁣⁣Library:⁡
 1. Less rules.
 2. Developer is incharge to choose when & where to call the library.
 3. More customization is possible.
@@ -11,23 +11,20 @@
 3. Less customization
 ⁡⁣⁢⁣JSX:⁡ JavaScript Syntax Extension acc. to official documentation of React and JavaScript XML (Extensible Markup Language) acc. to blogs & articles.⁡
 A Modern syntax convention to write HTML & JavaScript code together which defines the structure of UI components.
-
-JS Expressions (code that directly returns a value) can be written inside JSX.
+JS Expressions: Code that directly returns a value can be written inside JSX.
 Exmp#1:
 <p>{2 + 3}</p>
 Exmp#2:
 let fname = "Usman"
 let lname = "Shafiq"
 <p>{fname+lname}</p>
-
-JS Statements (code that performs an action but doesn't directly return a value) cannot be written inside JSX.
+JS Statements: Code that performs an action but doesn't directly return a value cannot be written inside JSX.
 Exmp#1:
 <p>{let fname = "Usman"}</p>
 Exmp#2
 <div>{for (let x of arr) {
     console.log(x);
 }}</div>
-
 ⁡⁣⁢⁣BABEL:⁡ JS compiler which onverts JSX into normal JS code to make it understandable for browser.
 ⁡⁢⁣⁢Note:⁡⁡ Always write JS expression inside curly braces:
 const task = 2;
@@ -45,13 +42,28 @@ Components:
 2. Returns JSX
 3. Manage internal state using React Hooks (like useState)
 4. Reactive; changes in state or props trigger UI re-renders
+Note: In React, functions defined inside a component are re-created on every render by default therefore they have a unique reference on every render.
+Example:
+const sayHello = () => console.log("Hello");
+const logHello = sayHello;
+
+console.log(sayHello === logHello); // false
+
+const sayHello = useCallback(() => {
+  console.log("Hello");
+}, []);
+
+const logHello = sayHello;
+
+console.log(sayHello === logHello); // true
 ⁡⁣⁢⁣Types:⁡
 ⁡⁣⁣⁢1. Class Components:⁡ Simple JS classes that extend 'React.component' & have a render() method which returns JSX.
 ⁡⁢⁣⁣React.component:⁡⁡ A base class in React that is used to create class components. It provides methods & properties that allow a component to manage its state & lifecycle.
 ⁡⁢⁣⁣State:⁡⁡ A built-in object in react which holds data or information about the component. Any change in the state causes the component to re-render to reflect new state in UI.
 ⁡⁢⁣⁣State Management:⁡⁡ Local state of a class component can be initialized & managed using 'this.state'.
 ⁡⁣⁣⁡⁢⁣⁣State Update:⁡⁡ State can be updated using this.setState() which triggers a re-render of the component.
-⁡⁢⁣⁣RENDERING:⁡⁡ Process of converting JSX components into React elements using createElement() method. React elements are basically JS objects which define the structure of UI.
+⁡⁢⁣⁣RENDERING:⁡⁡ Process of converting JSX components into React elements using createElement() method.
+‍⁡⁢⁣⁣REACT ELEMENTS:⁡ JS objects that define the structure of UI.
 ⁡⁢⁣⁣RE-RENDERING:⁡
 ⁡⁣⁢⁢State Variables & Props:⁡ They create a demand for change/update in the UI. When such a demand occurs, React identifies all components that need to be updated & re-renders them to create new React elements.
 ⁡⁢⁣⁡⁣⁢⁢Virtual DOM:⁡⁡ During the re-render, React creates a virtual DOM tree which represents how the original DOM & UI should look like after commiting changes.
@@ -98,10 +110,9 @@ class Counter extends React.Component {
 2. Side Effects: componentDidMount() & componentDidUpdate()
 3. Performance Optimization: shouldComponentUpdate()
 4. Cleanup: componentWillUnmount()
-
 ⁡⁢⁣⁢Note:⁡ Whenever, parent component is rendered it renders all its child components as well.
 
-⁡⁣⁣⁢2. Function Components:⁡ JS functions which return JSX. They use hooks for state management.
+⁡⁣⁣⁢2. Function Components:⁡ JS functions that return JSX, manage state using React hooks and trigger re-render of UI on state change.
 function Car() {
   return <h2>I am a car!</h2>;
 }
@@ -139,7 +150,7 @@ function Garage() {
 function Car(props) {
   return <h2>I am a { props.brand }!</h2>
 }
-⁡⁢⁣⁣Passing Variable:⁡
+⁡⁢⁣⁣Passing Variable as Props:⁡
 function Garage() {
     let brandName = "Toyota";
   return (
@@ -149,35 +160,47 @@ function Garage() {
     </>
   )
 }
-⁡⁢⁣⁣Passing Object:⁡
+⁡⁢⁣⁣Passing Object as Props/Spread Props:⁡
 function Garage() {
     const carInfo = { name: "Toyota", model: "Yaris" };
   return (
     <>
       <h1>Who lives in my garage?</h1>
       <Car brand={ carInfo } />
+          [OR]
+      <Car {...carInfo } />
+
     </>
   )
 }
-⁡⁢⁣⁢Note:⁡ Instead of normal loop, map() loop is used in the return of function component.
+function Car({...carInfo}) {
+  return <h2>I am a { carInfo.name }!</h2>
+}
+[OR]
+function Car({ name, model }) {
+  return <h2>I am a {name} {model}!</h2>
+}
+
+⁡⁢⁣⁢Note:⁡ Instead of normal loop, map() is used in the return of function component.
 ⁡⁢⁣⁢List & Keys:⁡⁡ Keys allows React to keep track of elements. Otherwise while updating or removing an element of list, React will render the entire list.
 
-⁡⁢⁣⁣Using <Component> or {Component()} inside Another Component:⁡
-When you use <Component /> in your JSX, you are treating it as a React component. This means that React will create an instance of the component and manage its state and lifecycle. It can accept props just like any other React component. This is the recommended way to use components in React.
-
-When you use {Component()} in your JSX, you are treating it as a JavaScript function call. It is not treated as a React component. This means that React will execute the Component function immediately and render the JSX returned by that function. It does not have access to React's state management or lifecycle methods.
-In this case, you cannot pass props directly to Component, and it will not behave like a typical React component. It's just a function that returns JSX, and it gets called whenever your main component (Home in this case) re-renders.
+⁡⁢⁣⁣Difference between using <Component> & {Component()}:⁡
+⁡⁣⁣⁢<Component>:⁡
+When we use <Component /> in our JSX, we treat it as a React component. This means that React will create an instance of the component and manage its state and lifecycle. It can accept props just like any other React component. This is the recommended way to use components in React.
+⁡⁣⁣⁢{Component()}:⁡
+When we use {Component()} in our JSX, we treat it as a JavaScript function call. It is not treated as a React component. This means that React will execute the Component function immediately and render the JSX returned by that function. It does not have access to React's state management or lifecycle methods.
+In this case, we cannot pass props directly to Component, and it will not behave like a typical React component. It's just a function that returns JSX, and it gets called whenever our main component (Home in this case) re-renders.
 
 ⁡⁢⁣⁣COMPOSITION:⁡ Making complex UIs by nesting & combining smaller, reusable components. It is considered as an alternative of inheritance in React.⁡
-⁡⁣⁣⁢1. Props:⁡⁡⁡ Properties pass as arguments into React components to pass data from parent to child components.
+⁡⁣⁣⁢1. Props:⁡⁡⁡ Properties passed as arguments into React components to pass data from parent to child components.
 ⁡⁣   ⁢⁡⁣⁢⁢Difference between State & Props:⁡
-   1.  Props are immutable, meaning once they are set by the parent, the child component cannot modify them. Whereas, state is mutable, meaning it can be modified using setState() method (in class components) & using useState hook (in functional components).
+   1.  Props are immutable, meaning once they are set by the parent, the child component cannot modify them. Whereas, state is mutable, meaning it can be modified using setState method (in class components) & using useState hook (in functional components).
    2. Props controls the component externally while state controls internally.
    ⁢⁡⁣⁢⁡⁣⁢⁢Difference between State & Variables:⁡
    1. State can only be declared and used inside a component. To use in other components, we can pass it as props. While variables Can be declared and used outside a function/component e.g. global variables.
    2. Updating a variable does not cause rerender of the component but updating state does.
 
- ⁡⁣⁣⁢Special Scenario:⁡ Suppose we have two almost similar components in our app with some differences as well:
+⁡⁢⁣⁡⁣⁣⁢2. Children Props:⁡⁡ Passing data from parent to child between opening & closing tags of a component. Children can receive this data using props.children or { children }.
 export default function App() {
     return (
         <div>
@@ -203,29 +226,17 @@ const Card = (props) => {
         </div>
     )
 }
-
-⁡⁢⁣⁡⁣⁣⁢2. Children Props:⁡⁡ Passing data from parent to child between opening & closing tags of a component. Children can receive this data using props.children or { children }.
-   Export File:
-   <Message username="Usman">Salman</Message>    // Usman is props & Salman is children props!
-   Import File:
-   function Message(props) {
-      return (
-        <div>
-        <h1>Hello {props.username}</h1>        // output: Hello Usman
-        <h1>Welcome {props.children}</h1>     // output: Welcome Salman  
-        </div>
-      )
-   }
 We can write the above code by destructuring as well:
-function Message({ username, children }) {
-  return (
+const Card = ({title, description, children}) => {
+    return (
         <div>
-        <h1>Hello {username}</h1>      // output: Hello Usman
-        <h1>Welcome {children}</h1>   // output: Welcome Salman 
+            <h1>{title}</h1>
+            <p>{description}</p>
+            {children} 
         </div>
-  )
+    )
 }
-⁡⁢⁣⁡⁣⁣⁢3. High Order Components (HOCs):⁡⁡ Sharing logic between components using 'props' whose value is a component. HOC is a function which takes a component & returns another component.
+⁡⁢⁣⁡⁣⁣⁢3. High Order Components (HOCs):⁡⁡ Passing component as props from one (parent) component to another (child). HOC is a function that takes a component & returns another component.
 ⁡⁢⁣⁣Benefits:⁡ Reusability, Enhancement, Testing and Debugging.
 ⁡⁣⁣⁢4. Render Props:⁡ Sharing logic between components using 'props' whose value is function.
 ⁡⁣⁣⁢5. Context API:⁡ Sharing data between multi-levels of components using useContext hook, without explicitly passing props (props drilling) through each component.
@@ -248,23 +259,12 @@ function Profile() {
   )
 }
 
-CHILDREN PROPS:
-Component:
-export default function Button({ children }) {
-   return (
-<button>{children}</button>
-)
-
-Usage:
-<Button>Left</Button>
-<Button>Right</Button>
-
 ⁡⁢⁣⁡⁢⁣⁢Refs:⁡⁡ Provide a way to access DOM nodes & React elements.
 
 ⁡⁣⁢⁣HOOKS:⁡ Functions that allow us to use React’s features (state management, lifecycle methods & performing side effects) in functional components without writing a class.
 
 ⁡⁣⁣⁢1. useState():⁡ used to add & manage the state of a component. It returns an array. First element of array is a variable & second element is modifier function for that variable.
-useState is made on using closure to remember previous value.
+useState uses closure under the hood to remember previous value.
 ⁡⁢⁣⁣Diff. between Normal & State Variables:⁡
 1. State variables are declared & initialized by destructuring.
 2. Normal variables cannot trigger re-render of the component, therefore, state cannot be managed through normal variables.
@@ -363,7 +363,7 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 1. Action, Reducer, Store
 2. Wraps the entire application.
 
-⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & state management library for complex JavaScritp applications.
+⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & client state management library for complex JavaScritp applications.
 On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.
 Solution: Redux persist.
 Data flow in redux is uni-directional.
@@ -405,10 +405,6 @@ Reducers are functions that take the current/initial state & an action as argume
 The { logic } part of reducer-which handles the dispatched action & payload (value)-comes from the slice component.
 The reducer updates the new state (value = 1) & store it in the Redux store.
 useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
-
-
-⁡⁢⁣⁣Action:⁡ Data that we want to store in redux store.
-⁡⁢⁣⁣Reducer:⁡ which stores that data in redux store.
 
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
 ⁡⁣⁢⁣YUP:⁡ Form Validation
