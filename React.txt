@@ -379,7 +379,7 @@ d. DECREASE_QUANTITY:
 ⁡⁢⁣⁣3. DISPATCH:⁡ A hook (useDispatch) available on the store to send actions to the reducer.
    Analogy: Store manager sending out message to all the employees (reducers) that something needs to be done.
 ⁡⁢⁣⁣4. MIDDLEWARE:⁡ A middleman between action creators & reducers. When an action is dispatched, it first passes through the middleware before reaching the reducers. Middleware can intercept the action before it reaches the reducer, allowing us to perform additional logic, such as logging, asynchronous operations, or modifying actions.
-⁡⁣⁢⁢Thunk Middleware:⁡ Handles asynchronous actions, like fetching product data from a server.
+⁡⁣⁢⁢Redux Thunk:⁡⁡ A middleware that handles asynchronous actions, like fetching data from a server.
 Analogy: Special staff/team in a store dedicated to manage the special requests of the customers that require some time.
 ⁡⁣⁢⁢Async Thunk:⁡ A middleware to handle asynchronous operations.
 Analogy: Shopping assistant which shops on yours behalf for things which take time allowing you to keep your other shopping continue meanwhile.
@@ -388,10 +388,10 @@ Thunk middleware manages the overall coordination of async operations within you
 ⁡⁢⁣⁣5. REDUCER:⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
 Analogy: Salesman to handle to handle diff. sale's departments by handling actions & to updating the store's state acc. to the actions.
 For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
-⁡⁢⁣⁣6. SLICE:⁡ Actions & reducers which were separately handled in redux, now both come under slice in redux toolkit. It contains complete reducer logic, action creators etc. to organize & modularize the Redux code.
+⁡⁢⁣⁣6. SLICE:⁡ Collection of actions & reducers which were separately handled in redux, now both come under slice in redux toolkit. It contains complete reducer logic, action creators etc. to organize & modularize the Redux code.
 Analogy: Section or department handles specific categories of products (state).
 For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles.
-⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to get data from redux store to the app component.
+⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to retrieve state from redux store to the app component.
 
 
 ⁡⁢⁣⁣Diagram:⁡

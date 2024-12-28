@@ -57,11 +57,12 @@ Category: params.postId[1] // second segment & so on..
 Global: not-found.jsx inside app folder.
 Specific: [...pageName]/page.jsx inside specific folder.
 
-1. SSR (dynamic): Data will be fetched but not cached/stored.
+1. CSR (Dynamic)
+2. SSR (static): Data will be fetched but not cached.
 Limitation: What if 1M pages?
-2. Static Site Generation (static/default): on build app pages cached by CDN, indexed by search engine & serve instantly.
+3. Static Site Generation (static/default): on build app pages cached by CDN, indexed by search engine & serve instantly.
 Limitation: What if data changes after build?
-3. Incremental Static Regeneration (static+dynamic): Data will be cached but after sometimes it will be refreshed: { next: { revalidate: 10 }}
+4. Incremental Static Regeneration (static+dynamic): Data will be cached but after sometimes it will be refreshed: { next: { revalidate: 10 }}
 Note: Diff. between SSR & SSG can only be understood when we are in production (build) mode, otherwise in development mode we see no difference.
 
 When to use CSR and SSR?
