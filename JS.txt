@@ -16,15 +16,19 @@ REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
 https://webagility.com/posts/the-basics-of-regex-explained.
 ______________________________________________________________________________
 DATA TYPES:
-1. Premitive (Value Types): String, Number, Boolean, Null, Undefined, Symbols.
+1. Premitive Types: String, Number, Boolean, Null, Undefined, Symbols.
 They are stored & executed in call stack.
 Call Stack:
 1. Manages function calls and their contexts
 b. LIFO
-2. Non-Premitive (Reference Types): Arrays, Object Literals, Functions, Dates etc.
+2. Non-Premitive/Reference Types: Arrays, Object Literals, Functions, Dates etc.
 They are stored & executed in heap.
 Heap: Dynamic memory allocation for objects, arrays & other complex data structures.
 
+- Premitive types: Passed by value (mutable)
+- Reference Types: Passed by reference (immutable)
+
+Mutability & Immutablility:
 When we assign an object to a variable, the variable contains a reference to the object. So if we assign that variable to another variable, the second variable will also contain a reference to the object. Therefore, if we change the object using one of the variables, that change will also be reflected into another variable.
 Watch: Ref.html
 Note: undefined and null are equal in value but different in type.

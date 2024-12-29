@@ -236,9 +236,17 @@ const Card = ({title, description, children}) => {
         </div>
     )
 }
-⁡⁢⁣⁡⁣⁣⁢3. High Order Components (HOCs):⁡⁡ Passing component as props from one (parent) component to another (child). HOC is a function that takes a component & returns another component.
+⁡⁢⁣⁡⁣⁣⁢3. High Order Components (HOCs):⁡⁡ A Higher-Order Component (HOC) is a pattern in React that takes a component as argument and returns a new component that wraps the original one, enhancing it with additional functionality or behavior.
+Example:
+const withHOC = (WrappedComponent) => {
+  return (props) => {
+    // other code
+    return <WrappedComponent {...props} />;
+  };
+};
+
 ⁡⁢⁣⁣Benefits:⁡ Reusability, Enhancement, Testing and Debugging.
-⁡⁣⁣⁢4. Render Props:⁡ Sharing logic between components using 'props' whose value is function.
+⁡⁣⁣⁢4. Render Prop:⁡ A pattern in React where a component takes a function as a prop and uses that function to dynamically determine what to render.
 ⁡⁣⁣⁢5. Context API:⁡ Sharing data between multi-levels of components using useContext hook, without explicitly passing props (props drilling) through each component.
 ⁡⁣⁣⁢6. Lifting State Up:⁡ Sending data from child to parent component.
 
