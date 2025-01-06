@@ -361,15 +361,17 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁢⁣⁣1. Dynamic Import:⁡ In traditional import statements, modules are loaded synchronously at compile time. But using dynamic import, modules can be imported conditionaly, on-demand & asynchronously at runtime.
 
 ⁡⁢⁣⁣2. Lazy Loading:⁡ Delaying the loading of certain components of an application until they are actually needed to optimize app. performance.
-⁡⁣⁣⁢Suspense:⁡⁡ React component used to handle asynchronous operations such as data fetching, loading chunks of code via lazy loading. It displayed a fallback content on UI while waiting for the asynchronous operation to complete.
+⁡⁣⁣⁢Suspense:⁡⁡ A React component used to handle asynchronous operations such as data fetching, loading chunks of code via lazy loading. It displayed a fallback content on UI while waiting for the asynchronous operation to complete.
 
 ⁡⁣⁢⁣Diff. b/w Context API and Redux Toolkit:⁡
 ⁡⁣⁣⁢Context API:⁡
 1. Create, Provide, Use
 2. Can wrap only necessary components.
+3. Cannot update the state
 ⁡⁣⁣⁢Redux Toolkit:⁡
 1. Action, Reducer, Store
 2. Wraps the entire application.
+3. Can update the state
 
 ⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & client state management library for complex JavaScritp applications.
 On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.

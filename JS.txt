@@ -16,13 +16,14 @@ REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
 https://webagility.com/posts/the-basics-of-regex-explained.
 ______________________________________________________________________________
 DATA TYPES:
-1. Premitive Types: String, Number, Boolean, Null, Undefined, Symbols.
+1. Primitive Types: String, Number, Boolean, Null, Undefined, Symbols.
 They are stored & executed in call stack.
 Call Stack:
-1. Manages function calls and their contexts
-b. LIFO
+      a. Manages function calls and their contexts
+      b. LIFO
+
 2. Non-Premitive/Reference Types: Arrays, Object Literals, Functions, Dates etc.
-They are stored & executed in heap.
+Their values are stored & executed in heap while their reference/address is stored in callstack as a pointer pointing towards the values stored in heap.
 Heap: Dynamic memory allocation for objects, arrays & other complex data structures.
 
 - Premitive types: Passed by value (mutable)
@@ -983,79 +984,86 @@ Names listed in function's definition i.e. x & y in myFunc(x, y) are called para
 _________________________________________________________________________________
 OBJECT Literals: Variables that can contain many properties (key-value pairs) & behaviors (methods).
 Exmp:
-const car = {type:"Fiat", model:"500", color:"white"};
-Object Name: car | keys: type, model & color | values: Fiat, 500 & white.
-console.log(car.type);     // output: Fiat
-console.log("car type is " + car.type + ".");  // output: car type is Fiat.
-console.log("car type is " + car.type + "& model is " + car.model + ".");    // output: car type is Fiat & model is 500.
-console.log("car type is " + car.type + "& model is " + car.model);         // output: car type is Fiat & model is 500
+ const person = {
+                 firstName: "John",
+                 lastName : "Doe",
+                 is_Male: true,
+                 "is-Educated": false,
+                 "likes reading": "yes",
+                };
+
+ACCESSING PROPERTIES:
+console.log(person.firstName);
+console.log(person.["lastName"]);
+console.log(person.is_Male);
+console.log(person.is-Educated); // error
+console.log(person["is-Educated"]); // false
+console.log(person.likes books); // error
+console.log(person["likes books"]); // yes
+
+UPDATING PROPERTY:
+person.lastName = "Wick",
+person["is-Educated"] = true;
+
+ADDING NEW PROPERTY:
+person.age = 30,
+
+PROPERTY SHORTHAND:
+ const role = "user";
+ const person = {
+                 firstName: "John",
+                 lastName : "Doe",
+                 role: role,
+                 [OR]
+                 role,
+                };
+
+ ADDING DYNAMIC PROPERTY:
+ const key = "email";
+ const value = "john@example.com";
+
+ const person = {
+                 firstName: "John",
+                 lastName : "Doe",
+                 [key]: value,
+               };
+
 OBJECT METHODS:
 const person = {
                 firstName: "John",
                 lastName : "Doe",
                 fullName : function() { 
-                  return this.firstName + " " + this.lastName;
+                  return `${this.firstName} ${this.lastName};
                  }
                };
-Function inside an object can also be defined as:
+
+METHOD SHORTHAND: Function inside an object can also be defined as:
 const person = {
+                firstName: "John",
+                lastName : "Doe",
                 fullName() { 
-                return this.firstName + " " + this.lastName;
+                return `${this.firstName} ${this.lastName};
                 }
                };
+
 NESTED OBJECTS:
-const student = {
-                name: "Usman",
-                city: "LHR",
-                age: 30,
-                info: {
-                       id: usman@gmail.com,
-                       password: 123456789,
-                       address: ABC
-                       }
-                };
-console.log(student.info.address);
-output: ABC
-OBJECT into ARRAY:
-const person = {
-               fname: "John",
-               lname: "Lock"
-               age: 30,
-               "my-city": "New York"
-               };
+ const person = {
+                firstName: "John",
+                lastName : "Doe",
+                address: {
+                          city: "Lahore",
+                          state: "Punjab",
+                          country: "Pakistan",
+                         },
+                 };
+ console.log(person.address.city);
+ output: Lahore
+
+Accessing All the Keys of an Object:
+console.log(Object.keys(person));
+
+Accessing All the Values of an Object:
 console.log(Object.values(person));
-output: ['John', 'Lock', 30, 'New York']
-
-ACCESSING PROPERTIES:
-console.log(person.fname); // John
-console.log(person.["fname"]); // John
-console.log(person.my-city); // error
-console.log(person["my-city"]); New York
-
-ADDING PROPERTIES:
-let obj1 = { name: "Usman", age: 30 };
-obj1.city = "LHR";
-obj1[city] = "FSD";
-obj["my-city"] = "KHI";
-
-ADDING EXTRA PROPERTIES:
-let obj3 = {...obj1, gender: "Male", city: "LHR"};
-console.log(obj3);
-
-SHORTHAND PROPERTY:
-const name = "Usman";
-const user = {
-  name: name,
-  [OR]
-  name, // shorthand
-  method: function sayHi() {
-    console.log("Hi...")
-  }
-  [OR]
-  sayHi() { // 
-    console.log("Hi...")
-  }
-}
 
 CONCATINATION OF OBJECTS:
 let obj1 = { name: "Usman", age: 30 };
@@ -1063,38 +1071,100 @@ let obj2 = { gender: "Male", city: "LHR" };
 
 let obj3 = {...obj1, ...obj2};
 console.log(obj3);
+
 CHECK EMPTY:
-Object.keys(obj) === 0 // true if 'obj' is empty.
+const person = {};
+Object.keys(person) === 0;
+Output: true if "person" is empty.
 
-CKECK OWN vs. NESTED PROPERTIES:
-hasOwnProperty(): to check whether an object has nested properties or not.
-It only returns true for direct properties not for nested/inherited ones.
-Exmp:     let user = {
-        fName: "Usman",
-        lName: "Shafiq",
-        fullName: function () {
-          return `${this.fName} ${this.lName}`;
-        },
-        address: {
-            country: "PAK",
-            city: "Lahore",
-            post: 5125,
-        }
-      };
+CHECKING A SPECIFIC PROPERTY:
+console.log("firstName" in person); // true
+console.log("city" in person); // false
+console.log("city" in person.address); // true
 
-user.hasOwnProperty("fName") // true
-user.hasOwnProperty("lName") // true
-user.hasOwnProperty("age") // false
-user.hasOwnProperty("city") // false
+console.log(person.hasOwnProperty("lastName")); // true
+console.log(person.hasOwnProperty("city")); // false
+console.log(person.address.hasOwnProperty("city")); // true
 
-Accessing keys of an Object:
-Object.keys(user) // output: [fName, lName, fullName, address]
+Note: hasOwnProperty() returns true only for direct properties, whether for nested/inherited ones it returns false.
 
+CONVERT OBJECT into ARRAY:
+const arr = Object.entries(person);
 
-Accessing values of an Object:
-Object.values(user)
-output: [Usman, Shafiq, f => (), {city: "Lahore", country: "PAK", zip: "5125"}]
+CONVERT ARRAY back to OBJECT:
+const arr = Object.fromEntries(arr);
 
+DESTRUCTURING:
+const { firstName, lastName } = person;
+
+NESTED DESTRUCTURING:
+const {address: { city, state }} = person;
+
+RENAMING DESTRUCTURED PROPERTY:
+const {firstName: fname} = person;
+console.log(fname); // John
+
+DESTRUCTURING INSIDE FUNCTION:
+  function sayHello({ firstName }) {
+    return `Hello ${firstName}`;
+  }
+
+  console.log(sayHello(person));
+___________________________________________________________
+COPYING VARIABLE: On assigning a primitive variable to another primtive variable, the value of assigned variable will be copied to the new variable. Hence, any changes in the value of new variable will not effect the original variable.
+let x = 5;
+let y = x;
+y = 3;
+console.log(x);
+output: 5
+CLONING/COPYING OBJECT: Unlike primitive variables, on assigning an object variable to another object vaiable, only the ref. (address) of memory location of that object is copied to the variable instead of value. Hence, any changes in the variable will also make a change in original object.
+const x = {
+          name: "Usman"
+          };
+let y = x;
+y.name = "Salman";
+console.log(x);
+output: {name: "Salman"}
+
+SHALLOW COPY: Creating a new object & copying only the top-level properties of the original object to preserve properties in original object:
+const x = {name: "Usman"};
+let y = {...x};    // spreading
+Now updating 'y' doesn't update 'x':
+y.name = "Salman";
+console.log(x);   // output: {name: "Usman"}
+console.log(y);   // output: {name: "Salman"}
+But shallow copy works only for direct properties of an object not for sub/nested properties:
+const x = {
+          name: "Usman",
+          info: {
+                city: "LHR",
+                state: "Pakistan"
+                }
+          };
+let y = {...x};
+y.info.city = "FSD";
+console.log(x.info.city);   // output: {city: "FSD"}
+Because for direct properties, it copies the values instead of ref. (memory address) but for sub/nested properties it again copies the ref. (address). 
+
+DEEP COPY: Used to copy nested objects and arrays (sun-properties) of an object.
+let y = JSON.parse(JSON.stringify(x));
+y.info.city = "FSD";
+console.log(x.info.city);   // output: {city: "LHR"}
+console.log(y.info.city);   // output: {city: "FSD"}
+
+Limitation: When an object has a function or Date in its properties, then on making its deep copy, function & date will be lost.
+Solution: Use loadash library or copy each property one by one using for loop.
+let y = _.cloneDeep(x);
+
+PRACTICAL EXAMPLE OF CLONING:
+const obj = { value: 2 };
+
+const multiply = (x = { ...obj }) => (x.value *= 2);
+
+console.log(multiply()); // 4
+console.log(multiply()); // 4
+console.log(multiply(obj)); // 4
+console.log(multiply(obj)); // 8
 ___________________________________________________________________________________
 CALL(): An object can call an independent function as well as a method belonging to another object using call method. It is used when the no. of function’s arguments are known.
 Exmp1: Making function inside an object & using it:
@@ -1208,7 +1278,7 @@ Benefits of Closure:
 3. Module Design Pattern: User can't access a private function directly, but through another public function. Pvt. functions are those who don't return anything, hence, can't be directly accessible.
 4. Currying
 ⁡⁣5. ⁢⁣DEBOUNCING:⁡ Function is invoked after a certain period of inactivity.
-6. ⁡⁣⁢⁣THROTLING:⁡ Function is repeatedly invoked after a given interval.
+6. ⁡⁣⁢THROTLING:⁡ Function is repeatedly invoked after a given interval.
 ___________________________________________________________________________________
 PROTOTYPE: Template or blue-print for objects.
 PROTOTYPAL INHERITENCE:  A process in which objects directly inherit properties & methods from other objects.
@@ -1607,49 +1677,6 @@ Exmp: try {
       finally {
         console.log("Execution completed!");
       }
-___________________________________________________________
-COPYING VARIABLE: On assigning a premitive variable to another premtive variable, the value of assigned variable will be copied to the new variable. Hence, any changes in the value of new variable will not effect the original variable.
-let x = 5;
-let y = x;
-y = 3;
-console.log(x);
-output: 5
-COPYING OBJECT (By Ref ): Unlike premitive variables, on assigning an object variable to another object vaiable, only the ref. (address) of memory location of that object is copied to the variable instead of value. Hence, any changes in the variable will also make a change in original object.
-const x = {
-          name: "Usman"
-          };
-let y = x;
-y.name = "Salman";
-console.log(x);
-output: {name: "Salman"}
-SHALLOW COPY: Creating a new object & copying only the top-level properties of the original object to preserve properties in original object:
-const x = {name: "Usman"};
-let y = {...x};    // spreading
-Now updating 'y' doesn't update 'x':
-y.name = "Salman";
-console.log(x);   // output: {name: "Usman"}
-console.log(y);   // output: {name: "Salman"}
-But shallow copy works only for basic properties of an object not for sub-properties:
-const x = {
-          name: "Usman",
-          info: {
-                city: "LHR",
-                state: "Pakistan"
-                }
-          };
-let y = {...x};
-y.info.city = "FSD";
-console.log(x.info.city);   // output: {city: "FSD"}
-Because for basic properties, it copies the values instead of ref. (memory address) but for sub properties it again copies the ref. (address). 
-DEEP COPY: Used to copy nested objects & arrays (sun-properties) of an object.
-let y = JSON.parse(JSON.stringify(x));
-y.info.city = "FSD";
-console.log(x.info.city);   // output: {city: "LHR"}
-console.log(y.info.city);   // output: {city: "FSD"}
-
-Limitation: When an object has a function or Date in its properties, then on making its deep copy, function & date will be lost.
-Solution: Use loadash library or copy each property one by one using for loop.
-let y = _.cloneDeep(x);
 --------------------------------------------------------------
 ​‌‍‌𝗘𝗩𝗘𝗡𝗧 𝗟𝗢𝗢𝗣:​
 It consists of 3 major components:
