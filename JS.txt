@@ -174,7 +174,7 @@ function outer() {
 }
 outer();
 ______________________________________________________________________________
-Hoisting: JavaScript's default behavior of moving all variable & function declarations (not initializations) to the top. It means a variable can be used & a function can be called before declaration.
+Hoisting: JavaScript's default behavior of moving all variable & function declarations (not initializations & assignments) to the top. It means a variable can be used and a function can be called before declaration.
 Note: Normal functions are hoisted. Arrow functions are not.
 Exmp#1: console.log(x);
        output: error: x is not defined.
@@ -1027,6 +1027,9 @@ PROPERTY SHORTHAND:
                  lastName : "Doe",
                  [key]: value,
                };
+
+DELETING PROPERT:
+delete person.firstName;
 
 OBJECT METHODS:
 const person = {

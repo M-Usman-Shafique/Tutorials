@@ -269,6 +269,9 @@ function Profile() {
 
 ⁡⁢⁣⁡⁢⁣⁢Refs:⁡⁡ Provide a way to access DOM nodes & React elements.
 
+⁡⁣⁢⁣PORTALS:⁡ Provide a way to render children into a DOM node that exists outside the DOM heirarchy of the parent (root) component.
+
+
 ⁡⁣⁢⁣HOOKS:⁡ Functions that allow us to use React’s features (state management, lifecycle methods & performing side effects) in functional components without writing a class.
 
 ⁡⁣⁣⁢1. useState():⁡ used to add & manage the state of a component. It returns an array. First element of array is a variable & second element is modifier function for that variable.
