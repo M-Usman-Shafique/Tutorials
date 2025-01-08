@@ -7,14 +7,34 @@ Thread: Smallest unit of execution.
 Synchronous: waiting for one line to finish before going to the next line.
 [OR]
 in a sequence from top to bottom.
-Asynchronous: no wait for one line to finish before going to the next line.
+Asynchronous: No wait for one line to finish before going to the next line.
 [OR]
 Tasks are not necessarily executed in a sequential order.
 
+DYNAMIC TYPING:
+JS is dynamically typed unlike other programming languages which are statically typed. It means, JS determines the type of a variable at runtime, allowing variables to hold values of any type without specifying a type explicitly.
+
+COERCION: Converting values from one data type to another during runtime.
+1. Explicit Coercion:
+Manually converting values using functions or operators.
+console.log(Number('123'));
+console.log(String(123));
+
+2. Implicit Coercion:
+JavaScript's behavior of automatically converting values from one data type to another during runtime often to make operations possible.
+console.log('5' + 2); // 52
+console.log('5' - 2); // 3
+
+Practical Use of Coercion:
+let a = 5;
+
+if (a) {
+  console.log("Gotta!");
+ }
 
 REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
 https://webagility.com/posts/the-basics-of-regex-explained.
-______________________________________________________________________________
+_________________________________________________________________________________________
 DATA TYPES:
 1. Primitive Types: String, Number, Boolean, Null, Undefined, Symbols.
 They are stored & executed in call stack.
@@ -107,8 +127,7 @@ Ques: (function() {
        console.log((typeof a !== 'undefined'));   // false
        console.log((typeof b !== 'undefined'));  // true
 _________________________________________________________________________________
-SCOPE: Region where JavaScript searches (loook up) for & accesses variables.
-The current execution context of a program which determines that which variables & functions can be accessed & which cannot.
+SCOPE: Region where JS searches (look up) for variables and accesses them.
 What's scope of 'x' means where can I access 'x'.
 Q: Who determines the scope?
 Ans: JavaScript determines its scope lexically (from surrounding).
@@ -159,7 +178,7 @@ Exmp: function outer() {
       }
       outer();
       console.log(y);        // output: y is not defined.
-SCOPE CHAINING: Hierarchical structure of nested lexical scopes: an closure has three scopes: Local (apna) + Outer function(s) scope + Global.
+SCOPE CHAINING: Hierarchical structure of nested outer lexical environment references. For example, a closure has three scopes: Local (apna) + Outer function(s) scope + Global.
 Exmp:
 let x = 3;               // global scope
 function outer() {
@@ -191,7 +210,7 @@ Because JS interpret this code as:
        var x;               // x declared without initialization, hence, undefined.
        console.log(x);     // agr hoisting na hoti tou error aata: x is not defined.
        x = 5;
-Temporal Dead Zone: During memory creation phase, variables declared using const or let has undefined in their value because in memory creation phase variables are not initialized/assigned with a value, hence can't be accessed & cause a ReferenceError.
+Temporal Dead Zone: During the memory creation phase, variables declared using let or const are hoisted (just like var), but they are not initialized immediately with a value (unlike var which is initialized to undefined). As a result, attempting to access them causes a ReferenceError.
 Watch: Hoist.html
 Exmp#5: console.log(x);
        let x = 5;
@@ -1059,8 +1078,17 @@ NESTED OBJECTS:
                           country: "Pakistan",
                          },
                  };
+
+ADDING NESTED PROPERTY:
+person.address.pincode = 5321;
+person.contact = {
+  ph: 9232109867,
+  email: "john@example.com",
+};
+
+ACCESSING NESTED PROPERTIES:
  console.log(person.address.city);
- output: Lahore
+ console.log(person["address"]["city"]);
 
 Accessing All the Keys of an Object:
 console.log(Object.keys(person));
