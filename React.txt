@@ -366,58 +366,5 @@ Splitting single bundle into smaller ones to optimize loading performance of lar
 ⁡⁢⁣⁣2. Lazy Loading:⁡ Delaying the loading of certain components of an application until they are actually needed to optimize app. performance.
 ⁡⁣⁣⁢Suspense:⁡⁡ A React component used to handle asynchronous operations such as data fetching, loading chunks of code via lazy loading. It displayed a fallback content on UI while waiting for the asynchronous operation to complete.
 
-⁡⁣⁢⁣Diff. b/w Context API and Redux Toolkit:⁡
-⁡⁣⁣⁢Context API:⁡
-1. Create, Provide, Use
-2. Can wrap only necessary components.
-3. Cannot update the state
-⁡⁣⁣⁢Redux Toolkit:⁡
-1. Action, Reducer, Store
-2. Wraps the entire application.
-3. Can update the state
-
-⁡⁣⁢⁣REDUX TOOLKIT:⁡ Data & client state management library for complex JavaScritp applications.
-On refreshing a redux app, all the redux data lost because it does not keep its data in loacal storage.
-Solution: Redux persist.
-Data flow in redux is uni-directional.
-⁡⁢⁣⁣1. ACTION:⁡ User instructions that describe what should happen in the application.
-Different events that can happen in a shopping store:
-a. ADD_TO_CART
-b. REMOVE_FROM_CART
-c. INCREASE_QUANTITY
-d. DECREASE_QUANTITY:
-⁡⁢⁣⁣2. STORE:⁡ Global state store to wrap the whole app. to become accessible anywhere. It takes actions & give it to reducer function.
-   Analogy: Stock Room
-   ⁡⁣⁢⁢State:⁡ Products/goods.
-⁡⁢⁣⁣3. DISPATCH:⁡ A hook (useDispatch) available on the store to send actions to the reducer.
-   Analogy: Store manager sending out message to all the employees (reducers) that something needs to be done.
-⁡⁢⁣⁣4. MIDDLEWARE:⁡ A middleman between action creators & reducers. When an action is dispatched, it first passes through the middleware before reaching the reducers. Middleware can intercept the action before it reaches the reducer, allowing us to perform additional logic, such as logging, asynchronous operations, or modifying actions.
-⁡⁣⁢⁢Redux Thunk:⁡⁡ A middleware that handles asynchronous actions, like fetching data from a server.
-Analogy: Special staff/team in a store dedicated to manage the special requests of the customers that require some time.
-⁡⁣⁢⁢Async Thunk:⁡ A middleware to handle asynchronous operations.
-Analogy: Shopping assistant which shops on yours behalf for things which take time allowing you to keep your other shopping continue meanwhile.
-⁡⁣⁢⁢Diff. between Thunk & Async Thunk:⁡
-Thunk middleware manages the overall coordination of async operations within your Redux store, while async thunks represent specific tasks or operations that require asynchronous logic to be performed.
-⁡⁢⁣⁣5. REDUCER:⁡ Function that takes two arguments (current state & an action), perform operations & returns new state as result.
-Analogy: Salesman to handle to handle diff. sale's departments by handling actions & to updating the store's state acc. to the actions.
-For example, when ADD_TO_CART action is dispatched, the reducer updates the inventory to reflect the product being added to the cart.
-⁡⁢⁣⁣6. SLICE:⁡ Collection of actions & reducers which were separately handled in redux, now both come under slice in redux toolkit. It contains complete reducer logic, action creators etc. to organize & modularize the Redux code.
-Analogy: Section or department handles specific categories of products (state).
-For example, there could be a cart slice responsible for managing the shopping cart, a products slice for managing product listings, and a user slice for managing user authentication & profiles.
-⁡⁢⁣⁣7. SELECTOR:⁡ A hook (useSelect) used to retrieve state from redux store to the app component.
-
-
-⁡⁢⁣⁣Diagram:⁡
-When button of "subChild" is clicked, an action is dispatched using the useDispatch hook. A dispatch function is used to send actions to the store.
-In this case, the action is dispatched with a state/value = 1 called payload:
-useDispatch(payload).
-The Redux store holds the entire state tree of the application & responsible for dispatching actions to reducers & managing state.
-The store then forwards the action to the appropriate reducer based on the action type.
-In this case, Redux store forwarded the dispatched action (value=1) along with the current state (value=0) of application-which was already present in the store-to the reducer present in the store.
-Reducers are functions that take the current/initial state & an action as arguments and return a new state. In this case: reducer1: (state (0), payload (1)) => { logic }.
-The { logic } part of reducer-which handles the dispatched action & payload (value)-comes from the slice component.
-The reducer updates the new state (value = 1) & store it in the Redux store.
-useSelector() takes the new state (value = 1) from Redux store & forwards it to the subChild component where it updates the state by re-rendering the component.
-
 ⁡⁣⁢⁣FORMIK:⁡ Form Handling
 ⁡⁣⁢⁣YUP:⁡ Form Validation
