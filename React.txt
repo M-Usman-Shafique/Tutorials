@@ -38,7 +38,7 @@ Functions:
 3. Cannot manage internal state in React
 4. Not reactive; cannot trigger re-renders
 Components:
-1. To render UI, manage state, handle lifecycle events
+1. Purpose: render UI, manage state, handle lifecycle events
 2. Returns JSX
 3. Manage internal state using React Hooks (like useState)
 4. Reactive; changes in state or props trigger UI re-renders
@@ -57,7 +57,7 @@ const logHello = sayHello;
 
 console.log(sayHello === logHello); // true
 ⁡⁣⁢⁣Types:⁡
-⁡⁣⁣⁢1. Class Components:⁡ Simple JS classes that extend 'React.component' & have a render() method which returns JSX.
+⁡⁣⁣⁢1. Class Components:⁡ Simple JS classes that extend 'React.component' and have a render() method which returns JSX.
 ⁡⁢⁣⁣React.component:⁡⁡ A base class in React that is used to create class components. It provides methods & properties that allow a component to manage its state & lifecycle.
 ⁡⁢⁣⁣State:⁡⁡ A built-in object in react which holds data or information about the component. Any change in the state causes the component to re-render to reflect new state in UI.
 ⁡⁢⁣⁣State Management:⁡⁡ Local state of a class component can be initialized & managed using 'this.state'.
@@ -181,7 +181,7 @@ function Car({ name, model }) {
   return <h2>I am a {name} {model}!</h2>
 }
 
-⁡⁢⁣⁢Note:⁡ Instead of normal loop, map() is used in the return of function component.
+⁡⁢⁣⁢Note:⁡ Instead of normal loop, map() function is used in the return of function component.
 ⁡⁢⁣⁢List & Keys:⁡⁡ Keys allows React to keep track of elements. Otherwise while updating or removing an element of list, React will render the entire list.
 
 ⁡⁢⁣⁣Difference between using <Component> & {Component()}:⁡
@@ -270,7 +270,6 @@ function Profile() {
 ⁡⁢⁣⁡⁢⁣⁢Refs:⁡⁡ Provide a way to access DOM nodes & React elements.
 
 ⁡⁣⁢⁣PORTALS:⁡ Provide a way to render children into a DOM node that exists outside the DOM heirarchy of the parent (root) component.
-
 
 ⁡⁣⁢⁣HOOKS:⁡ Functions that allow us to use React’s features (state management, lifecycle methods & performing side effects) in functional components without writing a class.
 

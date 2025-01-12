@@ -1,5 +1,16 @@
-DOM (Document Object Model): a platform or interface used to access, modify & manipulate  content, structure & style of a document dynamically.
-Document: HTML k tmam elements javascript mein aa kar ek object mein convert ho jaty jisy document kaha jata jo available hota hai window object k andar.
+DOM (Document Object Model): A platform or interface used to access, modify and manipulate the content, structure and style of a document dynamically.
+
+DOCUMENT:
+- A global object that represents the entire HTML document loaded in the browser window.
+- Root node of the DOM tree
+
+DOM Tree:
+The hierarchical representation of the HTML document, where:   
+- Document: Root Node
+- HTML Tags: Element Nodes
+- Text inside HTML Tags: Text Node   
+- Attributes of HTML Tags: Attribute Nodes
+
 Dynamic Changes: HTML & CSS files ko chherry bgher just on the basis of user's input.
 DOM ACCESS:
 1. ID: document.getElementById("idName")
@@ -110,7 +121,7 @@ Shorcut: document.querySelector('li').addEventListener('click', function abc() {
 
 REMOVE EVENT LISTENER:
 document.querySelector('li').removeEventListener('click', abc);
-
+_________________________________________________________________
 EVENT PROPAGATION: DOM elements can be nested inside each other. Therefore, when an event occurs on one element, it passes/propagates up & down to the other element.
 1. Capturing/Trickling: Propagation of event from top (parent) to bottom (child).
 Exmp: document.getElementById('demoId').addEventListener("click", function() {
@@ -118,6 +129,7 @@ console.log("demoText");}, true);
 2. Bubbling: Propagation of event from bottom (child) to top (parent).
 Exmp: document.getElementById('demoId').addEventListener("click", function() {
 console.log("demoText");}, false);    // false by default
+___________________________________________________________________
 CREATE METHODS:
 1. createElement: let newElement = document.createElement('p');
 2. createTextNode: let newText = document.createTextNode("Hello World");

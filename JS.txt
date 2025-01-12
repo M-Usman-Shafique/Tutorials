@@ -251,7 +251,7 @@ output: My name is Usman.
 Solution: console.log(`My name is ${str}. Thank you!);
 output: My name is Usman. Thank you!
 ________________________________________________________________________________
-STRINGS: Premitive data types which can store series of characters and behaves as an object (reference type).
+STRINGS: Primitive data types which can store series of characters and behaves as an object (reference type).
 At()/charAt(): returns the character at a specified index (position) in a string.
 let str = "John Doe";
 let text = str.at(0);   // output: J
@@ -445,7 +445,7 @@ output: [Saba, Sana, Ali, Asif, Babar]
  Objects have named indexes.
 
 SEARCHING:
-IndexOf(): forward search for 1st matching element in an array. Used when an array has premitive types of elements e.g. numbers & strings.
+IndexOf(): forward search for 1st matching element in an array. Used when an array has primitive types of elements e.g. numbers & strings.
 const fruits = ["Banana", "Orange", "Apple", "Mango", "Apple"];
 console.log (fruits.indexOf(“Apple”));
 output: 2
@@ -486,7 +486,7 @@ console.log(greater);                        | console.log(numbers.find(value) =
 output: 25                                   | output: 25
 If condtion not fulfilled, output: undefined |
                                              |
-FindIndex(): Similar to find() except it returns 1st condition fulfilling element's index instead of element itself. Used when an array has non-premitive types of elements i.e. objects.
+FindIndex(): Similar to find() except it returns 1st condition fulfilling element's index instead of element itself. Used when an array has non-primitive types of elements i.e. objects.
 console.log(numbers.findIndex(item => item > 18));
 output: 3 (index of 25)
 If condtion not fulfilled, output: -1.
@@ -995,12 +995,29 @@ Exmp: let man = {
 3. Not hoisted.
 _________________________________________________________________________________
 "this" Keyword: Its behavior (representation + value) varies depending on different contexts.
- this.name is exactly what obj.name means, just like the English pronoun (ضمیر).
+ this.name is exactly what obj.name means, just like the English pronoun (He/She).
  Alone it refers to the global (window) object.
  In an function, "this" refers to the owner object of that function, which in case of an independent function is global (window) object.
  If function is a method of an object, then before being called, "this" refers to the owner object. 
  After being called, 'this' does not essentialy point towards its owner object but points to the object where the method is called.
  In a function in strict mode, "this" is undefined.
+Exmp:
+      const user1 = {
+        name: "Ali",
+        showName() {
+          console.log(this.name);
+        },
+      };
+
+      const user2 = {
+        name: "Saad",
+      };
+
+      user1.showName(); // Ali
+      user1.showName.call(user2); // Saad
+      user1.showName.apply(user2); // Saad
+      const boundShowName = user1.showName.bind(user2);
+      boundShowName(); // Saad
 _______________________________________________________________________________
 Function Expression: Assigning function to a variable:
 let add = function(a, b) {
@@ -1138,7 +1155,7 @@ CONVERT OBJECT into ARRAY:
 const arr = Object.entries(person);
 
 CONVERT ARRAY back to OBJECT:
-const arr = Object.fromEntries(arr);
+const person = Object.fromEntries(arr);
 
 DESTRUCTURING:
 const { firstName, lastName } = person;
@@ -1199,8 +1216,25 @@ console.log(x.info.city);   // output: {city: "LHR"}
 console.log(y.info.city);   // output: {city: "FSD"}
 
 Limitation: When an object has a function or Date in its properties, then on making its deep copy, function & date will be lost.
-Solution: Use loadash library or copy each property one by one using for loop.
+Solution#1: Use loadash library or copy each property one by one using for loop.
 let y = _.cloneDeep(x);
+
+Solution#2:
+  function deepCopy(obj) {
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    }
+
+    const copy = {};
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        copy[key] = deepCopy(obj[key]);
+      }
+    }
+
+    return copy;
+  }
 
 PRACTICAL EXAMPLE OF CLONING:
 const obj = { value: 2 };
@@ -1286,31 +1320,30 @@ BIND(): By using bind, an object can borrow a function from another object, can 
       console.log(fullname());  //output: Salman Khan
       (OR)
       console.log(person1.fullname.bind(person2()));  //output: Salman Khan without writing previous 3 lines.
-
-CLOSURE: when an inner function who's using the variables of its outer function is returned from the outer function, it doesn't return alone, rather all the variables of the outer function which are used in the inner function are also returned. Although the execution context of the outer function is finished & all of its variables are deleted from the memory.
+________________________________________________________________________________
+CLOSURE: when an inner function who's using the variables of its outer function is returned from the outer function, it doesn't return alone, rather all the variables of the outer function which are used in the inner function are also returned. Although the execution context of the outer function is finished and all of its variables are deleted from the memory.
 
 Inner function along with lexical scope (ref. of its own location in memory + ref. of lexical environment of its parent).
 In general, we know that the variables declared within a function are called local variables, hence, cannot be accessed outside that function. But closure (an inner function nested inside another function) retains access to the lexical environment (variables of outer function) even after the outer function has finished execution. 
 Problem: function outer() {
-        let person = "Usman";      // local variable
+        let person = "Usman";
         function inner() {
-          console.log(person);
-    // local variable "person" used with successful execution bcoz outer scope accessible to inner function.
+          return person;
         }
         inner();
       }
+
       let x = outer();
-      console.log(x());   // Uncaught TypeError.
-   // local variable "person" used but throw execution error bcoz inner scope not accessible to the outer.
+      console.log(x());  // TypeError
 
 Solution: function outer() {
-            let person = "Usman";    // local variable declaration.
+            let person = "Usman";
             function inner() {
               return person;
-        // local variable "person" used with successful execution bcoz outer scope is accessible to inner function.
             }
             return inner;     // closure: instead of calling inner();
             }
+
             let x = outer();
             console.log(x);        // output: f inner() {return name;}
             console.log(x());     // output: Usman
@@ -1319,12 +1352,13 @@ Solution: function outer() {
   let x = outer(); iss code se outer function invoke hogya or apna execution context khtm kr k call stack se nikal gya. Function mein mojud variables bhi memory heap se delete hogay. But 'x' still remembers the value of those variables Qk humne outer function k andr se ek closure (inner function) ko return krwaya tha, jo closure poora ka poora aakar 'x' mein store hogya. Or closure k paas mojud ref. to the lexical environment of parent ki wja se wo parent k andr mojud variables ki values ko retain rakhta hai. Even that agr 'person' variable, outer function ki bjae, outest function scope ya global scope mein hota, tab bhi lexical environment k access ki wja se inner function uski value ko access kar sakta tha.
 
 Benefits of Closure:
-1. Memoization: Time optimization by caching (memorizing) results of repetitive calculations.
-2. Function "Once": useful in scenarios where you want to perform an expensive operation only once & then reuse the result for subsequent calls.
-3. Module Design Pattern: User can't access a private function directly, but through another public function. Pvt. functions are those who don't return anything, hence, can't be directly accessible.
-4. Currying
-⁡⁣5. ⁢⁣DEBOUNCING:⁡ Function is invoked after a certain period of inactivity.
-6. ⁡⁣⁢THROTLING:⁡ Function is repeatedly invoked after a given interval.
+1. State management in React.JS using useState() hook.
+2. Memoization: Time optimization by caching (memorizing) results of repetitive calculations.
+3. Function "Once": useful in scenarios where you want to perform an expensive operation only once & then reuse the result for subsequent calls.
+4. Module Design Pattern: User can't access a private function directly, but through another public function. Pvt. functions are those who don't return anything, hence, can't be directly accessible.
+5. Currying
+⁡⁣6. ⁢⁣DEBOUNCING:⁡ Function is invoked after a certain period of inactivity.
+7. ⁡⁣⁢THROTLING:⁡ Function is repeatedly invoked after a given interval.
 ___________________________________________________________________________________
 PROTOTYPE: Template or blue-print for objects.
 PROTOTYPAL INHERITENCE:  A process in which objects directly inherit properties & methods from other objects.
@@ -1677,7 +1711,7 @@ Two Problems of Callback:
 2. Callback Hell: Nested callbacks stacked below one another, form a pyramid structure (pyramid of doom) which makes programming difficult to manage & understand.
 Watch: Async.html
 _________________________________________________________________________________
-PROMISE: An object having three states & represents the eventual completion or failure of an async. operation.
+PROMISE: An object having three states and represents the eventual completion or failure of an async. operation.
 States of a Promise:
 1. Pending (waiting)
 2. Fulfilled (resolve: result) => then()
@@ -1737,15 +1771,15 @@ Exmp: try {
 --------------------------------------------------------------
 ​‌‍‌𝗘𝗩𝗘𝗡𝗧 𝗟𝗢𝗢𝗣:​
 It consists of 3 major components:
-𝟏. 𝐂𝐚𝐥𝐥 𝐒𝐭𝐚𝐜𝐤: Tracks the order of function calls in JavaScript; it processes one function at a time in a Last-In, First-Out (LIFO) manner. For example: console.log(5), console.log(x)
+𝟏. 𝐂𝐚𝐥𝐥 𝐒𝐭𝐚𝐜𝐤: Tracks the order of function calls in JavaScript; it processes one function at a time following the Last-In, First-Out (LIFO) principle. For example: console.log(5), console.log(x)
 
-𝟐. 𝐓𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞: Holds tasks (like setTimeout callbacks) to execute after the Call Stack is empty, maintaining execution order (FIFO). For example:
+𝟐. 𝐓𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞: Holds tasks (like setTimeout callbacks) and execute them after the Call Stack is empty, maintaining the FiFO execution order. For example:
 setTimeout(...)
 
-𝟑. 𝐌𝐢𝐜𝐫𝐨𝐭𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞 (More priority than Task Queue) : Contains high-priority tasks (like Promise callbacks) that run immediately after the Call Stack clears but before the Task Queue. For example:
-API Call using Promise
+𝟑. 𝐌𝐢𝐜𝐫𝐨𝐭𝐚𝐬𝐤 𝐐𝐮𝐞𝐮𝐞 (Have more priority than Task Queue): Contains high-priority tasks (like Promise callbacks) that run immediately after the Call Stack clears but before the Task Queue. For example:
+Making an API Call using Promise
 
-Event loop keeps checking if Call stack is empty, Then Micro-task queue and finally task queue...!!!
+Event loop keeps watchingthe  if Call stack is empty, Then Micro-task queue and finally task queue...!!!
 ______________________________________________________________
 AJAX (Asynchronous JavaScript & XML): A technique to create asynchronous web applications. It allows you to send & receive data from a web server without reloading the entire web page.
 ___________________________________________________________
@@ -1828,7 +1862,7 @@ console.log(JSON.parse(data));  {name: "Usman", age: 30, city: Lahore}
 
 -------------------------------------------------------------------------------------
 API (Application Programming Interface): Set of rules & protocols that allow different computer programs (softwares & apps.) to interact with each other. 
-FETCH API: Easiest waytomake a http request. Other ways are AJAX & XMLHttpRequest.
+FETCH API: Easiest way to make an http request. Other ways are AJAX & XMLHttpRequest.
 
 FETCH (READING Data):
 fetch("file path")    // reading data from a file in PC
