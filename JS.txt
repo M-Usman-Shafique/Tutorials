@@ -1432,6 +1432,11 @@ mySet.add("World");
 mySet.add(786);
 console.log(mySet);
 output: Set(3) {"Hello", "World", 786}
+
+SETS vs. ARRAYS
+- No-Duplicates vs. Duplicates
+- No insertion order vs. Ordered
+- Faster vs. Slower
 -------------------------------------------------------------------------
 MAPS: Ordered collection of key-value pairs.
 Exmp:
@@ -1443,6 +1448,12 @@ myMap.set("c", 3);
 myMap.set("func", function () { });
 console.log(myMap);
 output: {a: 1, b: 2, c: 3, 'func' => ƒ}
+
+MAPS vs. OBJECTS
+- Ordered vs. Unordered
+-  Keys of any type vs. Keys of string/symbol type
+- Iterable vs. Non-iterable
+- Just store data vs. Can have some functionality
 __________________________________________________________
 ACCESSOR PROPERTIES:
 1. GETTER: It makes a property readable. It doesn't take any parameter.

@@ -105,8 +105,9 @@ POLYMORPHISM: Handling different data types (variables, objects & functions) thr
 Ability of a method or operation to behave differently in different contexts.
 Types:
 1. Static (Compile Time): Polymorphic behavior which decides before execution (during compile time) that which implementation of method & operation is appropriate in the given context.
-Compile: The process of transforming source code into executable (machine) code.
-Run: The process of executing the executable code.
+Compile: The process of converting source code into executable (machine) code.
+Execution: The process of running the machine code on a computer.
+Running: The entire process of preparing and executing a program.
 (a) Method Overloading: Defining multiple methods in a class with the same name but with different parameter lists. The appropriate method to be called is determined on the basis of no. of arguments or type of arguments provided during the method call.
        Exmp:
         var a = 2, b = 3;
