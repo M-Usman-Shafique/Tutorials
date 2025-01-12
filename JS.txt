@@ -1,8 +1,7 @@
 History: Netscape: MOCHA/LiveScript
-JavaScript: A high-level programing language used for web development & can be executed both on client-side (within web browsers) & on server-side (with platforms like Node.js).
-Default behavior of JS is single-threaded & synchronous.
+JavaScript: A high-level programing language used for web development and can be executed both on client-side (within web browsers) and on server-side (with platforms like Node.js).
+Default behavior of JS is single-threaded and synchronous.
 Single-Threaded: Code executes line by line, which means that only one set of instructions can be processed at a time.
-Multi-Threaded: Parallelism & Multi-tasking simultaneously.
 Thread: Smallest unit of execution.
 Synchronous: waiting for one line to finish before going to the next line.
 [OR]
@@ -10,9 +9,10 @@ in a sequence from top to bottom.
 Asynchronous: No wait for one line to finish before going to the next line.
 [OR]
 Tasks are not necessarily executed in a sequential order.
+Note: JS handles asynchronous tasks using an event loop to prevent the single-thread from blocking.
 
 DYNAMIC TYPING:
-JS is dynamically typed unlike other programming languages which are statically typed. It means, JS determines the type of a variable at runtime, allowing variables to hold values of any type without specifying a type explicitly.
+JS is dynamically typed unlike other programming languages that are statically typed. It means, JS determines the type of a variable at runtime, allowing variables to hold values of any type without specifying a type explicitly.
 
 COERCION: Converting values from one data type to another during runtime.
 1. Explicit Coercion:
@@ -21,7 +21,7 @@ console.log(Number('123'));
 console.log(String(123));
 
 2. Implicit Coercion:
-JavaScript's behavior of automatically converting values from one data type to another during runtime often to make operations possible.
+JavaScript's behavior of automatically converting values from one data type to another during runtime to make operations possible.
 console.log('5' + 2); // 52
 console.log('5' - 2); // 3
 
@@ -29,54 +29,66 @@ Practical Use of Coercion:
 let a = 5;
 
 if (a) {
-  console.log("Gotta!");
+  console.log("Hello...");
  }
 
 REGEX: Regular Expressions: Sequence of characters that forms a search pattern.
 https://webagility.com/posts/the-basics-of-regex-explained.
 _________________________________________________________________________________________
 DATA TYPES:
-1. Primitive Types: String, Number, Boolean, Null, Undefined, Symbols.
-They are stored & executed in call stack.
-Call Stack:
-      a. Manages function calls and their contexts
-      b. LIFO
+1. Primitive Types:
+- Passed by value
+- Immutable: Value cannot be changed without changing the reference (memory address).
+- Stored and executed in call stack.
+  Call Stack:
+   a. Manages function calls and their contexts
+   b. LIFO
+- String, Number, Boolean, Null, Undefined, Symbols.
+- Immutablility:
+  let x = 5;  // 5 is stored at memory address #3d12f and "x" points to #3d12f
+  x = "Ali";  // "Ali" is stored at a new memory address #9s43w and "x" now points to #9s43w
 
-2. Non-Premitive/Reference Types: Arrays, Object Literals, Functions, Dates etc.
-Their values are stored & executed in heap while their reference/address is stored in callstack as a pointer pointing towards the values stored in heap.
-Heap: Dynamic memory allocation for objects, arrays & other complex data structures.
+2. Non-Primitive/Reference Types:
+- Passed by reference
+- Mutable: Value can be changed without changing the reference (memory address).
+- Their values are stored and executed in heap while their reference/address are stored in callstack as a pointer pointing towards the values stored in heap.
+   Heap: Dynamic memory allocation for objects, arrays & other complex data structures.
+- Arrays, Objects, Functions, Dates etc.
+- Mutability:
+  let obj1 = { name: "John" }; // obj1 stored at memory address #1a2b3
+  let obj2 = obj1;             // obj2 points to the same memory address #1a2b3
 
-- Premitive types: Passed by value (mutable)
-- Reference Types: Passed by reference (immutable)
+  console.log(obj1, obj2);     // { name: "John" } { name: "John" }
 
-Mutability & Immutablility:
-When we assign an object to a variable, the variable contains a reference to the object. So if we assign that variable to another variable, the second variable will also contain a reference to the object. Therefore, if we change the object using one of the variables, that change will also be reflected into another variable.
-Watch: Ref.html
+  obj2.name = "Alice";        // Modify the content at memory address #1a2b3
+
+  console.log(obj1, obj2);     // { name: "Alice" } { name: "Alice" }
+
 Note: undefined and null are equal in value but different in type.
 Type of undefined is undefined & of null is object.
 Typeof: returns a string describing the data type of a variable, object & function.
 
 IDENTIFIERS: user defined names of variables & functions.
 let x = "John Doe", y = "Volvo", z = 200;
-If you put a number in quotes, the rest of the numbers will be treated as strings &concatenated.
-Exmp: let x = "5" + 2 + 3;       //output: 523
-let x = 2 + 3 + "5";          //output: 55
-
-
 _________________________________________________________________________________
-ACCESS:
-Variables declared with let & const inside a block{} cannot be accessed from outside that block:
-{  let x = 2; }
-// x can NOT be used here.
-Variables declared with var inside a block{} can be accessed from outside the block:
-{  var x = 2; }
-// x CAN be used here.
-_________________________________________________________________________________
- var: can be redeclared & reassignd in a same block. var has global scope if declared outside of any function or block and function-scoped if declared inside a function.
+ var: can be redeclared & reassignd even in a same block. var has global scope if declared outside of a function or and has a local scope if declared inside a function.
+Exmp#1:
 var x = 5;
 var x =  3;        // allowed (redeclaration)
 x = 3;              // allowed (reassignment)
-console.log(x)    // output: 3
+console.log(x);    // output: 3
+
+Exmp#2:
+{ var x = 5; }
+console.log(x);    // output: 5
+
+Exmp#3:
+  function test() {
+    var x = 3;
+  }
+
+  console.log(x); // Ref. Error: x is not defined
+
  let: cannot be redeclared but can be reassigned in a same block.
 let x = 5;
 let x = 3       // not allowed (redeclaration)
@@ -93,7 +105,8 @@ if(true) {
   x = 3;          // not allowed (reassignment)
   const x = 3;   // allowed (new declaration)
 }
-REASSIGNMENT/INITIALIZATION/DEFINITION:
+
+REASSIGNMENT/RE-INITIALIZATION:
 let x = 2;
     x = 5;     // Now x is 5
 
@@ -120,17 +133,12 @@ const variables must be assigned a value when they are declared:
 const PI = 3.14159265359;    //correct
 const PI;
 PI = 3.14159265359;         //incorrect
-Ques: (function() {
-        var a = b = 3;
-      })();
-
-       console.log((typeof a !== 'undefined'));   // false
-       console.log((typeof b !== 'undefined'));  // true
 _________________________________________________________________________________
 SCOPE: Region where JS searches (look up) for variables and accesses them.
-What's scope of 'x' means where can I access 'x'.
+What's the scope of 'x' means where can I access 'x'?
 Q: Who determines the scope?
-Ans: JavaScript determines its scope lexically (from surrounding).
+Ans: JavaScript determines the scope lexically (from surrounding).
+
 TYPES of SCOPE:
 1. Global Scope: Outside any function or block.
 Variables declared in this scope can be accessed anywhere in the program.
@@ -146,7 +154,7 @@ Exmp: function myFunc() {
       myFunc();
       console.log(x);    // output: x is not defined.
 
-Note: variable created without any declaration keyword (var, let, or const) are always global, even if they are created inside a function. Hence, can be accessed anywhere in the program.
+Note: Variable created without any declaration keyword (var, let, or const) are always global, even if they are created inside a function. Hence, can be accessed anywhere in the program.
 
 Exmp: function myFunc() {
           x = 5;
@@ -163,7 +171,7 @@ Exmp#2: if (true) {
         }
      console.log(x);     // output: 5
 
-Lexical Scope: kisi function ka apna scope + usky parent(s) ka scope + global scope.
+Lexical Scope: Its own scope + scope of its parent(s) + global scope.
 It's a combination of two things:
 a. Local memory of itself.
 b. Ref. to the lexical environment of its parent(s).
@@ -192,6 +200,13 @@ function outer() {
   inner();
 }
 outer();
+
+Ques: (function () {
+        var a = b = 3;
+      })();
+
+      console.log(typeof a === "undefined"); // true bcoz "a" has local scope
+      console.log(typeof b === "undefined"); // false bcoz "b" has global scope
 ______________________________________________________________________________
 Hoisting: JavaScript's default behavior of moving all variable & function declarations (not initializations & assignments) to the top. It means a variable can be used and a function can be called before declaration.
 Note: Normal functions are hoisted. Arrow functions are not.
