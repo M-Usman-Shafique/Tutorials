@@ -147,6 +147,7 @@ Exmp: let x = 5;
       console.log(x);
       }
       myFunc();    // output: 5
+
 2. Local or Function Scope: Variable declared inside a function definition cannot be accessed outside the function. Hence called Local Variables.
 Exmp: function myFunc() {
          var x = 5 ;      // x is a local variable.
@@ -155,12 +156,12 @@ Exmp: function myFunc() {
       console.log(x);    // output: x is not defined.
 
 Note: Variable created without any declaration keyword (var, let, or const) are always global, even if they are created inside a function. Hence, can be accessed anywhere in the program.
-
 Exmp: function myFunc() {
           x = 5;
       }
       myFunc();
-      console.log(x);      // output: 5 
+      console.log(x);      // output: 5
+
 3. Block Scope: Variable declared inside the code block of "if", "while" & "for" statements with 'let' & 'const' follow identical rules to those of local scope but 'var' follows rules of global scope.
 Exmp#1: if (true) {
         let x = 5;
@@ -171,7 +172,7 @@ Exmp#2: if (true) {
         }
      console.log(x);     // output: 5
 
-Lexical Scope: Its own scope + scope of its parent(s) + global scope.
+4. Lexical Scope: A function's (own) scope + scope of its parent(s) + global scope.
 It's a combination of two things:
 a. Local memory of itself.
 b. Ref. to the lexical environment of its parent(s).
@@ -186,7 +187,8 @@ Exmp: function outer() {
       }
       outer();
       console.log(y);        // output: y is not defined.
-SCOPE CHAINING: Hierarchical structure of nested outer lexical environment references. For example, a closure has three scopes: Local (apna) + Outer function(s) scope + Global.
+
+SCOPE CHAINING: Hierarchical structure of nested outer lexical environments. For example, a closure has three scopes: Local (apna) + Outer function(s) scope + Global.
 Exmp:
 let x = 3;               // global scope
 function outer() {
@@ -208,7 +210,7 @@ Ques: (function () {
       console.log(typeof a === "undefined"); // true bcoz "a" has local scope
       console.log(typeof b === "undefined"); // false bcoz "b" has global scope
 ______________________________________________________________________________
-Hoisting: JavaScript's default behavior of moving all variable & function declarations (not initializations & assignments) to the top. It means a variable can be used and a function can be called before declaration.
+Hoisting: JavaScript's default behavior of moving all variable and function declarations (not initializations/assignments) to the top. It means a variable can be used and a function can be called before declaration.
 Note: Normal functions are hoisted. Arrow functions are not.
 Exmp#1: console.log(x);
        output: error: x is not defined.
@@ -249,7 +251,7 @@ output: My name is Usman.
 Solution: console.log(`My name is ${str}. Thank you!);
 output: My name is Usman. Thank you!
 ________________________________________________________________________________
-STRINGS: Premitive data types which can store series of characters & behaves as an object (reference type).
+STRINGS: Premitive data types which can store series of characters and behaves as an object (reference type).
 At()/charAt(): returns the character at a specified index (position) in a string.
 let str = "John Doe";
 let text = str.at(0);   // output: J
@@ -258,7 +260,7 @@ Slice(): extracts a part of a string & returns extracted part in a new string.
 Syntax: str.slice(starting index, ending index) // ending index excluded in output
 let text = "Hello Brave New World";
 let part = text.slice(12, 15);     // output: New
-Note: the end index is not includes.
+Note: the end index is not included.
 Note: if ending index not given, it will slice till the last word automatically.
 let part = text.slice(12);         // output: New World
 
@@ -267,9 +269,6 @@ Syntax: str.substr(starting index, amount of indexes) // end excluded
 let text = "Hello Brave New World";
 let subText = text.substr(12, 3); // output: New
 let subText = text.substr(12); // output: New World
-
-Diff. b/w Slice() & Substring():
-
 
 Replace(): replaces a specified value with another value at first match without changing original string.
 let str = "Please visit Microsoft!";
@@ -393,7 +392,7 @@ Exmp: let arr1 = [1, 2, 3];
 
 
 SPLICE(): add, remove & replace items in/from the original array. The removed elements are automatically stored in a new array.
-Syntax: arrayName.splice(index, no. of elements u want to delete, new value);
+Syntax: arrayName.splice(index, no. of elements to delete, new value);
 let ary = ["Adnan", "Noman", "Furqan", "Luqman"];
 const newArr = ary.splice(2, 0, "Usman", "Salman");
 console.log(ary)
@@ -474,7 +473,7 @@ console.log(fruits.every(items => items === “Apple”));
 output: false
 
 Find(): search with a condition using        |
-function.But it only shows one (1st)         |
+function. But it only shows one (1st)        |
 condition fulfilling element as output.      |
 const numbers = [4, 9, 16, 25, 29, 35, 70];  |
 Task: Find no. greater than 18.              |
@@ -519,8 +518,8 @@ output: 0: Java
 
 Diff. between forEach() & map():
 forEach():
-- It returns undefined.
-- Mutable: it does not create a new array; it simply calls the provided function for each element of the original array.
+- It returns nothing (undefined).
+- Mutable: It does not create a new array; it simply calls the provided function for each element of the original array.
 Exmp:
 const array = [1, 2, 3, 4, 5];
 array.forEach((element) => {
@@ -529,7 +528,7 @@ array.forEach((element) => {
 
 map():
 - It returns a new array with the results of calling the provided function on every element.
-- Immutable: It does not modify the original array.
+- Immutable: It does not modify the original array rather returns a new array with the modified values.
 Exmp:
 const array = [1, 2, 3, 4, 5];
 const newArray = array.map((element) => {
@@ -695,6 +694,7 @@ __________________________________________________________
 Math.Min: returns the lowest value in a list of arguments:
 Math.min(0, 150, 30, 20, -8, -200);
 output: -200
+
 Math.Max: returns the highest value in a list of arguments.
 Math.max(0, 150, 30, 20, -8, -200);
 output: 150
@@ -765,7 +765,7 @@ Rest Parameter:
 let person = ["Usman", true, 30, 1996, "Lahore"];
 let [name, ...bio] = person;
 console.log(name, ...bio);
-output: Usman 30 1996 Lahore
+output: Usman [true 30 1996 Lahore]
 
 Using Nested Array:
 let person = ["Usman", true, "Male", 1996, ["Lahore", 1101]];
