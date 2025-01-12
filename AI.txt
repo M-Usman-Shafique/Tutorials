@@ -1,10 +1,11 @@
 AI: Branch of CS that focuses on developing such methods/algorithms that allow computers to learn without explicit programming.
-ML: Feed data &  while Model will generate Rules (Generalization).
+ML: A subset of AI that enables models to learn and improve from data or experience without explicitly programmed. Feeding data & letting the model generate rules on the basis of data (Generalization).
+
 Model:
 
 Methods of ML:
 A. Supervised Learning:
-1. input/output pair: cat or cat not
+1. Labeled Data (input/output pair: cat or cat not)
 2. Regression: value i.e. stock, score predictions.
 Model operates in two Modes:
 1. Training Mode: Learning mode
@@ -13,7 +14,7 @@ Training Data: 70% data feeding
 Testing/Validation Data: 30% to test
 100% Accuracy: cram, over trained, over feeding & hard cored
 Training Accuracy > Validation Accuracy = Bad Sign
-Training Accuracy <= Validatio Accuracy = Good Sign
+Training Accuracy <= Validation Accuracy = Good Sign
 
 B. Unsupervised:
 1. Clustering: grouping similar things: A folder of 1M images of 3 types of animals
