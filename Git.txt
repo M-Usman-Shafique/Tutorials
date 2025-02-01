@@ -1,70 +1,89 @@
 1. To see config. settings & details (username, email):
  git config --list
+
 2. To do configurations:
 git config --global user.email "your-email@example.com"
 git config --global user.name "Your Name"
+
 3. To check repository already exists in github or not:
  git status
+
 Git Flow: init --> add --> commit --> push
 4. To initialize the current folder as a git repository in the local machine which means that now our folder is ready to be tracked for all the changes and to run add, commit & push etc. commands:
 git init
+
 5. To stage the files before commiting them into repository:
 git add  <file1> <file2> <file3>
 Exmp: git add index.jsx App.jsx globals.css etc.
-To stage all the changed files:
-git add .
-6. To unstage a file or stop a tracking a tracked file:
-git rm --cached <file>
 
+6. To stage all the changed files:
+git add .
+
+7. To unstage a file or to stop tracking a tracked file:
+git rm --cached <file>
 Exmp: git rm --cached App.jsx
-7. To commit the staged files into Repo:
+
+8. To commit the staged files into Repo:
 git commit -m "commit message"
-8. To see the complete commit history of current branch because after comminting changes into repo "git status" does not show the commit details:
+
+9. To see the complete commit history of current branch because after comminting changes into repo "git status" does not show the commit details:
 git log [OR] git log --oneline
 Note: "HEAD" in the commit history represents the commit at which we are right now.
-9. To list all the branches & to check the current/active branch. Star symbol "*" points the current branch:
+
+10. To list all the branches & to check the current/active branch. Star symbol "*" points the current branch:
 git branch // by default branch is "master" or "main" etc.
 * master
-10. To create new branch:
+
+11. To create new branch:
 git branch <branch name>
 Exmp: git branch dark-mode
 Run "git branch" to see current branch:
 dark-mode
 * master
-11. To switch to another branch:
+
+12. To switch to another branch:
 git switch <file name> [OR] git checkout <file name>
 git switch dark-mode [OR] git checkout dark-mode
 Run "git branch" to see current branch:
 * dark-mode
 master
-12. To create and to switch to a branch if it already doesn't exist:
+
+13. To create and to switch to a branch if it already doesn't exist:
 git switch -c dark-mode
 Run "git branch" to see current branch:
 * dark-mode
 master
-13. To merge a branch to the main/master branch:
+
+14. To merge a branch to the main/master branch:
 git checkout master
 git merge dark-mode
-13. After making a sub-branch (dark-mode) we start working on it but meanwhile another developer made changes in the main/master branch which are necessary for sub-branch (dark-mode) as well. So to get those changes into our sub-branch we can use two methods:
+
+15. After making a sub-branch (dark-mode) we start working on it but meanwhile another developer made changes in the main/master branch which are necessary for sub-branch (dark-mode) as well. So to get those changes into our sub-branch we can use two methods:
 a. Merge the main/master branch into our sub-branch.
 Exmp: git switch dark-mode
       git merge master
 b. Rebase: shift the root of sub-branch to newly changed main/master branch:
 Exmp: git switch dark-mode
       git rebase master
-14. To rename a branch:
+
+16. To rename a branch:
 git branch -m <old-branch-name> <new-branch-name>
-15. To delete a branch:
+
+17. To delete a branch:
 git branch -d <branch-name>
-16. To undo the changes and get back to a specific commit:
+
+17. To undo the changes and get back to a specific commit:
 git reset --hard <commit-hash>
 Note: "git log --oneline" to see all the commits & get their commit-hash (id).
-17. To rename master branch:
+
+18. To rename master branch:
 git branch -M main
-18. To check remote settings:
+
+19. To check remote settings:
 git remote -v
 Note: If no details/nothing show after running this command it means remote settings are not configured to fetch & push the code to GitHub.
-19. For remote configurations:
+
+20. For remote configurations:
 a. Create a new repository in GitHub
 b. Pick the link of that repository
 c. Paste the link as:
