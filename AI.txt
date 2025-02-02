@@ -1,12 +1,22 @@
 AI: Branch of CS that focuses on developing such methods/algorithms that allow computers to learn without explicit programming.
-ML: A subset of AI that enables models to learn and improve from data or experience without explicitly programmed. Feeding data & letting the model generate rules on the basis of data (Generalization).
+Types of AI:
+1. ANI
+2. AGI
+
+How to do AI?
+ML: A subset of AI that enables models to learn and improve from data and previous experiences without explicitly programmed. Feeding data & letting the model generate rules on the basis of data (Generalization).
+
+Classical AI: Feed algorithms (set of rules (if-else)) to AI. AI will receives input, apply rules and will give output.
+ML: Train a model by giving data in the form of input-output pairs and ask it to generate rules by identifying certain patterns present in the data.
 
 Model:
 
-Methods of ML:
+Types of ML:
 A. Supervised Learning:
-1. Labeled Data (input/output pair: cat or cat not)
-2. Regression: value i.e. stock, score predictions.
+- Labeled Data:
+1. Classification (input/output pairs: cat or cat not)
+2. Regression: value/number i.e. stock, score predictions.
+
 Model operates in two Modes:
 1. Training Mode: Learning mode
 2. Inference/Prediction Mode: Non-learning mode
